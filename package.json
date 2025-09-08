@@ -2,6 +2,16 @@
     "name":  "@m1kej0hns0n/captify-apps-pmbook",
     "version":  "1.0.0",
     "description":  "Strategic alignment and business operations platform for government contracting",
+    "type":  "module",
+    "sideEffects":  [
+                        "**/*.css"
+                    ],
+    "files":  [
+                  "dist"
+              ],
+    "engines":  {
+                    "node":  ">=18.18 || >=20"
+                },
     "main":  "dist/app.mjs",
     "types":  "./dist/app.d.mts",
     "exports":  {
@@ -19,17 +29,20 @@
     "scripts":  {
                     "build":  "tsup",
                     "dev":  "cross-env NODE_ENV=development tsup --watch",
-                    "typecheck":  "tsc --noEmit"
+                    "type-check":  "npx tsc --noEmit",
+                    "clean":  "rimraf dist"
                 },
     "dependencies":  {
                          "@aws-sdk/client-dynamodb":  "^3.693.0",
                          "@aws-sdk/client-s3":  "^3.693.0",
                          "@aws-sdk/lib-dynamodb":  "^3.693.0",
-                         "date-fns":  "^3.0.0",
-                         "recharts":  "^2.12.7",
-                         "uuid":  "^11.1.0",
                          "@m1kej0hns0n/captify-core":  "*",
-                         "@m1kej0hns0n/captify-apps-admin":  "*"
+                         "date-fns":  "^3.0.0",
+                         "lucide-react":  "^0.542.0",
+                         "react":  "19.1.1",
+                         "react-dom":  "19.1.1",
+                         "recharts":  "^2.12.7",
+                         "uuid":  "^11.1.0"
                      },
     "repository":  {
                        "type":  "git",
@@ -40,6 +53,8 @@
                           "access":  "public"
                       },
     "devDependencies":  {
+                            "cross-env":  "^7.0.3",
+                            "esbuild":  "0.25.8",
                             "tsup":  "^8.5.0",
                             "typescript":  "^5.9.2"
                         },
