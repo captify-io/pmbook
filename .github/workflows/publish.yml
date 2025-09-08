@@ -5,6 +5,7 @@ on:
     branches: [main]
   release:
     types: [created]
+  workflow_dispatch:
 
 jobs:
   publish:
@@ -20,16 +21,42 @@ jobs:
           node-version: '20'
           registry-url: 'https://npm.pkg.github.com'
       
+      - name: Configure npm for GitHub Packages
+        run: |
+          echo "@m1kej0hns0n:registry=https://npm.pkg.github.com" >> ~/.npmrc
+          echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" >> ~/.npmrc
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
       - name: Install pnpm
         run: npm install -g pnpm
       
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --no-frozen-lockfile
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Build
         run: pnpm build
       
+      - name: Check if version exists
+        id: check
+        run: |
+          PACKAGE_NAME=$(node -p "require('./package.json').name")
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          
+          if npm view "${PACKAGE_NAME}@${PACKAGE_VERSION}" 2>/dev/null; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+            echo "Package ${PACKAGE_NAME}@${PACKAGE_VERSION} already exists"
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+            echo "Package ${PACKAGE_NAME}@${PACKAGE_VERSION} does not exist, will publish"
+          fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
       - name: Publish
+        if: steps.check.outputs.exists != 'true'
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
