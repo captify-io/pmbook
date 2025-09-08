@@ -1,0 +1,56 @@
+import { defineConfig } from "tsup";
+
+const isDev = process.env.NODE_ENV === "development";
+
+// Helper function to create config for each entry
+const createEntryConfig = (
+  entryName: string,
+  entryPath: string,
+  addUseClient: boolean
+) => ({
+  entry: { [entryName]: entryPath },
+  format: ["esm"] as ["esm"],
+  dts: false, // Disable for now due to type resolution issues
+  splitting: false,
+  sourcemap: true,
+  clean: entryName === "app", // Only clean once (first entry alphabetically)
+  target: "es2022",
+  minify: false,
+  treeshake: false,
+  external: [
+    "react",
+    "react-dom",
+    "react/jsx-runtime",
+    "react/jsx-dev-runtime",
+    "next",
+    "next/link",
+    "next/navigation",
+    "next/router",
+    "@aws-sdk/*",
+    "@captify/core",
+    "@captify/core/*",
+  ],
+  esbuildOptions(options: {
+    jsx: string;
+    jsxImportSource: string;
+    keepNames: boolean;
+    legalComments: string;
+  }) {
+    options.jsx = "automatic";
+    options.jsxImportSource = "react";
+    options.keepNames = true;
+    options.legalComments = "none";
+  },
+  ...(addUseClient && {
+    banner: {
+      js: '"use client";',
+    },
+  }),
+  onSuccess: isDev ? `echo '@captify/pmbook ${entryName} rebuilt!'` : undefined,
+  watch: isDev ? [`src/**/*.ts`, `src/**/*.tsx`] : false,
+});
+
+export default defineConfig([
+  // Client-side modules (with "use client")
+  createEntryConfig("app", "src/app/index.ts", true),
+]);

@@ -1,0 +1,77 @@
+{
+  "name": "@captify/apps-pmbook",
+  "version": "1.0.0",
+  "description": "Strategic alignment and business operations platform for government contracting",
+  "main": "dist/app.mjs",
+  "types": "./dist/app.d.mts",
+  "exports": {
+    ".": {
+      "import": "./dist/app.mjs",
+      "require": "./dist/app.mjs",
+      "default": "./dist/app.mjs"
+    },
+    "./*": {
+      "import": "./dist/*.mjs",
+      "require": "./dist/*.mjs",
+      "default": "./dist/*.mjs"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "cross-env NODE_ENV=development tsup --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.693.0",
+    "@aws-sdk/client-s3": "^3.693.0",
+    "@aws-sdk/lib-dynamodb": "^3.693.0",
+    "@captify/admin": "^1.0.0",
+    "@captify/core": "^1.0.0",
+    "date-fns": "^3.0.0",
+    "recharts": "^2.12.7",
+    "uuid": "^11.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anaut/captify-apps-pmbook.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "devDependencies": {
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.2"
+  },
+  "_originalExports": {
+    ".": {
+      "import": "./dist/app.mjs",
+      "types": "./dist/app.d.mts"
+    },
+    "./services": {
+      "import": "./dist/services.mjs",
+      "types": "./dist/services.d.mts"
+    },
+    "./app": {
+      "import": "./dist/app.mjs",
+      "types": "./dist/app.d.mts"
+    },
+    "./app/client": {
+      "import": "./dist/app/client.mjs",
+      "types": "./dist/app/client.d.mts"
+    },
+    "./app/pageLoader": {
+      "import": "./dist/app/pageLoader.mjs",
+      "types": "./dist/app/pageLoader.d.mts"
+    },
+    "./components": {
+      "import": "./dist/components.mjs",
+      "types": "./dist/components.d.mts"
+    },
+    "./types": {
+      "import": "./dist/types.mjs",
+      "types": "./dist/types.d.mts"
+    }
+  },
+  "module": "dist/app.mjs"
+}
