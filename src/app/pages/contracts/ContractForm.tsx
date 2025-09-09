@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { apiClient } from "@captify/core/lib";
-import { cn } from "@captify/core/lib";
+import { apiClient } from "@captify-io/core/lib";
+import { cn } from "@captify-io/core/lib";
 import {
   Button,
   Input,
@@ -30,7 +30,7 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@captify/core/ui";
+} from "@captify-io/core/ui";
 import { Upload, Plus, X, Check, ChevronsUpDown } from "lucide-react";
 import type { Contract } from "../../../types/contract";
 

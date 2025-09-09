@@ -2,8 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { useCaptify } from "@captify/core/components";
-import { apiClient } from "@captify/core/lib";
+import { useCaptify } from "@captify-io/core/components";
+import { apiClient } from "@captify-io/core/lib";
 import {
   Card,
   CardContent,
@@ -22,7 +22,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@captify/core/ui";
+} from "@captify-io/core/ui";
 import {
   FileText,
   DollarSign,

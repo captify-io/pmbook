@@ -11,512 +11,6 @@ var __export = (target, all) => {
     __defProp(target, name, { get: all[name], enumerable: true });
 };
 
-// ../../node_modules/lucide-react/dist/esm/shared/src/utils.js
-var toKebabCase, toCamelCase, toPascalCase, mergeClasses, hasA11yProp;
-var init_utils = __esm({
-  "../../node_modules/lucide-react/dist/esm/shared/src/utils.js"() {
-    "use strict";
-    toKebabCase = /* @__PURE__ */ __name((string) => string.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase(), "toKebabCase");
-    toCamelCase = /* @__PURE__ */ __name((string) => string.replace(
-      /^([A-Z])|[\s-_]+(\w)/g,
-      (match, p1, p2) => p2 ? p2.toUpperCase() : p1.toLowerCase()
-    ), "toCamelCase");
-    toPascalCase = /* @__PURE__ */ __name((string) => {
-      const camelCase = toCamelCase(string);
-      return camelCase.charAt(0).toUpperCase() + camelCase.slice(1);
-    }, "toPascalCase");
-    mergeClasses = /* @__PURE__ */ __name((...classes) => classes.filter((className, index, array) => {
-      return Boolean(className) && className.trim() !== "" && array.indexOf(className) === index;
-    }).join(" ").trim(), "mergeClasses");
-    hasA11yProp = /* @__PURE__ */ __name((props) => {
-      for (const prop in props) {
-        if (prop.startsWith("aria-") || prop === "role" || prop === "title") {
-          return true;
-        }
-      }
-    }, "hasA11yProp");
-  }
-});
-
-// ../../node_modules/lucide-react/dist/esm/defaultAttributes.js
-var defaultAttributes;
-var init_defaultAttributes = __esm({
-  "../../node_modules/lucide-react/dist/esm/defaultAttributes.js"() {
-    "use strict";
-    defaultAttributes = {
-      xmlns: "http://www.w3.org/2000/svg",
-      width: 24,
-      height: 24,
-      viewBox: "0 0 24 24",
-      fill: "none",
-      stroke: "currentColor",
-      strokeWidth: 2,
-      strokeLinecap: "round",
-      strokeLinejoin: "round"
-    };
-  }
-});
-
-// ../../node_modules/lucide-react/dist/esm/Icon.js
-import { forwardRef, createElement } from "react";
-var Icon;
-var init_Icon = __esm({
-  "../../node_modules/lucide-react/dist/esm/Icon.js"() {
-    "use strict";
-    init_defaultAttributes();
-    init_utils();
-    Icon = forwardRef(
-      ({
-        color = "currentColor",
-        size = 24,
-        strokeWidth = 2,
-        absoluteStrokeWidth,
-        className = "",
-        children,
-        iconNode,
-        ...rest
-      }, ref) => createElement(
-        "svg",
-        {
-          ref,
-          ...defaultAttributes,
-          width: size,
-          height: size,
-          stroke: color,
-          strokeWidth: absoluteStrokeWidth ? Number(strokeWidth) * 24 / Number(size) : strokeWidth,
-          className: mergeClasses("lucide", className),
-          ...!children && !hasA11yProp(rest) && { "aria-hidden": "true" },
-          ...rest
-        },
-        [
-          ...iconNode.map(([tag, attrs]) => createElement(tag, attrs)),
-          ...Array.isArray(children) ? children : [children]
-        ]
-      )
-    );
-  }
-});
-
-// ../../node_modules/lucide-react/dist/esm/createLucideIcon.js
-import { forwardRef as forwardRef2, createElement as createElement2 } from "react";
-var createLucideIcon;
-var init_createLucideIcon = __esm({
-  "../../node_modules/lucide-react/dist/esm/createLucideIcon.js"() {
-    "use strict";
-    init_utils();
-    init_Icon();
-    createLucideIcon = /* @__PURE__ */ __name((iconName, iconNode) => {
-      const Component = forwardRef2(
-        ({ className, ...props }, ref) => createElement2(Icon, {
-          ref,
-          iconNode,
-          className: mergeClasses(
-            `lucide-${toKebabCase(toPascalCase(iconName))}`,
-            `lucide-${iconName}`,
-            className
-          ),
-          ...props
-        })
-      );
-      Component.displayName = toPascalCase(iconName);
-      return Component;
-    }, "createLucideIcon");
-  }
-});
-
-// ../../node_modules/lucide-react/dist/esm/icons/activity.js
-var __iconNode, Activity;
-var init_activity = __esm({
-  "../../node_modules/lucide-react/dist/esm/icons/activity.js"() {
-    "use strict";
-    init_createLucideIcon();
-    __iconNode = [
-      [
-        "path",
-        {
-          d: "M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2",
-          key: "169zse"
-        }
-      ]
-    ];
-    Activity = createLucideIcon("activity", __iconNode);
-  }
-});
-
-// ../../node_modules/lucide-react/dist/esm/icons/archive.js
-var __iconNode2, Archive;
-var init_archive = __esm({
-  "../../node_modules/lucide-react/dist/esm/icons/archive.js"() {
-    "use strict";
-    init_createLucideIcon();
-    __iconNode2 = [
-      ["rect", { width: "20", height: "5", x: "2", y: "3", rx: "1", key: "1wp1u1" }],
-      ["path", { d: "M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8", key: "1s80jp" }],
-      ["path", { d: "M10 12h4", key: "a56b0p" }]
-    ];
-    Archive = createLucideIcon("archive", __iconNode2);
-  }
-});
-
-// ../../node_modules/lucide-react/dist/esm/icons/check.js
-var __iconNode3, Check;
-var init_check = __esm({
-  "../../node_modules/lucide-react/dist/esm/icons/check.js"() {
-    "use strict";
-    init_createLucideIcon();
-    __iconNode3 = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]];
-    Check = createLucideIcon("check", __iconNode3);
-  }
-});
-
-// ../../node_modules/lucide-react/dist/esm/icons/chevrons-up-down.js
-var __iconNode4, ChevronsUpDown;
-var init_chevrons_up_down = __esm({
-  "../../node_modules/lucide-react/dist/esm/icons/chevrons-up-down.js"() {
-    "use strict";
-    init_createLucideIcon();
-    __iconNode4 = [
-      ["path", { d: "m7 15 5 5 5-5", key: "1hf1tw" }],
-      ["path", { d: "m7 9 5-5 5 5", key: "sgt6xg" }]
-    ];
-    ChevronsUpDown = createLucideIcon("chevrons-up-down", __iconNode4);
-  }
-});
-
-// ../../node_modules/lucide-react/dist/esm/icons/circle-alert.js
-var __iconNode5, CircleAlert;
-var init_circle_alert = __esm({
-  "../../node_modules/lucide-react/dist/esm/icons/circle-alert.js"() {
-    "use strict";
-    init_createLucideIcon();
-    __iconNode5 = [
-      ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-      ["line", { x1: "12", x2: "12", y1: "8", y2: "12", key: "1pkeuh" }],
-      ["line", { x1: "12", x2: "12.01", y1: "16", y2: "16", key: "4dfq90" }]
-    ];
-    CircleAlert = createLucideIcon("circle-alert", __iconNode5);
-  }
-});
-
-// ../../node_modules/lucide-react/dist/esm/icons/circle-check-big.js
-var __iconNode6, CircleCheckBig;
-var init_circle_check_big = __esm({
-  "../../node_modules/lucide-react/dist/esm/icons/circle-check-big.js"() {
-    "use strict";
-    init_createLucideIcon();
-    __iconNode6 = [
-      ["path", { d: "M21.801 10A10 10 0 1 1 17 3.335", key: "yps3ct" }],
-      ["path", { d: "m9 11 3 3L22 4", key: "1pflzl" }]
-    ];
-    CircleCheckBig = createLucideIcon("circle-check-big", __iconNode6);
-  }
-});
-
-// ../../node_modules/lucide-react/dist/esm/icons/clock.js
-var __iconNode7, Clock;
-var init_clock = __esm({
-  "../../node_modules/lucide-react/dist/esm/icons/clock.js"() {
-    "use strict";
-    init_createLucideIcon();
-    __iconNode7 = [
-      ["path", { d: "M12 6v6l4 2", key: "mmk7yg" }],
-      ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }]
-    ];
-    Clock = createLucideIcon("clock", __iconNode7);
-  }
-});
-
-// ../../node_modules/lucide-react/dist/esm/icons/dollar-sign.js
-var __iconNode8, DollarSign;
-var init_dollar_sign = __esm({
-  "../../node_modules/lucide-react/dist/esm/icons/dollar-sign.js"() {
-    "use strict";
-    init_createLucideIcon();
-    __iconNode8 = [
-      ["line", { x1: "12", x2: "12", y1: "2", y2: "22", key: "7eqyqh" }],
-      ["path", { d: "M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6", key: "1b0p4s" }]
-    ];
-    DollarSign = createLucideIcon("dollar-sign", __iconNode8);
-  }
-});
-
-// ../../node_modules/lucide-react/dist/esm/icons/download.js
-var __iconNode9, Download;
-var init_download = __esm({
-  "../../node_modules/lucide-react/dist/esm/icons/download.js"() {
-    "use strict";
-    init_createLucideIcon();
-    __iconNode9 = [
-      ["path", { d: "M12 15V3", key: "m9g1x1" }],
-      ["path", { d: "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4", key: "ih7n3h" }],
-      ["path", { d: "m7 10 5 5 5-5", key: "brsn70" }]
-    ];
-    Download = createLucideIcon("download", __iconNode9);
-  }
-});
-
-// ../../node_modules/lucide-react/dist/esm/icons/ellipsis-vertical.js
-var __iconNode10, EllipsisVertical;
-var init_ellipsis_vertical = __esm({
-  "../../node_modules/lucide-react/dist/esm/icons/ellipsis-vertical.js"() {
-    "use strict";
-    init_createLucideIcon();
-    __iconNode10 = [
-      ["circle", { cx: "12", cy: "12", r: "1", key: "41hilf" }],
-      ["circle", { cx: "12", cy: "5", r: "1", key: "gxeob9" }],
-      ["circle", { cx: "12", cy: "19", r: "1", key: "lyex9k" }]
-    ];
-    EllipsisVertical = createLucideIcon("ellipsis-vertical", __iconNode10);
-  }
-});
-
-// ../../node_modules/lucide-react/dist/esm/icons/git-branch.js
-var __iconNode11, GitBranch;
-var init_git_branch = __esm({
-  "../../node_modules/lucide-react/dist/esm/icons/git-branch.js"() {
-    "use strict";
-    init_createLucideIcon();
-    __iconNode11 = [
-      ["line", { x1: "6", x2: "6", y1: "3", y2: "15", key: "17qcm7" }],
-      ["circle", { cx: "18", cy: "6", r: "3", key: "1h7g24" }],
-      ["circle", { cx: "6", cy: "18", r: "3", key: "fqmcym" }],
-      ["path", { d: "M18 9a9 9 0 0 1-9 9", key: "n2h4wq" }]
-    ];
-    GitBranch = createLucideIcon("git-branch", __iconNode11);
-  }
-});
-
-// ../../node_modules/lucide-react/dist/esm/icons/pause.js
-var __iconNode12, Pause;
-var init_pause = __esm({
-  "../../node_modules/lucide-react/dist/esm/icons/pause.js"() {
-    "use strict";
-    init_createLucideIcon();
-    __iconNode12 = [
-      ["rect", { x: "14", y: "3", width: "5", height: "18", rx: "1", key: "kaeet6" }],
-      ["rect", { x: "5", y: "3", width: "5", height: "18", rx: "1", key: "1wsw3u" }]
-    ];
-    Pause = createLucideIcon("pause", __iconNode12);
-  }
-});
-
-// ../../node_modules/lucide-react/dist/esm/icons/play.js
-var __iconNode13, Play;
-var init_play = __esm({
-  "../../node_modules/lucide-react/dist/esm/icons/play.js"() {
-    "use strict";
-    init_createLucideIcon();
-    __iconNode13 = [
-      [
-        "path",
-        {
-          d: "M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z",
-          key: "10ikf1"
-        }
-      ]
-    ];
-    Play = createLucideIcon("play", __iconNode13);
-  }
-});
-
-// ../../node_modules/lucide-react/dist/esm/icons/plus.js
-var __iconNode14, Plus;
-var init_plus = __esm({
-  "../../node_modules/lucide-react/dist/esm/icons/plus.js"() {
-    "use strict";
-    init_createLucideIcon();
-    __iconNode14 = [
-      ["path", { d: "M5 12h14", key: "1ays0h" }],
-      ["path", { d: "M12 5v14", key: "s699le" }]
-    ];
-    Plus = createLucideIcon("plus", __iconNode14);
-  }
-});
-
-// ../../node_modules/lucide-react/dist/esm/icons/square-pen.js
-var __iconNode15, SquarePen;
-var init_square_pen = __esm({
-  "../../node_modules/lucide-react/dist/esm/icons/square-pen.js"() {
-    "use strict";
-    init_createLucideIcon();
-    __iconNode15 = [
-      ["path", { d: "M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7", key: "1m0v6g" }],
-      [
-        "path",
-        {
-          d: "M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z",
-          key: "ohrbg2"
-        }
-      ]
-    ];
-    SquarePen = createLucideIcon("square-pen", __iconNode15);
-  }
-});
-
-// ../../node_modules/lucide-react/dist/esm/icons/star.js
-var __iconNode16, Star;
-var init_star = __esm({
-  "../../node_modules/lucide-react/dist/esm/icons/star.js"() {
-    "use strict";
-    init_createLucideIcon();
-    __iconNode16 = [
-      [
-        "path",
-        {
-          d: "M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z",
-          key: "r04s7s"
-        }
-      ]
-    ];
-    Star = createLucideIcon("star", __iconNode16);
-  }
-});
-
-// ../../node_modules/lucide-react/dist/esm/icons/target.js
-var __iconNode17, Target;
-var init_target = __esm({
-  "../../node_modules/lucide-react/dist/esm/icons/target.js"() {
-    "use strict";
-    init_createLucideIcon();
-    __iconNode17 = [
-      ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-      ["circle", { cx: "12", cy: "12", r: "6", key: "1vlfrh" }],
-      ["circle", { cx: "12", cy: "12", r: "2", key: "1c9p78" }]
-    ];
-    Target = createLucideIcon("target", __iconNode17);
-  }
-});
-
-// ../../node_modules/lucide-react/dist/esm/icons/ticket.js
-var __iconNode18, Ticket;
-var init_ticket = __esm({
-  "../../node_modules/lucide-react/dist/esm/icons/ticket.js"() {
-    "use strict";
-    init_createLucideIcon();
-    __iconNode18 = [
-      [
-        "path",
-        {
-          d: "M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z",
-          key: "qn84l0"
-        }
-      ],
-      ["path", { d: "M13 5v2", key: "dyzc3o" }],
-      ["path", { d: "M13 17v2", key: "1ont0d" }],
-      ["path", { d: "M13 11v2", key: "1wjjxi" }]
-    ];
-    Ticket = createLucideIcon("ticket", __iconNode18);
-  }
-});
-
-// ../../node_modules/lucide-react/dist/esm/icons/trending-down.js
-var __iconNode19, TrendingDown;
-var init_trending_down = __esm({
-  "../../node_modules/lucide-react/dist/esm/icons/trending-down.js"() {
-    "use strict";
-    init_createLucideIcon();
-    __iconNode19 = [
-      ["path", { d: "M16 17h6v-6", key: "t6n2it" }],
-      ["path", { d: "m22 17-8.5-8.5-5 5L2 7", key: "x473p" }]
-    ];
-    TrendingDown = createLucideIcon("trending-down", __iconNode19);
-  }
-});
-
-// ../../node_modules/lucide-react/dist/esm/icons/trending-up.js
-var __iconNode20, TrendingUp;
-var init_trending_up = __esm({
-  "../../node_modules/lucide-react/dist/esm/icons/trending-up.js"() {
-    "use strict";
-    init_createLucideIcon();
-    __iconNode20 = [
-      ["path", { d: "M16 7h6v6", key: "box55l" }],
-      ["path", { d: "m22 7-8.5 8.5-5-5L2 17", key: "1t1m79" }]
-    ];
-    TrendingUp = createLucideIcon("trending-up", __iconNode20);
-  }
-});
-
-// ../../node_modules/lucide-react/dist/esm/icons/upload.js
-var __iconNode21, Upload;
-var init_upload = __esm({
-  "../../node_modules/lucide-react/dist/esm/icons/upload.js"() {
-    "use strict";
-    init_createLucideIcon();
-    __iconNode21 = [
-      ["path", { d: "M12 3v12", key: "1x0j5s" }],
-      ["path", { d: "m17 8-5-5-5 5", key: "7q97r8" }],
-      ["path", { d: "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4", key: "ih7n3h" }]
-    ];
-    Upload = createLucideIcon("upload", __iconNode21);
-  }
-});
-
-// ../../node_modules/lucide-react/dist/esm/icons/users.js
-var __iconNode22, Users;
-var init_users = __esm({
-  "../../node_modules/lucide-react/dist/esm/icons/users.js"() {
-    "use strict";
-    init_createLucideIcon();
-    __iconNode22 = [
-      ["path", { d: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2", key: "1yyitq" }],
-      ["path", { d: "M16 3.128a4 4 0 0 1 0 7.744", key: "16gr8j" }],
-      ["path", { d: "M22 21v-2a4 4 0 0 0-3-3.87", key: "kshegd" }],
-      ["circle", { cx: "9", cy: "7", r: "4", key: "nufk8" }]
-    ];
-    Users = createLucideIcon("users", __iconNode22);
-  }
-});
-
-// ../../node_modules/lucide-react/dist/esm/icons/zap.js
-var __iconNode23, Zap;
-var init_zap = __esm({
-  "../../node_modules/lucide-react/dist/esm/icons/zap.js"() {
-    "use strict";
-    init_createLucideIcon();
-    __iconNode23 = [
-      [
-        "path",
-        {
-          d: "M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z",
-          key: "1xq2db"
-        }
-      ]
-    ];
-    Zap = createLucideIcon("zap", __iconNode23);
-  }
-});
-
-// ../../node_modules/lucide-react/dist/esm/lucide-react.js
-var init_lucide_react = __esm({
-  "../../node_modules/lucide-react/dist/esm/lucide-react.js"() {
-    "use strict";
-    init_circle_alert();
-    init_circle_check_big();
-    init_ellipsis_vertical();
-    init_square_pen();
-    init_activity();
-    init_archive();
-    init_check();
-    init_chevrons_up_down();
-    init_clock();
-    init_dollar_sign();
-    init_download();
-    init_git_branch();
-    init_pause();
-    init_play();
-    init_plus();
-    init_star();
-    init_target();
-    init_ticket();
-    init_trending_down();
-    init_trending_up();
-    init_upload();
-    init_users();
-    init_zap();
-  }
-});
-
 // src/app/pages/command-center/CommandCenter.tsx
 var CommandCenter_exports = {};
 __export(CommandCenter_exports, {
@@ -524,8 +18,8 @@ __export(CommandCenter_exports, {
   default: () => CommandCenter_default
 });
 import { useEffect, useState } from "react";
-import { useCaptify } from "@captify/core/components";
-import { apiClient } from "@captify/core/lib";
+import { useCaptify } from "@captify-io/core/components";
+import { apiClient } from "@captify-io/core/lib";
 import {
   Card,
   CardContent,
@@ -535,7 +29,17 @@ import {
   Progress,
   Alert,
   AlertDescription
-} from "@captify/core/ui";
+} from "@captify-io/core/ui";
+import {
+  TrendingUp,
+  TrendingDown,
+  AlertCircle,
+  DollarSign,
+  Users,
+  Target,
+  Activity,
+  Clock
+} from "lucide-react";
 import { jsx, jsxs } from "react/jsx-runtime";
 function CommandCenterPage() {
   const { session } = useCaptify();
@@ -582,7 +86,7 @@ function CommandCenterPage() {
   }
   if (!session?.user?.groups?.includes("Operations")) {
     return /* @__PURE__ */ jsx("div", { className: "container mx-auto p-6", children: /* @__PURE__ */ jsxs(Alert, { children: [
-      /* @__PURE__ */ jsx(CircleAlert, { className: "h-4 w-4" }),
+      /* @__PURE__ */ jsx(AlertCircle, { className: "h-4 w-4" }),
       /* @__PURE__ */ jsx(AlertDescription, { children: "You need Operations role to view this page." })
     ] }) });
   }
@@ -605,7 +109,7 @@ function CommandCenterPage() {
       )
     ] }),
     dashboard?.health?.alerts?.length > 0 && /* @__PURE__ */ jsxs(Alert, { variant: "destructive", children: [
-      /* @__PURE__ */ jsx(CircleAlert, { className: "h-4 w-4" }),
+      /* @__PURE__ */ jsx(AlertCircle, { className: "h-4 w-4" }),
       /* @__PURE__ */ jsx(AlertDescription, { children: dashboard.health.alerts[0].description })
     ] }),
     /* @__PURE__ */ jsxs("div", { className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4", children: [
@@ -766,7 +270,6 @@ var init_CommandCenter = __esm({
   "src/app/pages/command-center/CommandCenter.tsx"() {
     "use strict";
     "use client";
-    init_lucide_react();
     __name(CommandCenterPage, "CommandCenterPage");
     CommandCenter_default = CommandCenterPage;
   }
@@ -774,8 +277,8 @@ var init_CommandCenter = __esm({
 
 // src/app/pages/contracts/ContractForm.tsx
 import { useState as useState2, useEffect as useEffect2 } from "react";
-import { apiClient as apiClient2 } from "@captify/core/lib";
-import { cn } from "@captify/core/lib";
+import { apiClient as apiClient2 } from "@captify-io/core/lib";
+import { cn } from "@captify-io/core/lib";
 import {
   Button as Button2,
   Input,
@@ -802,7 +305,8 @@ import {
   CommandInput,
   CommandItem,
   CommandList
-} from "@captify/core/ui";
+} from "@captify-io/core/ui";
+import { Upload, Plus, Check, ChevronsUpDown } from "lucide-react";
 import { jsx as jsx2, jsxs as jsxs2 } from "react/jsx-runtime";
 function ContractForm({
   contract,
@@ -1545,7 +1049,6 @@ var init_ContractForm = __esm({
   "src/app/pages/contracts/ContractForm.tsx"() {
     "use strict";
     "use client";
-    init_lucide_react();
     __name(ContractForm, "ContractForm");
   }
 });
@@ -1558,8 +1061,8 @@ __export(ContractsPage_exports, {
 });
 import { useEffect as useEffect3, useState as useState3 } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { useCaptify as useCaptify2 } from "@captify/core/components";
-import { apiClient as apiClient3 } from "@captify/core/lib";
+import { useCaptify as useCaptify2 } from "@captify-io/core/components";
+import { apiClient as apiClient3 } from "@captify-io/core/lib";
 import {
   Card as Card3,
   CardContent as CardContent3,
@@ -1578,7 +1081,16 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger
-} from "@captify/core/ui";
+} from "@captify-io/core/ui";
+import {
+  AlertCircle as AlertCircle2,
+  TrendingUp as TrendingUp2,
+  Plus as Plus2,
+  Edit,
+  Archive,
+  MoreVertical,
+  Download
+} from "lucide-react";
 import { Fragment, jsx as jsx3, jsxs as jsxs3 } from "react/jsx-runtime";
 function ContractsPage() {
   const { session } = useCaptify2();
@@ -1806,7 +1318,7 @@ function ContractsPage() {
         /* @__PURE__ */ jsx3("p", { className: "text-muted-foreground", children: "Monitor contracts, deliverables, and financial performance" })
       ] }),
       /* @__PURE__ */ jsx3("div", { className: "flex gap-2", children: /* @__PURE__ */ jsxs3(Button3, { onClick: handleAddContract, children: [
-        /* @__PURE__ */ jsx3(Plus, { className: "mr-2 h-4 w-4" }),
+        /* @__PURE__ */ jsx3(Plus2, { className: "mr-2 h-4 w-4" }),
         "Add Contract"
       ] }) })
     ] }),
@@ -1872,10 +1384,10 @@ function ContractsPage() {
       /* @__PURE__ */ jsxs3("div", { className: "flex justify-between items-center mb-4", children: [
         /* @__PURE__ */ jsx3("h2", { className: "text-2xl font-semibold", children: selectedContract.name || selectedContract.contractNumber }),
         /* @__PURE__ */ jsxs3(DropdownMenu, { children: [
-          /* @__PURE__ */ jsx3(DropdownMenuTrigger, { asChild: true, children: /* @__PURE__ */ jsx3(Button3, { variant: "outline", size: "sm", children: /* @__PURE__ */ jsx3(EllipsisVertical, { className: "h-4 w-4" }) }) }),
+          /* @__PURE__ */ jsx3(DropdownMenuTrigger, { asChild: true, children: /* @__PURE__ */ jsx3(Button3, { variant: "outline", size: "sm", children: /* @__PURE__ */ jsx3(MoreVertical, { className: "h-4 w-4" }) }) }),
           /* @__PURE__ */ jsxs3(DropdownMenuContent, { align: "end", children: [
             /* @__PURE__ */ jsxs3(DropdownMenuItem, { onClick: () => handleEditContract(selectedContract), children: [
-              /* @__PURE__ */ jsx3(SquarePen, { className: "mr-2 h-4 w-4" }),
+              /* @__PURE__ */ jsx3(Edit, { className: "mr-2 h-4 w-4" }),
               "Edit Contract"
             ] }),
             /* @__PURE__ */ jsxs3(DropdownMenuItem, { onClick: () => handleArchiveContract(selectedContract.id), children: [
@@ -1920,7 +1432,7 @@ function ContractsPage() {
               "k"
             ] }),
             /* @__PURE__ */ jsxs3("div", { className: "flex items-center text-xs text-muted-foreground mt-1", children: [
-              /* @__PURE__ */ jsx3(TrendingUp, { className: "h-3 w-3 mr-1" }),
+              /* @__PURE__ */ jsx3(TrendingUp2, { className: "h-3 w-3 mr-1" }),
               contractDetails?.burn?.trend || "stable"
             ] })
           ] })
@@ -2096,7 +1608,7 @@ function ContractsPage() {
             ] }),
             contractDetails?.burn?.recommendations?.map(
               (rec, idx) => /* @__PURE__ */ jsxs3(Alert2, { children: [
-                /* @__PURE__ */ jsx3(CircleAlert, { className: "h-4 w-4" }),
+                /* @__PURE__ */ jsx3(AlertCircle2, { className: "h-4 w-4" }),
                 /* @__PURE__ */ jsxs3(AlertDescription2, { children: [
                   /* @__PURE__ */ jsx3("strong", { children: rec.message }),
                   /* @__PURE__ */ jsx3("br", {}),
@@ -2198,7 +1710,6 @@ var init_ContractsPage = __esm({
   "src/app/pages/contracts/ContractsPage.tsx"() {
     "use strict";
     "use client";
-    init_lucide_react();
     init_ContractForm();
     __name(ContractsPage, "ContractsPage");
     ContractsPage_default = ContractsPage;
@@ -2212,14 +1723,14 @@ __export(PerformancePage_exports, {
   default: () => PerformancePage_default
 });
 import { useEffect as useEffect4, useState as useState4 } from "react";
-import { useCaptify as useCaptify3 } from "@captify/core/components";
-import { apiClient as apiClient4 } from "@captify/core/lib";
+import { useCaptify as useCaptify3 } from "@captify-io/core/components";
+import { apiClient as apiClient4 } from "@captify-io/core/lib";
 import {
   Card as Card4,
   CardContent as CardContent4,
   CardHeader as CardHeader4,
   CardTitle as CardTitle4
-} from "@captify/core/ui";
+} from "@captify-io/core/ui";
 import { jsx as jsx4, jsxs as jsxs4 } from "react/jsx-runtime";
 function PerformancePage() {
   const { session } = useCaptify3();
@@ -2396,7 +1907,7 @@ __export(RoadmapsPage_exports, {
   default: () => RoadmapsPage_default
 });
 import { useState as useState5 } from "react";
-import { useCaptify as useCaptify4 } from "@captify/core/hooks";
+import { useCaptify as useCaptify4 } from "@captify-io/core/hooks";
 import {
   Card as Card5,
   CardContent as CardContent5,
@@ -2409,7 +1920,13 @@ import {
   TabsContent as TabsContent3,
   TabsList as TabsList3,
   TabsTrigger as TabsTrigger3
-} from "@captify/core/ui";
+} from "@captify-io/core/ui";
+import {
+  GitBranch,
+  Users as Users2,
+  Clock as Clock3,
+  Activity as Activity2
+} from "lucide-react";
 import { jsx as jsx5, jsxs as jsxs5 } from "react/jsx-runtime";
 function RoadmapsPage() {
   const { session } = useCaptify4();
@@ -2627,7 +2144,7 @@ function RoadmapsPage() {
               {
                 className: "flex items-center gap-1 px-2 py-1 rounded-md bg-muted",
                 children: [
-                  /* @__PURE__ */ jsx5(Users, { className: "h-3 w-3" }),
+                  /* @__PURE__ */ jsx5(Users2, { className: "h-3 w-3" }),
                   /* @__PURE__ */ jsx5("span", { className: "text-sm", children: ws })
                 ]
               },
@@ -2641,12 +2158,12 @@ function RoadmapsPage() {
               /* @__PURE__ */ jsx5("p", { className: "text-sm font-medium", children: "8" })
             ] }),
             /* @__PURE__ */ jsxs5("div", { className: "text-center", children: [
-              /* @__PURE__ */ jsx5(Activity, { className: "h-4 w-4 mx-auto mb-1 text-muted-foreground" }),
+              /* @__PURE__ */ jsx5(Activity2, { className: "h-4 w-4 mx-auto mb-1 text-muted-foreground" }),
               /* @__PURE__ */ jsx5("p", { className: "text-xs text-muted-foreground", children: "Features" }),
               /* @__PURE__ */ jsx5("p", { className: "text-sm font-medium", children: "24" })
             ] }),
             /* @__PURE__ */ jsxs5("div", { className: "text-center", children: [
-              /* @__PURE__ */ jsx5(Clock, { className: "h-4 w-4 mx-auto mb-1 text-muted-foreground" }),
+              /* @__PURE__ */ jsx5(Clock3, { className: "h-4 w-4 mx-auto mb-1 text-muted-foreground" }),
               /* @__PURE__ */ jsx5("p", { className: "text-xs text-muted-foreground", children: "Days Left" }),
               /* @__PURE__ */ jsx5("p", { className: "text-sm font-medium", children: Math.floor(
                 (new Date(initiative.endDate).getTime() - Date.now()) / (1e3 * 60 * 60 * 24)
@@ -2714,7 +2231,6 @@ var init_RoadmapsPage = __esm({
   "src/app/pages/roadmaps/RoadmapsPage.tsx"() {
     "use strict";
     "use client";
-    init_lucide_react();
     __name(RoadmapsPage, "RoadmapsPage");
     RoadmapsPage_default = RoadmapsPage;
   }
@@ -2727,8 +2243,8 @@ __export(WorkDashboard_exports, {
   default: () => WorkDashboard_default
 });
 import { useEffect as useEffect5, useState as useState6 } from "react";
-import { useCaptify as useCaptify5 } from "@captify/core/components";
-import { apiClient as apiClient5 } from "@captify/core/lib";
+import { useCaptify as useCaptify5 } from "@captify-io/core/components";
+import { apiClient as apiClient5 } from "@captify-io/core/lib";
 import {
   Card as Card6,
   CardContent as CardContent6,
@@ -2741,7 +2257,15 @@ import {
   TabsContent as TabsContent4,
   TabsList as TabsList4,
   TabsTrigger as TabsTrigger4
-} from "@captify/core/ui";
+} from "@captify-io/core/ui";
+import {
+  Play,
+  Pause,
+  CheckCircle as CheckCircle3,
+  Target as Target3,
+  Zap,
+  AlertCircle as AlertCircle4
+} from "lucide-react";
 import { jsx as jsx6, jsxs as jsxs6 } from "react/jsx-runtime";
 function WorkDashboardPage() {
   const { session } = useCaptify5();
@@ -2867,7 +2391,7 @@ function WorkDashboardPage() {
               variant: "default",
               className: "flex-1",
               children: [
-                /* @__PURE__ */ jsx6(CircleCheckBig, { className: "h-4 w-4 mr-2" }),
+                /* @__PURE__ */ jsx6(CheckCircle3, { className: "h-4 w-4 mr-2" }),
                 "Complete"
               ]
             }
@@ -2917,7 +2441,7 @@ function WorkDashboardPage() {
             "%"
           ] }),
           /* @__PURE__ */ jsxs6("div", { className: "flex items-center text-xs text-muted-foreground", children: [
-            /* @__PURE__ */ jsx6(Target, { className: "h-3 w-3 mr-1" }),
+            /* @__PURE__ */ jsx6(Target3, { className: "h-3 w-3 mr-1" }),
             "On critical path"
           ] })
         ] })
@@ -2968,7 +2492,7 @@ function WorkItem({ item, onStart, critical, blocked }) {
     /* @__PURE__ */ jsxs6("div", { className: "flex-1", children: [
       /* @__PURE__ */ jsxs6("div", { className: "flex items-center gap-2", children: [
         /* @__PURE__ */ jsx6("h4", { className: "font-medium", children: item.title }),
-        critical && /* @__PURE__ */ jsx6(CircleAlert, { className: "h-4 w-4 text-red-500" })
+        critical && /* @__PURE__ */ jsx6(AlertCircle4, { className: "h-4 w-4 text-red-500" })
       ] }),
       /* @__PURE__ */ jsx6("p", { className: "text-sm text-muted-foreground mt-1", children: item.description }),
       /* @__PURE__ */ jsxs6("div", { className: "flex gap-2 mt-2", children: [
@@ -2995,7 +2519,6 @@ var init_WorkDashboard = __esm({
   "src/app/pages/work/WorkDashboard.tsx"() {
     "use strict";
     "use client";
-    init_lucide_react();
     __name(WorkDashboardPage, "WorkDashboardPage");
     __name(WorkItem, "WorkItem");
     WorkDashboard_default = WorkDashboardPage;
@@ -3009,8 +2532,8 @@ __export(ServicesHub_exports, {
   default: () => ServicesHub_default
 });
 import { useEffect as useEffect6, useState as useState7 } from "react";
-import { useCaptify as useCaptify6 } from "@captify/core/components";
-import { apiClient as apiClient6 } from "@captify/core/lib";
+import { useCaptify as useCaptify6 } from "@captify-io/core/components";
+import { apiClient as apiClient6 } from "@captify-io/core/lib";
 import {
   Card as Card7,
   CardContent as CardContent7,
@@ -3029,7 +2552,14 @@ import {
   TabsContent as TabsContent5,
   TabsList as TabsList5,
   TabsTrigger as TabsTrigger5
-} from "@captify/core/ui";
+} from "@captify-io/core/ui";
+import {
+  Plus as Plus3,
+  Ticket,
+  Clock as Clock5,
+  DollarSign as DollarSign3,
+  Star
+} from "lucide-react";
 import { jsx as jsx7, jsxs as jsxs7 } from "react/jsx-runtime";
 function ServicesHubPage() {
   const { session } = useCaptify6();
@@ -3123,7 +2653,7 @@ function ServicesHubPage() {
         /* @__PURE__ */ jsx7("p", { className: "text-muted-foreground", children: "Internal service marketplace" })
       ] }),
       /* @__PURE__ */ jsxs7(Button6, { onClick: () => setShowCreateTicket(true), children: [
-        /* @__PURE__ */ jsx7(Plus, { className: "h-4 w-4 mr-2" }),
+        /* @__PURE__ */ jsx7(Plus3, { className: "h-4 w-4 mr-2" }),
         "Create Ticket"
       ] })
     ] }),
@@ -3144,7 +2674,7 @@ function ServicesHubPage() {
         /* @__PURE__ */ jsxs7(CardContent7, { children: [
           /* @__PURE__ */ jsx7("div", { className: "text-2xl font-bold", children: marketplace?.myTickets?.assigned?.length || 0 }),
           /* @__PURE__ */ jsxs7("div", { className: "flex items-center text-xs text-muted-foreground", children: [
-            /* @__PURE__ */ jsx7(Clock, { className: "h-3 w-3 mr-1" }),
+            /* @__PURE__ */ jsx7(Clock5, { className: "h-3 w-3 mr-1" }),
             "In progress"
           ] })
         ] })
@@ -3196,7 +2726,7 @@ function ServicesHubPage() {
           ] }),
           marketplace?.available?.highBounty?.length > 0 && /* @__PURE__ */ jsxs7("div", { children: [
             /* @__PURE__ */ jsxs7("h4", { className: "font-medium mb-3 flex items-center gap-2", children: [
-              /* @__PURE__ */ jsx7(DollarSign, { className: "h-4 w-4" }),
+              /* @__PURE__ */ jsx7(DollarSign3, { className: "h-4 w-4" }),
               "High Bounty"
             ] }),
             /* @__PURE__ */ jsx7("div", { className: "space-y-3", children: marketplace.available.highBounty.map((ticket) => /* @__PURE__ */ jsx7(
@@ -3387,11 +2917,11 @@ function TicketCard({ ticket, onClaim, assigned, requested }) {
       /* @__PURE__ */ jsxs7("div", { className: "flex items-center gap-4 mt-2", children: [
         /* @__PURE__ */ jsx7(Badge5, { variant: "outline", children: ticket.serviceArea }),
         ticket.bounty > 0 && /* @__PURE__ */ jsxs7("div", { className: "flex items-center text-sm", children: [
-          /* @__PURE__ */ jsx7(DollarSign, { className: "h-3 w-3" }),
+          /* @__PURE__ */ jsx7(DollarSign3, { className: "h-3 w-3" }),
           ticket.bounty
         ] }),
         ticket.sla && /* @__PURE__ */ jsxs7("div", { className: "flex items-center text-sm text-muted-foreground", children: [
-          /* @__PURE__ */ jsx7(Clock, { className: "h-3 w-3 mr-1" }),
+          /* @__PURE__ */ jsx7(Clock5, { className: "h-3 w-3 mr-1" }),
           "SLA: ",
           ticket.sla,
           "h"
@@ -3408,7 +2938,6 @@ var init_ServicesHub = __esm({
   "src/app/pages/services/ServicesHub.tsx"() {
     "use strict";
     "use client";
-    init_lucide_react();
     __name(ServicesHubPage, "ServicesHubPage");
     __name(TicketCard, "TicketCard");
     ServicesHub_default = ServicesHubPage;

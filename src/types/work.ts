@@ -1,4 +1,4 @@
-import { Core } from "@captify/core/types";
+import { Core } from "@captify-io/core/types";
 
 /**
  * Work management types with automatic time tracking

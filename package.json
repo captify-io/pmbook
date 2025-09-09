@@ -1,92 +1,91 @@
 {
-    "name":  "@m1kej0hns0n/captify-apps-pmbook",
-    "version":  "1.0.0",
-    "description":  "Strategic alignment and business operations platform for government contracting",
-    "type":  "module",
-    "sideEffects":  [
-                        "**/*.css"
-                    ],
-    "files":  [
-                  "dist"
-              ],
-    "engines":  {
-                    "node":  ">=18.18 || >=20"
-                },
-    "main":  "dist/app.mjs",
-    "types":  "./dist/app.d.mts",
-    "exports":  {
-                    ".":  {
-                              "import":  "./dist/app.mjs",
-                              "require":  "./dist/app.mjs",
-                              "default":  "./dist/app.mjs"
-                          },
-                    "./*":  {
-                                "import":  "./dist/*.mjs",
-                                "require":  "./dist/*.mjs",
-                                "default":  "./dist/*.mjs"
-                            }
-                },
-    "scripts":  {
-                    "build":  "tsup",
-                    "dev":  "cross-env NODE_ENV=development tsup --watch",
-                    "type-check":  "npx tsc --noEmit",
-                    "clean":  "rimraf dist"
-                },
-    "dependencies":  {
-                         "@aws-sdk/client-dynamodb":  "^3.693.0",
-                         "@aws-sdk/client-s3":  "^3.693.0",
-                         "@aws-sdk/lib-dynamodb":  "^3.693.0",
-                         "@m1kej0hns0n/captify-core":  "*",
-                         "date-fns":  "^3.0.0",
-                         "lucide-react":  "^0.542.0",
-                         "react":  "19.1.1",
-                         "react-dom":  "19.1.1",
-                         "recharts":  "^2.12.7",
-                         "uuid":  "^11.1.0"
-                     },
-    "repository":  {
-                       "type":  "git",
-                       "url":  "https://github.com/anaut/captify-apps-pmbook.git"
-                   },
-    "publishConfig":  {
-                          "registry":  "https://npm.pkg.github.com",
-                          "access":  "public"
-                      },
-    "devDependencies":  {
-                            "cross-env":  "^7.0.3",
-                            "esbuild":  "0.25.8",
-                            "tsup":  "^8.5.0",
-                            "typescript":  "^5.9.2"
-                        },
-    "_originalExports":  {
-                             ".":  {
-                                       "import":  "./dist/app.mjs",
-                                       "types":  "./dist/app.d.mts"
-                                   },
-                             "./services":  {
-                                                "import":  "./dist/services.mjs",
-                                                "types":  "./dist/services.d.mts"
-                                            },
-                             "./app":  {
-                                           "import":  "./dist/app.mjs",
-                                           "types":  "./dist/app.d.mts"
-                                       },
-                             "./app/client":  {
-                                                  "import":  "./dist/app/client.mjs",
-                                                  "types":  "./dist/app/client.d.mts"
-                                              },
-                             "./app/pageLoader":  {
-                                                      "import":  "./dist/app/pageLoader.mjs",
-                                                      "types":  "./dist/app/pageLoader.d.mts"
-                                                  },
-                             "./components":  {
-                                                  "import":  "./dist/components.mjs",
-                                                  "types":  "./dist/components.d.mts"
-                                              },
-                             "./types":  {
-                                             "import":  "./dist/types.mjs",
-                                             "types":  "./dist/types.d.mts"
-                                         }
-                         },
-    "module":  "dist/app.mjs"
+    "name": "@captify-io/pmbook",
+    "version": "1.0.0",
+    "description": "Strategic alignment and business operations platform for government contracting",
+    "type": "module",
+    "sideEffects": [
+        "**/*.css"
+    ],
+    "files": [
+        "dist"
+    ],
+    "engines": {
+        "node": ">=18.18 || >=20"
+    },
+    "main": "dist/app.mjs",
+    "types": "./dist/app.d.mts",
+    "exports": {
+        ".": {
+            "import": "./dist/app.mjs",
+            "types": "./dist/app.d.mts"
+        },
+        "./app": {
+            "import": "./dist/app.mjs",
+            "types": "./dist/app.d.mts"
+        },
+        "./components": {
+            "import": "./dist/components.mjs",
+            "types": "./dist/components.d.mts"
+        },
+        "./hooks": {
+            "import": "./dist/hooks.mjs",
+            "types": "./dist/hooks.d.mts"
+        },
+        "./lib": {
+            "import": "./dist/lib.mjs",
+            "types": "./dist/lib.d.mts"
+        },
+        "./services": {
+            "import": "./dist/services.mjs",
+            "types": "./dist/services.d.mts"
+        },
+        "./types": {
+            "import": "./dist/types.mjs",
+            "types": "./dist/types.d.mts"
+        }
+    },
+    "scripts": {
+        "build": "tsup",
+        "dev": "cross-env NODE_ENV=development tsup --watch",
+        "type-check": "npx tsc --noEmit",
+        "clean": "rimraf dist"
+    },
+    "dependencies": {
+        "@aws-sdk/client-dynamodb": "^3.693.0",
+        "@aws-sdk/client-s3": "^3.693.0",
+        "@aws-sdk/lib-dynamodb": "^3.693.0",
+        "@captify-io/core": "*",
+        "date-fns": "^3.0.0",
+        "lucide-react": "^0.542.0",
+        "react": "19.1.1",
+        "react-dom": "19.1.1",
+        "recharts": "^2.12.7",
+        "resolve-from": "^5.0.0",
+        "rimraf": "^6.0.1",
+        "uuid": "^11.1.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/captify-io/pmbook.git"
+    },
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com",
+        "access": "public"
+    },
+    "devDependencies": {
+        "@types/node": "^24.3.1",
+        "@types/react": "^19.1.12",
+        "@types/react-dom": "^19.1.9",
+        "cross-env": "^7.0.3",
+        "esbuild": "0.25.8",
+        "tsup": "^8.5.0",
+        "typescript": "^5.9.2"
+    },
+    "module": "dist/app.mjs",
+    "author": "Captify IO",
+    "license": "MIT",
+    "homepage": "https://github.com/captify-io/pmbook#readme",
+    "bugs": {
+        "url": "https://github.com/captify-io/pmbook/issues"
+    }
 }

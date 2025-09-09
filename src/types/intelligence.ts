@@ -1,4 +1,4 @@
-import { Core } from "@captify/core/types";
+import { Core } from "@captify-io/core/types";
 
 /**
  * AI Intelligence and Analytics types

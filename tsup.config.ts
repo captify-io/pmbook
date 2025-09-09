@@ -10,7 +10,8 @@ const createEntryConfig = (
 ) => ({
   entry: { [entryName]: entryPath },
   format: ["esm"] as ["esm"],
-  dts: false, // Disable for now due to type resolution issues
+  outExtension: () => ({ js: ".mjs", dts: ".d.mts" }),
+  dts: true, // Enable TypeScript declarations
   splitting: false,
   sourcemap: true,
   clean: entryName === "app", // Only clean once (first entry alphabetically)
@@ -27,8 +28,8 @@ const createEntryConfig = (
     "next/navigation",
     "next/router",
     "@aws-sdk/*",
-    "@captify/core",
-    "@captify/core/*",
+    "@captify-io/core",
+    "@captify-io/core/*",
   ],
   esbuildOptions(options: {
     jsx: string;
@@ -53,4 +54,13 @@ const createEntryConfig = (
 export default defineConfig([
   // Client-side modules (with "use client")
   createEntryConfig("app", "src/app/index.ts", true),
+  createEntryConfig("components", "src/components/index.ts", true),
+  createEntryConfig("hooks", "src/hooks/index.ts", true),
+  createEntryConfig("lib", "src/lib/index.ts", true),
+  
+  // Server-side modules (without "use client")
+  createEntryConfig("services", "src/services/index.ts", false),
+  
+  // Type exports (no "use client" needed)
+  createEntryConfig("types", "src/types/index.ts", false),
 ]);

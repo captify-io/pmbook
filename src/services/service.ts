@@ -6,7 +6,7 @@ import {
   UpdateCommand,
 } from "@aws-sdk/lib-dynamodb";
 // Simple type definitions for service pattern
-import { AwsCredentials, ApiUserSession } from "@captify/core/types";
+import { AwsCredentials, ApiUserSession } from "@captify-io/core/types";
 
 import type { ServiceTicket, ServiceMetrics } from "../types/service";
 

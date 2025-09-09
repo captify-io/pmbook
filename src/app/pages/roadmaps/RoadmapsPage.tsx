@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { useCaptify } from "@captify/core/hooks";
+import { useCaptify } from "@captify-io/core/hooks";
 import {
   Card,
   CardContent,
@@ -14,7 +14,7 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@captify/core/ui";
+} from "@captify-io/core/ui";
 import {
   Target,
   GitBranch,

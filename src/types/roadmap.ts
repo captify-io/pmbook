@@ -1,4 +1,4 @@
-import { Core } from "@captify/core/types";
+import { Core } from "@captify-io/core/types";
 
 /**
  * Roadmap types for strategic alignment from goals to execution

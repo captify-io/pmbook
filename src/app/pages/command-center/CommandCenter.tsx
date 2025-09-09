@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useCaptify } from "@captify/core/components";
-import { apiClient } from "@captify/core/lib";
+import { useCaptify } from "@captify-io/core/components";
+import { apiClient } from "@captify-io/core/lib";
 import {
   Card,
   CardContent,
@@ -13,7 +13,7 @@ import {
   Progress,
   Alert,
   AlertDescription,
-} from "@captify/core/ui";
+} from "@captify-io/core/ui";
 import {
   TrendingUp,
   TrendingDown,
