@@ -193,4 +193,4 @@ Captify IO
 
 ---
 
-Built with ❤️ for the government contracting community
+Built with ❤️ for the government contracting community.
