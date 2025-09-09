@@ -28,16 +28,13 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.DEPLOY_SECRET }}
       
-      - name: Install pnpm
-        run: npm install -g pnpm
-      
       - name: Install dependencies
-        run: pnpm install --no-frozen-lockfile
+        run: npm ci
         env:
           NODE_AUTH_TOKEN: ${{ secrets.DEPLOY_SECRET }}
       
       - name: Build
-        run: pnpm build
+        run: npm run build
       
       - name: Check if version exists
         id: check
