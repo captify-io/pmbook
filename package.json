@@ -1,6 +1,6 @@
 {
     "name": "@captify-io/pmbook",
-    "version": "1.0.4",
+    "version": "1.0.3",
     "description": "Strategic alignment and business operations platform for government contracting",
     "type": "module",
     "sideEffects": [
@@ -13,28 +13,35 @@
         "node": ">=18.18 || >=20"
     },
     "main": "dist/app.mjs",
-    "module": "dist/app.mjs",
+    "types": "./dist/app.d.mts",
     "exports": {
         ".": {
-            "import": "./dist/app.mjs"
+            "import": "./dist/app.mjs",
+            "types": "./dist/app.d.mts"
         },
         "./app": {
-            "import": "./dist/app.mjs"
+            "import": "./dist/app.mjs",
+            "types": "./dist/app.d.mts"
         },
         "./components": {
-            "import": "./dist/components.mjs"
+            "import": "./dist/components.mjs",
+            "types": "./dist/components.d.mts"
         },
         "./hooks": {
-            "import": "./dist/hooks.mjs"
+            "import": "./dist/hooks.mjs",
+            "types": "./dist/hooks.d.mts"
         },
         "./lib": {
-            "import": "./dist/lib.mjs"
+            "import": "./dist/lib.mjs",
+            "types": "./dist/lib.d.mts"
         },
         "./services": {
-            "import": "./dist/services.mjs"
+            "import": "./dist/services.mjs",
+            "types": "./dist/services.d.mts"
         },
         "./types": {
-            "import": "./dist/types.mjs"
+            "import": "./dist/types.mjs",
+            "types": "./dist/types.d.mts"
         }
     },
     "scripts": {

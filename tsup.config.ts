@@ -10,8 +10,8 @@ const createEntryConfig = (
 ) => ({
   entry: { [entryName]: entryPath },
   format: ["esm"] as ["esm"],
-  outExtension: () => ({ js: ".mjs" }),
-  dts: false, // Disable for now - types from peer deps not resolving in CI
+  outExtension: () => ({ js: ".mjs", dts: ".d.mts" }),
+  dts: true, // Enable TypeScript declarations
   splitting: false,
   sourcemap: true,
   clean: entryName === "app", // Only clean once (first entry alphabetically)
