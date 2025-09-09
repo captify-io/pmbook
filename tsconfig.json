@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ES2022",
     "module": "ESNext",
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "jsx": "react-jsx",
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
@@ -17,9 +17,7 @@
     "outDir": "dist",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "@captify-io/core": ["node_modules/@captify-io/core"],
-      "@captify-io/core/*": ["node_modules/@captify-io/core/*"]
+      "@/*": ["src/*"]
     },
     "incremental": false
   },
