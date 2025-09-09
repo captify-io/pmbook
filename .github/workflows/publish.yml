@@ -32,7 +32,7 @@ jobs:
         run: npm install -g pnpm
       
       - name: Install dependencies
-        run: pnpm install --no-frozen-lockfile
+        run: pnpm install --no-frozen-lockfile --config.auto-install-peers=false
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
