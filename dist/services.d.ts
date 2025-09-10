@@ -296,6 +296,7 @@ interface Contract extends Core {
     optionPeriods?: OptionPeriod[];
     popStart: string;
     popEnd: string;
+    popMonths?: number;
     proposalSubmitted?: boolean;
     proposalDate?: string;
     proposalUrl?: string;

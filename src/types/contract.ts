@@ -51,6 +51,7 @@ export interface Contract extends Core {
   optionPeriods?: OptionPeriod[];
   popStart: string; // Period of Performance start
   popEnd: string; // Period of Performance end
+  popMonths?: number; // Period of Performance in months (calculated field)
 
   // Proposal
   proposalSubmitted?: boolean;

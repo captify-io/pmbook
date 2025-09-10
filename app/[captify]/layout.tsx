@@ -3,7 +3,7 @@ import { ClientCaptifyLayout } from "./components/ClientCaptifyLayout";
 
 interface CaptifyLayoutProps {
   children: React.ReactNode;
-  params: Promise<{ captify: string[] }>;
+  params: Promise<{ captify: string }>;
 }
 
 export default async function CaptifyPageLayout({
@@ -12,10 +12,10 @@ export default async function CaptifyPageLayout({
 }: CaptifyLayoutProps) {
   const { captify } = await params;
 
-  console.log("called [captify]/layout.tsx with package:", captify[0]);
+  console.log("called [captify]/layout.tsx with package:", captify);
 
   return (
-    <ClientCaptifyLayout packageName={captify[0] || ""}>
+    <ClientCaptifyLayout packageName={captify || ""}>
       {children}
     </ClientCaptifyLayout>
   );

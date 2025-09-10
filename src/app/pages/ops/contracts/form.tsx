@@ -177,14 +177,14 @@ export function ContractForm({
     value: number
   ) => {
     setFormData((prev) => {
-      const costs = { ...prev[costType] };
+      const costs = { ...prev[costType] } as any;
       costs[field] = value;
       costs.total =
-        costs.direct +
-        costs.indirect +
-        costs.materials +
-        costs.subcontracts +
-        costs.profit;
+        (costs.direct || 0) +
+        (costs.indirect || 0) +
+        (costs.materials || 0) +
+        (costs.subcontracts || 0) +
+        (costs.profit || 0);
       return {
         ...prev,
         [costType]: costs,

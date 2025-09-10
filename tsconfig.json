@@ -19,7 +19,6 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "rootDir": "src",
     "outDir": "dist",
     "baseUrl": ".",
     "paths": {
@@ -37,6 +36,7 @@
   },
   "include": [
     "src",
+    "app",
     ".next/types/**/*.ts"
   ],
   "exclude": [

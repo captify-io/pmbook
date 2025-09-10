@@ -1,6 +1,6 @@
 {
   "name": "@captify-io/pmbook",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Strategic alignment and business operations platform for government contracting",
   "type": "module",
   "sideEffects": [
@@ -57,6 +57,7 @@
     "dist": "tsup",
     "git:commit": "git add -A && git commit -m \"Package update: $(date)\" || echo \"No changes to commit\"",
     "git:push": "git push origin main",
+    "lint": "next lint",
     "publish:package": "npm publish",
     "start": "next start -p 3000",
     "type-check": "npx tsc --noEmit",
@@ -65,18 +66,19 @@
     "update": "npm install @captify-io/platform@github:captify-io/platform#main"
   },
   "dependencies": {
-    "@captify-io/platform": "^1.0.26",
-    "@types/uuid": "^10.0.0",
+    "rimraf": "^6.0.1"
+  },
+  "peerDependencies": {
+    "@captify-io/platform": "^1.0.27",
+    "@tailwindcss/postcss": "^4.1.13",
+    "autoprefixer": "^10.4.21",
     "clsx": "^2.0.0",
     "next-auth": "5.0.0-beta.25",
     "next-themes": "^0.4.0",
-    "rimraf": "^6.0.1",
+    "react": ">=19.1.1",
+    "react-dom": ">=19.1.1",
     "tailwind-merge": "^3.0.0",
-    "uuid": "^13.0.0"
-  },
-  "peerDependencies": {
-    "react": ">=18.0.0",
-    "react-dom": ">=18.0.0"
+    "uuid": "^11.1.0"
   },
   "repository": {
     "type": "git",
@@ -87,18 +89,22 @@
     "access": "public"
   },
   "devDependencies": {
+    "@captify-io/platform": "^1.0.27",
     "@types/node": "^24.3.1",
-    "@types/react": "^19.1.12",
-    "@types/react-dom": "^19.1.9",
+    "@types/react": "19.1.1",
+    "@types/react-dom": "19.1.1",
+    "@types/uuid": "^10.0.0",
     "cross-env": "^7.0.3",
     "esbuild": "0.25.8",
-    "next": "^15.0.0",
+    "eslint": "^9.16.0",
+    "eslint-config-next": "^15.5.2",
+    "next": "^15.5.2",
     "postcss": "^8.4.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "tailwindcss": "^3.4.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "tailwindcss": "^4.1.13",
     "tsup": "^8.5.0",
-    "typescript": "^5.9.2"
+    "typescript": "5.9.2"
   },
   "module": "dist/app.mjs",
   "author": "Captify IO",
