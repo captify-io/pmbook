@@ -1,93 +1,110 @@
 {
-    "name": "@captify-io/pmbook",
-    "version": "1.0.4",
-    "description": "Strategic alignment and business operations platform for government contracting",
-    "type": "module",
-    "sideEffects": [
-        "**/*.css"
-    ],
-    "files": [
-        "dist"
-    ],
-    "engines": {
-        "node": ">=18.18 || >=20"
+  "name": "@captify-io/pmbook",
+  "version": "1.0.5",
+  "description": "Strategic alignment and business operations platform for government contracting",
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=18.18 || >=20"
+  },
+  "main": "dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
     },
-    "main": "dist/app.mjs",
-    "types": "./dist/app.d.mts",
-    "exports": {
-        ".": {
-            "import": "./dist/app.mjs",
-            "types": "./dist/app.d.mts"
-        },
-        "./app": {
-            "import": "./dist/app.mjs",
-            "types": "./dist/app.d.mts"
-        },
-        "./components": {
-            "import": "./dist/components.mjs",
-            "types": "./dist/components.d.mts"
-        },
-        "./hooks": {
-            "import": "./dist/hooks.mjs",
-            "types": "./dist/hooks.d.mts"
-        },
-        "./lib": {
-            "import": "./dist/lib.mjs",
-            "types": "./dist/lib.d.mts"
-        },
-        "./services": {
-            "import": "./dist/services.mjs",
-            "types": "./dist/services.d.mts"
-        },
-        "./types": {
-            "import": "./dist/types.mjs",
-            "types": "./dist/types.d.mts"
-        }
+    "./app": {
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
     },
-    "scripts": {
-        "build": "tsup",
-        "dev": "cross-env NODE_ENV=development tsup --watch",
-        "type-check": "npx tsc --noEmit",
-        "clean": "rimraf dist"
+    "./components": {
+      "import": "./dist/components.mjs",
+      "types": "./dist/components.d.ts"
     },
-    "dependencies": {
-        "@aws-sdk/client-dynamodb": "^3.693.0",
-        "@aws-sdk/client-s3": "^3.693.0",
-        "@aws-sdk/lib-dynamodb": "^3.693.0",
-        "date-fns": "^3.0.0",
-        "lucide-react": "^0.542.0",
-        "recharts": "^2.12.7",
-        "resolve-from": "^5.0.0",
-        "rimraf": "^6.0.1",
-        "uuid": "^11.1.0"
+    "./hooks": {
+      "import": "./dist/hooks.mjs",
+      "types": "./dist/hooks.d.ts"
     },
-    "peerDependencies": {
-        "@captify-io/core": "^1.0.8",
-        "react": ">=18.0.0",
-        "react-dom": ">=18.0.0"
+    "./lib": {
+      "import": "./dist/lib.mjs",
+      "types": "./dist/lib.d.ts"
     },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/captify-io/pmbook.git"
+    "./services": {
+      "import": "./dist/services.mjs",
+      "types": "./dist/services.d.ts"
     },
-    "publishConfig": {
-        "registry": "https://npm.pkg.github.com",
-        "access": "public"
+    "./services/config": {
+      "import": "./dist/services.mjs",
+      "types": "./dist/services.d.ts"
     },
-    "devDependencies": {
-        "@types/node": "^24.3.1",
-        "@types/react": "^19.1.12",
-        "@types/react-dom": "^19.1.9",
-        "cross-env": "^7.0.3",
-        "esbuild": "0.25.8",
-        "tsup": "^8.5.0",
-        "typescript": "^5.9.2"
-    },
-    "module": "dist/app.mjs",
-    "author": "Captify IO",
-    "license": "MIT",
-    "homepage": "https://github.com/captify-io/pmbook#readme",
-    "bugs": {
-        "url": "https://github.com/captify-io/pmbook/issues"
+    "./types": {
+      "import": "./dist/types.mjs",
+      "types": "./dist/types.d.ts"
     }
+  },
+  "scripts": {
+    "build": "npm run git:commit && npm run version:patch && npm run build:package && npm run git:push && npm run publish:package",
+    "build:app": "next build",
+    "build:package": "npm run dist",
+    "dev": "next dev -p 3050",
+    "dev:lib": "tsup --watch",
+    "dist": "tsup",
+    "git:commit": "git add -A && git commit -m \"Package update: $(date)\" || echo \"No changes to commit\"",
+    "git:push": "git push origin main",
+    "publish:package": "npm publish",
+    "start": "next start -p 3000",
+    "type-check": "npx tsc --noEmit",
+    "version:patch": "npm version patch --no-git-tag-version",
+    "clean": "rimraf dist .next",
+    "update": "npm install @captify-io/platform@github:captify-io/platform#main"
+  },
+  "dependencies": {
+    "@captify-io/platform": "^1.0.26",
+    "@types/uuid": "^10.0.0",
+    "clsx": "^2.0.0",
+    "next-auth": "5.0.0-beta.25",
+    "next-themes": "^0.4.0",
+    "rimraf": "^6.0.1",
+    "tailwind-merge": "^3.0.0",
+    "uuid": "^13.0.0"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/captify-io/pmbook.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.1",
+    "@types/react": "^19.1.12",
+    "@types/react-dom": "^19.1.9",
+    "cross-env": "^7.0.3",
+    "esbuild": "0.25.8",
+    "next": "^15.0.0",
+    "postcss": "^8.4.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwindcss": "^3.4.0",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.2"
+  },
+  "module": "dist/app.mjs",
+  "author": "Captify IO",
+  "license": "MIT",
+  "homepage": "https://github.com/captify-io/pmbook#readme",
+  "bugs": {
+    "url": "https://github.com/captify-io/pmbook/issues"
+  }
 }

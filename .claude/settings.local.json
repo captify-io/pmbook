@@ -1,0 +1,36 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/anaut/OneDrive/Documents/GitHub/captify-core/src/components/packages/**)",
+      "Bash(npm run build:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run clean:*)",
+      "Bash(find:*)",
+      "Bash(git add:*)",
+      "Bash(git reset:*)",
+      "Bash(git push:*)",
+      "Bash(npm publish:*)",
+      "Bash(npm version:*)",
+      "Bash(git commit:*)",
+      "Bash(git remote set-url:*)",
+      "Bash(git remote get-url:*)",
+      "Bash(git fetch:*)",
+      "Read(//c/Users/anaut/OneDrive/Documents/GitHub/captify-core/**)",
+      "Bash(git revert:*)",
+      "Bash(npm view:*)",
+      "Bash(npm ls:*)",
+      "Bash(cat:*)",
+      "Bash(npm pack:*)",
+      "Bash(tar:*)",
+      "Bash(npx tsup:*)",
+      "Bash(npm run dist:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(npm run dev:*)",
+      "Bash(npm run update:*)",
+      "Bash(npm run type-check:*)",
+      "Bash(npx next dev:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

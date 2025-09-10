@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useCaptify } from "@captify-io/core/components";
-import { apiClient } from "@captify-io/core/lib";
+import { useCaptify } from "@captify-io/platform/hooks";
+import { apiClient } from "@captify-io/platform/api";
 import {
   Card,
   CardContent,
@@ -21,17 +21,8 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@captify-io/core/ui";
-import {
-  Plus,
-  Ticket,
-  Clock,
-  DollarSign,
-  Star,
-  TrendingUp,
-  Users,
-  CheckCircle,
-} from "lucide-react";
+  DynamicIcon,
+} from "@captify-io/platform/ui";
 
 export function ServicesHubPage() {
   const { session } = useCaptify();
@@ -135,7 +126,7 @@ export function ServicesHubPage() {
           <p className="text-muted-foreground">Internal service marketplace</p>
         </div>
         <Button onClick={() => setShowCreateTicket(true)}>
-          <Plus className="h-4 w-4 mr-2" />
+          <DynamicIcon name="plus" className="h-4 w-4 mr-2" />
           Create Ticket
         </Button>
       </div>
@@ -166,7 +157,7 @@ export function ServicesHubPage() {
               {marketplace?.myTickets?.assigned?.length || 0}
             </div>
             <div className="flex items-center text-xs text-muted-foreground">
-              <Clock className="h-3 w-3 mr-1" />
+              <DynamicIcon name="clock" className="h-3 w-3 mr-1" />
               In progress
             </div>
           </CardContent>
@@ -181,7 +172,7 @@ export function ServicesHubPage() {
               {marketplace?.myTickets?.requested?.length || 0}
             </div>
             <div className="flex items-center text-xs text-muted-foreground">
-              <Ticket className="h-3 w-3 mr-1" />
+              <DynamicIcon name="ticket" className="h-3 w-3 mr-1" />
               Submitted
             </div>
           </CardContent>
@@ -194,7 +185,7 @@ export function ServicesHubPage() {
           <CardContent>
             <div className="text-2xl font-bold">#5</div>
             <div className="flex items-center text-xs text-muted-foreground">
-              <Star className="h-3 w-3 mr-1" />
+              <DynamicIcon name="star" className="h-3 w-3 mr-1" />
               Top performer
             </div>
           </CardContent>
@@ -237,7 +228,7 @@ export function ServicesHubPage() {
               {marketplace?.available?.highBounty?.length > 0 && (
                 <div>
                   <h4 className="font-medium mb-3 flex items-center gap-2">
-                    <DollarSign className="h-4 w-4" />
+                    <DynamicIcon name="dollar-sign" className="h-4 w-4" />
                     High Bounty
                   </h4>
                   <div className="space-y-3">
@@ -314,7 +305,7 @@ export function ServicesHubPage() {
                     </div>
                     <div className="text-right">
                       <div className="flex items-center gap-1">
-                        <Star className="h-4 w-4 text-yellow-500" />
+                        <DynamicIcon name="star" className="h-4 w-4 text-yellow-500" />
                         <span className="font-medium">
                           {entry.satisfaction}%
                         </span>
@@ -459,13 +450,13 @@ function TicketCard({ ticket, onClaim, assigned, requested }: any) {
           <Badge variant="outline">{ticket.serviceArea}</Badge>
           {ticket.bounty > 0 && (
             <div className="flex items-center text-sm">
-              <DollarSign className="h-3 w-3" />
+              <DynamicIcon name="dollar-sign" className="h-3 w-3" />
               {ticket.bounty}
             </div>
           )}
           {ticket.sla && (
             <div className="flex items-center text-sm text-muted-foreground">
-              <Clock className="h-3 w-3 mr-1" />
+              <DynamicIcon name="clock" className="h-3 w-3 mr-1" />
               SLA: {ticket.sla}h
             </div>
           )}

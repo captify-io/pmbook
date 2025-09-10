@@ -1,4 +1,4 @@
-import { Core } from "@captify-io/core/types";
+import { Core } from "@captify-io/platform/types";
 
 /**
  * Contract management types for government contracting
@@ -16,7 +16,7 @@ export interface Contract extends Core {
   // Award Information
   awardAmount: number;
   awardDate: string;
-  
+
   // Financial
   totalValue: number;
   fundedValue: number;
@@ -77,7 +77,7 @@ export interface Contract extends Core {
   strategicGoals?: StrategicGoal[];
   workStreams?: WorkStreamAllocation[];
   capabilities?: string[];
-  
+
   // Status
   status: "pre-award" | "active" | "option-pending" | "closing" | "closed";
   healthScore: number;
@@ -100,7 +100,7 @@ export interface CDRL extends Core {
   status: "pending" | "in-progress" | "submitted" | "approved" | "rejected";
   currentVersion?: string;
   submissions?: CDRLSubmission[];
-  
+
   // Payment Information
   paymentAmount?: number; // Amount to be paid upon delivery/approval
   paymentTerms?: string; // e.g., "Net 30", "Upon approval"

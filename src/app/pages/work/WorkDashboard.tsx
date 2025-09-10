@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useCaptify } from "@captify-io/core/components";
-import { apiClient } from "@captify-io/core/lib";
+import { useCaptify } from "@captify-io/platform/hooks";
+import { apiClient } from "@captify-io/platform/api";
 import {
   Card,
   CardContent,
@@ -15,17 +15,8 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@captify-io/core/ui";
-import {
-  Play,
-  Pause,
-  CheckCircle,
-  Clock,
-  Target,
-  Zap,
-  TrendingUp,
-  AlertCircle,
-} from "lucide-react";
+  DynamicIcon,
+} from "@captify-io/platform/ui";
 
 export function WorkDashboardPage() {
   const { session } = useCaptify();
@@ -129,7 +120,7 @@ export function WorkDashboardPage() {
           <CardHeader>
             <CardTitle className="flex items-center justify-between">
               <span className="flex items-center gap-2">
-                <Play className="h-5 w-5 text-green-500" />
+                <DynamicIcon name="play" className="h-5 w-5 text-green-500" />
                 Current Focus
               </span>
               <Badge variant="default">{formatTime(timer)}</Badge>
@@ -153,7 +144,7 @@ export function WorkDashboardPage() {
                 variant="destructive"
                 className="flex-1"
               >
-                <Pause className="h-4 w-4 mr-2" />
+                <DynamicIcon name="pause" className="h-4 w-4 mr-2" />
                 Stop Work
               </Button>
               <Button
@@ -161,7 +152,7 @@ export function WorkDashboardPage() {
                 variant="default"
                 className="flex-1"
               >
-                <CheckCircle className="h-4 w-4 mr-2" />
+                <DynamicIcon name="check-circle" className="h-4 w-4 mr-2" />
                 Complete
               </Button>
             </div>
@@ -220,7 +211,7 @@ export function WorkDashboardPage() {
               {productivity?.strategicAlignment?.toFixed(0) || 0}%
             </div>
             <div className="flex items-center text-xs text-muted-foreground">
-              <Target className="h-3 w-3 mr-1" />
+              <DynamicIcon name="target" className="h-3 w-3 mr-1" />
               On critical path
             </div>
           </CardContent>
@@ -235,7 +226,7 @@ export function WorkDashboardPage() {
               {productivity?.focusTime?.toFixed(1) || 0}h
             </div>
             <div className="flex items-center text-xs text-muted-foreground">
-              <Zap className="h-3 w-3 mr-1" />
+              <DynamicIcon name="zap" className="h-3 w-3 mr-1" />
               Deep work
             </div>
           </CardContent>
@@ -304,7 +295,7 @@ function WorkItem({ item, onStart, critical, blocked }: any) {
       <div className="flex-1">
         <div className="flex items-center gap-2">
           <h4 className="font-medium">{item.title}</h4>
-          {critical && <AlertCircle className="h-4 w-4 text-red-500" />}
+          {critical && <DynamicIcon name="alert-circle" className="h-4 w-4 text-red-500" />}
         </div>
         <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
         <div className="flex gap-2 mt-2">
@@ -315,7 +306,7 @@ function WorkItem({ item, onStart, critical, blocked }: any) {
         </div>
       </div>
       <Button onClick={() => onStart(item)} disabled={blocked} size="sm">
-        <Play className="h-4 w-4 mr-1" />
+        <DynamicIcon name="play" className="h-4 w-4 mr-1" />
         Start
       </Button>
     </div>

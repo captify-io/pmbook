@@ -1,4 +1,4 @@
-import { Core } from "@captify-io/core/types";
+import { Core } from "@captify-io/platform/types";
 
 /**
  * Business performance and health metrics

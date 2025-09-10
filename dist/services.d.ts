@@ -1,81 +1,55 @@
-import { AwsCredentials, ApiUserSession, Core } from '@captify-io/core/types';
+import { Core } from '@captify-io/platform/types';
 
-interface WorkServiceRequest {
-    service: string;
-    operation: string;
-    data?: any;
-    schema?: string;
-    app?: string;
-}
-declare function execute$5(request: WorkServiceRequest, credentials?: AwsCredentials, session?: ApiUserSession): Promise<any>;
-declare const workService: {
-    execute: typeof execute$5;
-};
-
-interface StrategicServiceRequest {
-    service: string;
-    operation: string;
-    data?: any;
-    schema?: string;
-    app?: string;
-}
 /**
- * Execute strategic management operations
+ * @captify/pmbook/services/config - Application configuration
+ *
+ * Contains configuration data that the platform needs to pick up
  */
-declare function execute$4(request: StrategicServiceRequest, credentials?: AwsCredentials, session?: ApiUserSession): Promise<any>;
-declare const strategicService: {
-    execute: typeof execute$4;
-};
-
-interface ServiceMarketplaceRequest {
-    service: string;
-    operation: string;
-    data?: any;
-    schema?: string;
-    app?: string;
-}
-declare function execute$3(request: ServiceMarketplaceRequest, credentials?: AwsCredentials, session?: ApiUserSession): Promise<any>;
-declare const serviceMarketplaceService: {
-    execute: typeof execute$3;
-};
-
-interface PerformanceServiceRequest {
-    service: string;
-    operation: string;
-    data?: any;
-    schema?: string;
-    app?: string;
-}
-declare function execute$2(request: PerformanceServiceRequest, credentials?: AwsCredentials, session?: ApiUserSession): Promise<any>;
-declare const performanceService: {
-    execute: typeof execute$2;
-};
-
-interface IntelligenceServiceRequest {
-    service: string;
-    operation: string;
-    data?: any;
-    schema?: string;
-    app?: string;
-}
-declare function execute$1(request: IntelligenceServiceRequest, credentials?: AwsCredentials, session?: ApiUserSession): Promise<any>;
-declare const intelligenceService: {
-    execute: typeof execute$1;
-};
-
-interface ContractServiceRequest {
-    service: string;
-    operation: string;
-    data?: any;
-    schema?: string;
-    app?: string;
-}
-/**
- * Execute contract management operations
- */
-declare function execute(request: ContractServiceRequest, credentials?: AwsCredentials, session?: ApiUserSession): Promise<any>;
-declare const contractService: {
-    execute: typeof execute;
+declare const config: {
+    appName: string;
+    version: string;
+    identityPoolId: string;
+    agentId: string;
+    agentAliasId: string;
+    description: string;
+    menu: ({
+        id: string;
+        label: string;
+        icon: string;
+        order: number;
+        description: string;
+        group: string;
+        role: string;
+        children: {
+            id: string;
+            label: string;
+            href: string;
+            icon: string;
+            description: string;
+        }[];
+    } | {
+        id: string;
+        label: string;
+        icon: string;
+        order: number;
+        description: string;
+        children: {
+            id: string;
+            label: string;
+            href: string;
+            icon: string;
+            description: string;
+        }[];
+        group?: undefined;
+        role?: undefined;
+    })[];
+    platform: {
+        deployment: {
+            dev: string;
+            staging: string;
+            production: string;
+        };
+    };
 };
 
 /**
@@ -1254,33 +1228,4 @@ interface RoadmapView {
     showMetrics: boolean;
 }
 
-/**
- * @captify/pmbook/services - Server-side exports
- *
- * Contains all server-side functionality for the program management and business operations package.
- */
-declare const services: {
-    use: (serviceName: string) => {
-        execute: typeof execute;
-    };
-    contract: {
-        execute: typeof execute;
-    };
-    intelligence: {
-        execute: typeof execute$1;
-    };
-    performance: {
-        execute: typeof execute$2;
-    };
-    serviceMarketplace: {
-        execute: typeof execute$3;
-    };
-    strategic: {
-        execute: typeof execute$4;
-    };
-    work: {
-        execute: typeof execute$5;
-    };
-};
-
-export { type AnalyticsQuery, type ApprovalRecord, type BurnAnalysis, type CDRL, type CDRLSubmission, type Capability, type Comment, type CompanyHealth, type Contract, type ContractBurn, type ContractMetrics, type ContractMod, type Dependency, type EmployeeValue, type Epic, type Feature, type FinancialForecast, type ForecastPeriod, type ForecastScenario, type GroundTruth, type HealthAlert, type Initiative, type InitiativeMilestone, type InitiativeRisk, type InitiativeWorkStreamAllocation, type Insight, type IntelligenceAlert, type Invoice, type KeyResult, type LaborCategory, type LaborLineItem, type Milestone, type ODCLineItem, type Objective, type ObjectiveKeyResult, type ObjectiveMetrics, type OptionPeriod, type Prediction, type ProductivityMetrics, type ProposalDocument, type Recommendation, type Risk, type Roadmap, type RoadmapView, type SLA, type ServiceArea, type ServiceCatalog, type ServiceLevelAgreement, type ServiceLevelObjective, type ServiceMetrics, type ServiceOffering, type ServiceRequest, type ServiceTicket, type Sprint, type StrategicGoal, type StrategicObjective, type Subcontractor, type SubcontractorLineItem, type Task, type Team, type TeamMember, type TeamPerformance, type Ticket, type TicketComment, type TrendAnalysis, type UserStory, type WorkItem, type WorkLog, type WorkQueue, type WorkSession, type WorkStream, type WorkStreamAllocation, type WorkStreamMetrics, type WorkStreamRisk, type WorkStreamServiceCatalog, type WorkStreamTeamMember, type WorkStreamType, execute as contractExecute, contractService, execute$1 as intelligenceExecute, intelligenceService, execute$2 as performanceExecute, performanceService, execute$3 as serviceExecute, serviceMarketplaceService, services, execute$4 as strategicExecute, strategicService, execute$5 as workExecute, workService };
+export { type AnalyticsQuery, type ApprovalRecord, type BurnAnalysis, type CDRL, type CDRLSubmission, type Capability, type Comment, type CompanyHealth, type Contract, type ContractBurn, type ContractMetrics, type ContractMod, type Dependency, type EmployeeValue, type Epic, type Feature, type FinancialForecast, type ForecastPeriod, type ForecastScenario, type GroundTruth, type HealthAlert, type Initiative, type InitiativeMilestone, type InitiativeRisk, type InitiativeWorkStreamAllocation, type Insight, type IntelligenceAlert, type Invoice, type KeyResult, type LaborCategory, type LaborLineItem, type Milestone, type ODCLineItem, type Objective, type ObjectiveKeyResult, type ObjectiveMetrics, type OptionPeriod, type Prediction, type ProductivityMetrics, type ProposalDocument, type Recommendation, type Risk, type Roadmap, type RoadmapView, type SLA, type ServiceArea, type ServiceCatalog, type ServiceLevelAgreement, type ServiceLevelObjective, type ServiceMetrics, type ServiceOffering, type ServiceRequest, type ServiceTicket, type Sprint, type StrategicGoal, type StrategicObjective, type Subcontractor, type SubcontractorLineItem, type Task, type Team, type TeamMember, type TeamPerformance, type Ticket, type TicketComment, type TrendAnalysis, type UserStory, type WorkItem, type WorkLog, type WorkQueue, type WorkSession, type WorkStream, type WorkStreamAllocation, type WorkStreamMetrics, type WorkStreamRisk, type WorkStreamServiceCatalog, type WorkStreamTeamMember, type WorkStreamType, config };
