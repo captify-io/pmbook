@@ -1,6 +1,6 @@
 {
   "name": "@captify-io/pmbook",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Strategic alignment and business operations platform for government contracting",
   "type": "module",
   "sideEffects": [
@@ -55,7 +55,7 @@
     "dev": "next dev -p 3050",
     "dev:lib": "tsup --watch",
     "dist": "tsup",
-    "git:commit": "git add -A && git commit -m \"Package update: $(date)\" || echo \"No changes to commit\"",
+    "git:commit": "git add package.json package-lock.json dist/ src/ && git commit -m \"Package update: $(date)\" || echo \"No changes to commit\"",
     "git:push": "git push origin main",
     "lint": "next lint",
     "publish:package": "npm publish --legacy-peer-deps",
