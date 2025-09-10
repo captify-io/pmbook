@@ -19,18 +19,30 @@ export type ComponentRegistry = Record<string, PageImport>;
 // Export individual types for external use
 export type { ComponentType };
 
+// Page component imports for proper bundling
+import {
+  IntelligencePage,
+  ContractsPage,
+  CommandCenterPage,
+  PerformancePage,
+  ValueStreamsPage,
+  MyTicketsPage,
+  ServicesHubPage,
+  WorkDashboardPage,
+} from "./app/pages";
+
 // Page path mapping based on config.json structure
-const PAGE_MAPPINGS: Record<string, string> = {
+const PAGE_MAPPINGS: Record<string, NextPageComponent> = {
   // Operations pages
-  "/ops/insights": "./app/pages/ops/insights/page",
-  "/ops/contracts": "./app/pages/ops/contracts/page", 
-  "/ops/people": "./app/pages/ops/people/page",
-  "/ops/performance": "./app/pages/ops/performance/page",
+  "/ops/insights": IntelligencePage,
+  "/ops/contracts": ContractsPage, 
+  "/ops/people": CommandCenterPage,
+  "/ops/performance": PerformancePage,
   
   // Execution pages
-  "/exe/value-streams": "./app/pages/exe/value-streams/page",
-  "/exe/my-tickets": "./app/pages/exe/my-tickets/page",
-  "/exe/service-hub": "./app/pages/services/ServicesHub",
+  "/exe/value-streams": ValueStreamsPage,
+  "/exe/my-tickets": MyTicketsPage,
+  "/exe/service-hub": ServicesHubPage,
 };
 
 // Generate page registry dynamically from config.json
@@ -38,8 +50,8 @@ function generatePageRegistry(): PageRegistry {
   const registry: PageRegistry = {};
   
   // Add default/home page
-  registry.home = () => import("./app/pages/ops/people/page");
-  registry.dashboard = () => import("./app/pages/ops/people/page");
+  registry.home = async () => ({ default: CommandCenterPage });
+  registry.dashboard = async () => ({ default: CommandCenterPage });
   
   // Process menu items recursively
   function processMenuItems(items: any[], parentPath = "") {
@@ -49,15 +61,15 @@ function generatePageRegistry(): PageRegistry {
         processMenuItems(item.children, parentPath);
       } else if (item.href) {
         // Map menu item to page component
-        const pagePath = PAGE_MAPPINGS[item.href];
-        if (pagePath) {
+        const pageComponent = PAGE_MAPPINGS[item.href];
+        if (pageComponent) {
           // Create registry entries for different access patterns
           const cleanId = item.id.replace("pmbook-", "").replace(/-/g, "-");
           const hrefKey = item.href.slice(1).replace("/", "-"); // Remove leading slash, replace / with -
           
-          registry[cleanId] = () => import(pagePath);
-          registry[hrefKey] = () => import(pagePath);
-          registry[item.id] = () => import(pagePath);
+          registry[cleanId] = async () => ({ default: pageComponent });
+          registry[hrefKey] = async () => ({ default: pageComponent });
+          registry[item.id] = async () => ({ default: pageComponent });
         }
       }
     });
@@ -72,18 +84,18 @@ function generatePageRegistry(): PageRegistry {
 function generateComponentRegistry(): ComponentRegistry {
   return {
     // Operations components
-    IntelligencePage: () => import("./app/pages/ops/insights/page"),
-    ContractsPage: () => import("./app/pages/ops/contracts/page"),
-    CommandCenterPage: () => import("./app/pages/ops/people/page"),
-    PerformancePage: () => import("./app/pages/ops/performance/page"),
+    IntelligencePage: async () => ({ default: IntelligencePage }),
+    ContractsPage: async () => ({ default: ContractsPage }),
+    CommandCenterPage: async () => ({ default: CommandCenterPage }),
+    PerformancePage: async () => ({ default: PerformancePage }),
     
     // Execution components
-    ValueStreamsPage: () => import("./app/pages/exe/value-streams/page"),
-    MyTicketsPage: () => import("./app/pages/exe/my-tickets/page"),
-    ServicesHubPage: () => import("./app/pages/services/ServicesHub"),
+    ValueStreamsPage: async () => ({ default: ValueStreamsPage }),
+    MyTicketsPage: async () => ({ default: MyTicketsPage }),
+    ServicesHubPage: async () => ({ default: ServicesHubPage }),
     
     // Legacy compatibility
-    WorkDashboardPage: () => import("./app/pages/work/WorkDashboard"),
+    WorkDashboardPage: async () => ({ default: WorkDashboardPage }),
   };
 }
 

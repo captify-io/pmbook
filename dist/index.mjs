@@ -1,22 +1,82 @@
 "use client";
 "use client";
 var __defProp = Object.defineProperty;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-var __esm = (fn, res) => function __init() {
-  return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
-};
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
+
+// src/config.json
+var config_default = [
+  {
+    id: "pmbook-ops",
+    label: "Operations",
+    icon: "layout-dashboard",
+    order: 0,
+    description: "Operations command center",
+    group: "OpsManager",
+    role: "Admin",
+    children: [
+      {
+        id: "pmbook-ops-insights",
+        label: "Insights",
+        href: "/ops/insights",
+        icon: "eye",
+        description: "Operational insights and analytics"
+      },
+      {
+        id: "pmbook-ops-contracts",
+        label: "Contracts",
+        href: "/ops/contracts",
+        icon: "file-text",
+        description: "Contract management and tracking"
+      },
+      {
+        id: "pmbook-ops-people",
+        label: "People",
+        href: "/ops/people]",
+        icon: "bar-chart",
+        description: "Peole management"
+      },
+      {
+        id: "pmbook-ops-performance",
+        label: "Performance",
+        href: "/ops/performance",
+        icon: "bar-chart",
+        description: "Performance metrics and KPIs"
+      }
+    ]
+  },
+  {
+    id: "pmbook-execution",
+    label: "Execution",
+    icon: "briefcase",
+    order: 2,
+    description: "Functional area management",
+    children: [
+      {
+        id: "pmbook-exe-tickets",
+        label: "Value Streams",
+        href: "/exe/value-streams",
+        icon: "check-square",
+        description: "Personal work queue and tickets"
+      },
+      {
+        id: "pmbook-exe-tickets",
+        label: "My Tickets",
+        href: "/exe/my-tickets",
+        icon: "check-square",
+        description: "Personal work queue and tickets"
+      },
+      {
+        id: "pmbook-service-hub",
+        label: "Service Hub",
+        href: "/exe/service-hub",
+        icon: "users",
+        description: "Service catalog and team management"
+      }
+    ]
+  }
+];
 
 // src/app/pages/ops/insights/page.tsx
-var page_exports = {};
-__export(page_exports, {
-  IntelligencePage: () => IntelligencePage,
-  default: () => page_default
-});
 import { useEffect, useState } from "react";
 import { useCaptify } from "@captify-io/platform/hooks";
 import { apiClient } from "@captify-io/platform/api";
@@ -228,15 +288,33 @@ function IntelligencePage() {
     ] })
   ] });
 }
-var page_default;
-var init_page = __esm({
-  "src/app/pages/ops/insights/page.tsx"() {
-    "use strict";
-    "use client";
-    __name(IntelligencePage, "IntelligencePage");
-    page_default = IntelligencePage;
-  }
-});
+__name(IntelligencePage, "IntelligencePage");
+
+// src/app/pages/ops/contracts/page.tsx
+import { useEffect as useEffect3, useState as useState3 } from "react";
+import { apiClient as apiClient3 } from "@captify-io/platform/api";
+import { useCaptify as useCaptify2 } from "@captify-io/platform/hooks";
+import {
+  Card as Card3,
+  CardContent as CardContent3,
+  CardHeader as CardHeader3,
+  CardTitle as CardTitle3,
+  Badge,
+  Button as Button2,
+  Progress,
+  Alert,
+  AlertDescription,
+  Tabs as Tabs2,
+  TabsContent as TabsContent2,
+  TabsList as TabsList2,
+  TabsTrigger as TabsTrigger2,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+  DynamicIcon as DynamicIcon2
+} from "@captify-io/platform/ui";
+import { v4 as uuidv4 } from "uuid";
 
 // src/app/pages/ops/contracts/form.tsx
 import { useState as useState2, useEffect as useEffect2 } from "react";
@@ -1085,44 +1163,9 @@ function ContractForm({
     ] })
   ] });
 }
-var init_form = __esm({
-  "src/app/pages/ops/contracts/form.tsx"() {
-    "use strict";
-    "use client";
-    __name(ContractForm, "ContractForm");
-  }
-});
+__name(ContractForm, "ContractForm");
 
 // src/app/pages/ops/contracts/page.tsx
-var page_exports2 = {};
-__export(page_exports2, {
-  ContractsPage: () => ContractsPage,
-  default: () => page_default2
-});
-import { useEffect as useEffect3, useState as useState3 } from "react";
-import { apiClient as apiClient3 } from "@captify-io/platform/api";
-import { useCaptify as useCaptify2 } from "@captify-io/platform/hooks";
-import {
-  Card as Card3,
-  CardContent as CardContent3,
-  CardHeader as CardHeader3,
-  CardTitle as CardTitle3,
-  Badge,
-  Button as Button2,
-  Progress,
-  Alert,
-  AlertDescription,
-  Tabs as Tabs2,
-  TabsContent as TabsContent2,
-  TabsList as TabsList2,
-  TabsTrigger as TabsTrigger2,
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-  DynamicIcon as DynamicIcon2
-} from "@captify-io/platform/ui";
-import { v4 as uuidv4 } from "uuid";
 import { Fragment, jsx as jsx3, jsxs as jsxs3 } from "react/jsx-runtime";
 function ContractsPage() {
   const { session } = useCaptify2();
@@ -1756,23 +1799,10 @@ function ContractsPage() {
     ] })
   ] });
 }
-var page_default2;
-var init_page2 = __esm({
-  "src/app/pages/ops/contracts/page.tsx"() {
-    "use strict";
-    "use client";
-    init_form();
-    __name(ContractsPage, "ContractsPage");
-    page_default2 = ContractsPage;
-  }
-});
+__name(ContractsPage, "ContractsPage");
+var page_default = ContractsPage;
 
 // src/app/pages/ops/people/page.tsx
-var page_exports3 = {};
-__export(page_exports3, {
-  CommandCenterPage: () => CommandCenterPage,
-  default: () => page_default3
-});
 import { useEffect as useEffect4, useState as useState4 } from "react";
 import { useCaptify as useCaptify3 } from "@captify-io/platform/hooks";
 import { apiClient as apiClient4 } from "@captify-io/platform/api";
@@ -2012,22 +2042,9 @@ function CommandCenterPage() {
     ] })
   ] });
 }
-var page_default3;
-var init_page3 = __esm({
-  "src/app/pages/ops/people/page.tsx"() {
-    "use strict";
-    "use client";
-    __name(CommandCenterPage, "CommandCenterPage");
-    page_default3 = CommandCenterPage;
-  }
-});
+__name(CommandCenterPage, "CommandCenterPage");
 
 // src/app/pages/ops/performance/page.tsx
-var page_exports4 = {};
-__export(page_exports4, {
-  PerformancePage: () => PerformancePage,
-  default: () => page_default4
-});
 import { useEffect as useEffect5, useState as useState5 } from "react";
 import { useCaptify as useCaptify4 } from "@captify-io/platform/hooks";
 import { apiClient as apiClient5 } from "@captify-io/platform/api";
@@ -2196,22 +2213,9 @@ function PerformancePage() {
     ] })
   ] });
 }
-var page_default4;
-var init_page4 = __esm({
-  "src/app/pages/ops/performance/page.tsx"() {
-    "use strict";
-    "use client";
-    __name(PerformancePage, "PerformancePage");
-    page_default4 = PerformancePage;
-  }
-});
+__name(PerformancePage, "PerformancePage");
 
 // src/app/pages/exe/value-streams/page.tsx
-var page_exports5 = {};
-__export(page_exports5, {
-  ValueStreamsPage: () => ValueStreamsPage,
-  default: () => page_default5
-});
 import { useEffect as useEffect6, useState as useState6 } from "react";
 import { useCaptify as useCaptify5 } from "@captify-io/platform/hooks";
 import { apiClient as apiClient6 } from "@captify-io/platform/api";
@@ -2305,22 +2309,10 @@ function ValueStreamsPage() {
     ] }, stream.id)) : /* @__PURE__ */ jsx6("div", { className: "col-span-full text-center py-12", children: /* @__PURE__ */ jsx6("p", { className: "text-muted-foreground", children: "No value streams configured" }) }) })
   ] });
 }
-var page_default5;
-var init_page5 = __esm({
-  "src/app/pages/exe/value-streams/page.tsx"() {
-    "use strict";
-    "use client";
-    __name(ValueStreamsPage, "ValueStreamsPage");
-    page_default5 = ValueStreamsPage;
-  }
-});
+__name(ValueStreamsPage, "ValueStreamsPage");
+var page_default2 = ValueStreamsPage;
 
 // src/app/pages/exe/my-tickets/page.tsx
-var page_exports6 = {};
-__export(page_exports6, {
-  MyTicketsPage: () => MyTicketsPage,
-  default: () => page_default6
-});
 import { useEffect as useEffect7, useState as useState7 } from "react";
 import { useCaptify as useCaptify6 } from "@captify-io/platform/hooks";
 import { apiClient as apiClient7 } from "@captify-io/platform/api";
@@ -2447,22 +2439,10 @@ function MyTicketsPage() {
     ] }) }, ticket.id)) : /* @__PURE__ */ jsx7("div", { className: "text-center py-12", children: /* @__PURE__ */ jsx7("p", { className: "text-muted-foreground", children: filter === "all" ? "No tickets assigned to you" : `No ${filter.replace("-", " ")} tickets` }) }) })
   ] });
 }
-var page_default6;
-var init_page6 = __esm({
-  "src/app/pages/exe/my-tickets/page.tsx"() {
-    "use strict";
-    "use client";
-    __name(MyTicketsPage, "MyTicketsPage");
-    page_default6 = MyTicketsPage;
-  }
-});
+__name(MyTicketsPage, "MyTicketsPage");
+var page_default3 = MyTicketsPage;
 
 // src/app/pages/services/ServicesHub.tsx
-var ServicesHub_exports = {};
-__export(ServicesHub_exports, {
-  ServicesHubPage: () => ServicesHubPage,
-  default: () => ServicesHub_default
-});
 import { useEffect as useEffect8, useState as useState8 } from "react";
 import { useCaptify as useCaptify7 } from "@captify-io/platform/hooks";
 import { apiClient as apiClient8 } from "@captify-io/platform/api";
@@ -2826,6 +2806,7 @@ function ServicesHubPage() {
     ] }) })
   ] });
 }
+__name(ServicesHubPage, "ServicesHubPage");
 function TicketCard({ ticket, onClaim, assigned, requested }) {
   return /* @__PURE__ */ jsxs8("div", { className: "flex items-center justify-between p-4 rounded-lg border bg-card", children: [
     /* @__PURE__ */ jsxs8("div", { className: "flex-1", children: [
@@ -2859,23 +2840,9 @@ function TicketCard({ ticket, onClaim, assigned, requested }) {
     requested && /* @__PURE__ */ jsx8(Badge3, { variant: "outline", children: ticket.status })
   ] });
 }
-var ServicesHub_default;
-var init_ServicesHub = __esm({
-  "src/app/pages/services/ServicesHub.tsx"() {
-    "use strict";
-    "use client";
-    __name(ServicesHubPage, "ServicesHubPage");
-    __name(TicketCard, "TicketCard");
-    ServicesHub_default = ServicesHubPage;
-  }
-});
+__name(TicketCard, "TicketCard");
 
 // src/app/pages/work/WorkDashboard.tsx
-var WorkDashboard_exports = {};
-__export(WorkDashboard_exports, {
-  WorkDashboardPage: () => WorkDashboardPage,
-  default: () => WorkDashboard_default
-});
 import { useEffect as useEffect9, useState as useState9 } from "react";
 import { useCaptify as useCaptify8 } from "@captify-io/platform/hooks";
 import { apiClient as apiClient9 } from "@captify-io/platform/api";
@@ -3114,6 +3081,7 @@ function WorkDashboardPage() {
     ] })
   ] });
 }
+__name(WorkDashboardPage, "WorkDashboardPage");
 function WorkItem({ item, onStart, critical, blocked }) {
   return /* @__PURE__ */ jsxs9("div", { className: "flex items-center justify-between p-4 rounded-lg border bg-card", children: [
     /* @__PURE__ */ jsxs9("div", { className: "flex-1", children: [
@@ -3141,128 +3109,36 @@ function WorkItem({ item, onStart, critical, blocked }) {
     ] })
   ] });
 }
-var WorkDashboard_default;
-var init_WorkDashboard = __esm({
-  "src/app/pages/work/WorkDashboard.tsx"() {
-    "use strict";
-    "use client";
-    __name(WorkDashboardPage, "WorkDashboardPage");
-    __name(WorkItem, "WorkItem");
-    WorkDashboard_default = WorkDashboardPage;
-  }
-});
-
-// src/config.json
-var config_default = [
-  {
-    id: "pmbook-ops",
-    label: "Operations",
-    icon: "layout-dashboard",
-    order: 0,
-    description: "Operations command center",
-    group: "OpsManager",
-    role: "Admin",
-    children: [
-      {
-        id: "pmbook-ops-insights",
-        label: "Insights",
-        href: "/ops/insights",
-        icon: "eye",
-        description: "Operational insights and analytics"
-      },
-      {
-        id: "pmbook-ops-contracts",
-        label: "Contracts",
-        href: "/ops/contracts",
-        icon: "file-text",
-        description: "Contract management and tracking"
-      },
-      {
-        id: "pmbook-ops-people",
-        label: "People",
-        href: "/ops/people]",
-        icon: "bar-chart",
-        description: "Peole management"
-      },
-      {
-        id: "pmbook-ops-performance",
-        label: "Performance",
-        href: "/ops/performance",
-        icon: "bar-chart",
-        description: "Performance metrics and KPIs"
-      }
-    ]
-  },
-  {
-    id: "pmbook-execution",
-    label: "Execution",
-    icon: "briefcase",
-    order: 2,
-    description: "Functional area management",
-    children: [
-      {
-        id: "pmbook-exe-tickets",
-        label: "Value Streams",
-        href: "/exe/value-streams",
-        icon: "check-square",
-        description: "Personal work queue and tickets"
-      },
-      {
-        id: "pmbook-exe-tickets",
-        label: "My Tickets",
-        href: "/exe/my-tickets",
-        icon: "check-square",
-        description: "Personal work queue and tickets"
-      },
-      {
-        id: "pmbook-service-hub",
-        label: "Service Hub",
-        href: "/exe/service-hub",
-        icon: "users",
-        description: "Service catalog and team management"
-      }
-    ]
-  }
-];
-
-// src/app/pages/index.ts
-init_page();
-init_page2();
-init_page3();
-init_page4();
-init_page5();
-init_page6();
-init_ServicesHub();
-init_WorkDashboard();
+__name(WorkItem, "WorkItem");
 
 // src/index.ts
 var PAGE_MAPPINGS = {
   // Operations pages
-  "/ops/insights": "./app/pages/ops/insights/page",
-  "/ops/contracts": "./app/pages/ops/contracts/page",
-  "/ops/people": "./app/pages/ops/people/page",
-  "/ops/performance": "./app/pages/ops/performance/page",
+  "/ops/insights": IntelligencePage,
+  "/ops/contracts": page_default,
+  "/ops/people": CommandCenterPage,
+  "/ops/performance": PerformancePage,
   // Execution pages
-  "/exe/value-streams": "./app/pages/exe/value-streams/page",
-  "/exe/my-tickets": "./app/pages/exe/my-tickets/page",
-  "/exe/service-hub": "./app/pages/services/ServicesHub"
+  "/exe/value-streams": page_default2,
+  "/exe/my-tickets": page_default3,
+  "/exe/service-hub": ServicesHubPage
 };
 function generatePageRegistry() {
   const registry = {};
-  registry.home = () => Promise.resolve().then(() => (init_page3(), page_exports3));
-  registry.dashboard = () => Promise.resolve().then(() => (init_page3(), page_exports3));
+  registry.home = async () => ({ default: CommandCenterPage });
+  registry.dashboard = async () => ({ default: CommandCenterPage });
   function processMenuItems(items, parentPath = "") {
     items.forEach((item) => {
       if (item.children) {
         processMenuItems(item.children, parentPath);
       } else if (item.href) {
-        const pagePath = PAGE_MAPPINGS[item.href];
-        if (pagePath) {
+        const pageComponent = PAGE_MAPPINGS[item.href];
+        if (pageComponent) {
           const cleanId = item.id.replace("pmbook-", "").replace(/-/g, "-");
           const hrefKey = item.href.slice(1).replace("/", "-");
-          registry[cleanId] = () => import(pagePath);
-          registry[hrefKey] = () => import(pagePath);
-          registry[item.id] = () => import(pagePath);
+          registry[cleanId] = async () => ({ default: pageComponent });
+          registry[hrefKey] = async () => ({ default: pageComponent });
+          registry[item.id] = async () => ({ default: pageComponent });
         }
       }
     });
@@ -3275,16 +3151,16 @@ __name(generatePageRegistry, "generatePageRegistry");
 function generateComponentRegistry() {
   return {
     // Operations components
-    IntelligencePage: /* @__PURE__ */ __name(() => Promise.resolve().then(() => (init_page(), page_exports)), "IntelligencePage"),
-    ContractsPage: /* @__PURE__ */ __name(() => Promise.resolve().then(() => (init_page2(), page_exports2)), "ContractsPage"),
-    CommandCenterPage: /* @__PURE__ */ __name(() => Promise.resolve().then(() => (init_page3(), page_exports3)), "CommandCenterPage"),
-    PerformancePage: /* @__PURE__ */ __name(() => Promise.resolve().then(() => (init_page4(), page_exports4)), "PerformancePage"),
+    IntelligencePage: /* @__PURE__ */ __name(async () => ({ default: IntelligencePage }), "IntelligencePage"),
+    ContractsPage: /* @__PURE__ */ __name(async () => ({ default: page_default }), "ContractsPage"),
+    CommandCenterPage: /* @__PURE__ */ __name(async () => ({ default: CommandCenterPage }), "CommandCenterPage"),
+    PerformancePage: /* @__PURE__ */ __name(async () => ({ default: PerformancePage }), "PerformancePage"),
     // Execution components
-    ValueStreamsPage: /* @__PURE__ */ __name(() => Promise.resolve().then(() => (init_page5(), page_exports5)), "ValueStreamsPage"),
-    MyTicketsPage: /* @__PURE__ */ __name(() => Promise.resolve().then(() => (init_page6(), page_exports6)), "MyTicketsPage"),
-    ServicesHubPage: /* @__PURE__ */ __name(() => Promise.resolve().then(() => (init_ServicesHub(), ServicesHub_exports)), "ServicesHubPage"),
+    ValueStreamsPage: /* @__PURE__ */ __name(async () => ({ default: page_default2 }), "ValueStreamsPage"),
+    MyTicketsPage: /* @__PURE__ */ __name(async () => ({ default: page_default3 }), "MyTicketsPage"),
+    ServicesHubPage: /* @__PURE__ */ __name(async () => ({ default: ServicesHubPage }), "ServicesHubPage"),
     // Legacy compatibility
-    WorkDashboardPage: /* @__PURE__ */ __name(() => Promise.resolve().then(() => (init_WorkDashboard(), WorkDashboard_exports)), "WorkDashboardPage")
+    WorkDashboardPage: /* @__PURE__ */ __name(async () => ({ default: WorkDashboardPage }), "WorkDashboardPage")
   };
 }
 __name(generateComponentRegistry, "generateComponentRegistry");
@@ -3293,12 +3169,12 @@ var componentRegistry = generateComponentRegistry();
 var menuConfiguration = config_default;
 export {
   CommandCenterPage,
-  page_default2 as ContractsPage,
+  page_default as ContractsPage,
   IntelligencePage,
-  page_default6 as MyTicketsPage,
+  page_default3 as MyTicketsPage,
   PerformancePage,
   ServicesHubPage,
-  page_default5 as ValueStreamsPage,
+  page_default2 as ValueStreamsPage,
   WorkDashboardPage,
   componentRegistry,
   menuConfiguration,
