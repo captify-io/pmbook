@@ -1,7 +1,4 @@
 "use client";
-"use client";
-var __defProp = Object.defineProperty;
-var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
 
 // src/config.json
 var config_default = [
@@ -98,7 +95,7 @@ function IntelligencePage() {
   useEffect(() => {
     loadIntelligenceData();
   }, []);
-  const loadIntelligenceData = /* @__PURE__ */ __name(async () => {
+  const loadIntelligenceData = async () => {
     try {
       const insightsResponse = await apiClient.run({
         service: "intelligence",
@@ -123,8 +120,8 @@ function IntelligencePage() {
     } finally {
       setLoading(false);
     }
-  }, "loadIntelligenceData");
-  const handleQuery = /* @__PURE__ */ __name(async () => {
+  };
+  const handleQuery = async () => {
     if (!query.trim()) return;
     try {
       const response = await apiClient.run({
@@ -136,8 +133,8 @@ function IntelligencePage() {
     } catch (error) {
       console.error("Failed to process query:", error);
     }
-  }, "handleQuery");
-  const getInsightTypeColor = /* @__PURE__ */ __name((type) => {
+  };
+  const getInsightTypeColor = (type) => {
     switch (type) {
       case "positive":
         return "text-green-600";
@@ -148,8 +145,8 @@ function IntelligencePage() {
       default:
         return "text-blue-600";
     }
-  }, "getInsightTypeColor");
-  const getPriorityColor = /* @__PURE__ */ __name((priority) => {
+  };
+  const getPriorityColor = (priority) => {
     switch (priority) {
       case "critical":
         return "border-red-500 bg-red-50";
@@ -160,7 +157,7 @@ function IntelligencePage() {
       default:
         return "border-blue-500 bg-blue-50";
     }
-  }, "getPriorityColor");
+  };
   return /* @__PURE__ */ jsxs("div", { className: "container mx-auto p-6", children: [
     /* @__PURE__ */ jsx("h1", { className: "text-3xl font-bold mb-6", children: "AI Intelligence" }),
     /* @__PURE__ */ jsxs(Card, { className: "mb-6", children: [
@@ -288,7 +285,6 @@ function IntelligencePage() {
     ] })
   ] });
 }
-__name(IntelligencePage, "IntelligencePage");
 
 // src/app/pages/ops/contracts/page.tsx
 import { useEffect as useEffect3, useState as useState3 } from "react";
@@ -355,7 +351,7 @@ function ContractForm({
   onClose,
   onSave
 }) {
-  const getInitialFormData = /* @__PURE__ */ __name(() => {
+  const getInitialFormData = () => {
     if (contract) return { ...contract };
     const today = (/* @__PURE__ */ new Date()).toISOString().split("T")[0];
     const oneYearFromNow = new Date(Date.now() + 365 * 24 * 60 * 60 * 1e3).toISOString().split("T")[0];
@@ -413,7 +409,7 @@ function ContractForm({
       indirectRate: 0,
       proposalSubmitted: false
     };
-  }, "getInitialFormData");
+  };
   const [formData, setFormData] = useState2(
     getInitialFormData()
   );
@@ -441,7 +437,7 @@ function ContractForm({
   useEffect2(() => {
     loadDropdownData();
   }, []);
-  const loadDropdownData = /* @__PURE__ */ __name(async () => {
+  const loadDropdownData = async () => {
     try {
       const usersRes = await apiClient2.run({
         service: "user",
@@ -451,14 +447,14 @@ function ContractForm({
     } catch (error) {
       console.log("Error loading dropdown data:", error);
     }
-  }, "loadDropdownData");
-  const handleInputChange = /* @__PURE__ */ __name((field, value) => {
+  };
+  const handleInputChange = (field, value) => {
     setFormData((prev) => ({
       ...prev,
       [field]: value
     }));
-  }, "handleInputChange");
-  const handleCostChange = /* @__PURE__ */ __name((costType, field, value) => {
+  };
+  const handleCostChange = (costType, field, value) => {
     setFormData((prev) => {
       const costs = { ...prev[costType] };
       costs[field] = value;
@@ -468,8 +464,8 @@ function ContractForm({
         [costType]: costs
       };
     });
-  }, "handleCostChange");
-  const handleSubmit = /* @__PURE__ */ __name(async () => {
+  };
+  const handleSubmit = async () => {
     setLoading(true);
     try {
       const submitData = { ...formData };
@@ -492,7 +488,7 @@ function ContractForm({
     } finally {
       setLoading(false);
     }
-  }, "handleSubmit");
+  };
   return /* @__PURE__ */ jsxs2("div", { className: "max-w-6xl", children: [
     /* @__PURE__ */ jsx2("div", { className: "flex justify-between items-center mb-6", children: /* @__PURE__ */ jsx2("h2", { className: "text-2xl font-bold", children: contract?.id && contract?.name ? "Edit Contract" : "New Contract" }) }),
     /* @__PURE__ */ jsxs2(Tabs, { value: activeTab, onValueChange: setActiveTab, children: [
@@ -1163,7 +1159,6 @@ function ContractForm({
     ] })
   ] });
 }
-__name(ContractForm, "ContractForm");
 
 // src/app/pages/ops/contracts/page.tsx
 import { Fragment, jsx as jsx3, jsxs as jsxs3 } from "react/jsx-runtime";
@@ -1185,7 +1180,7 @@ function ContractsPage() {
       loadContractDetails(selectedContract.id);
     }
   }, [selectedContract]);
-  const loadContracts = /* @__PURE__ */ __name(async () => {
+  const loadContracts = async () => {
     try {
       const response = await apiClient3.run({
         service: "contract",
@@ -1202,8 +1197,8 @@ function ContractsPage() {
     } finally {
       setLoading(false);
     }
-  }, "loadContracts");
-  const loadContractDetails = /* @__PURE__ */ __name(async (contractId) => {
+  };
+  const loadContractDetails = async (contractId) => {
     try {
       const [burn, cdrls, milestones, profitability] = await Promise.all([
         apiClient3.run({
@@ -1235,8 +1230,8 @@ function ContractsPage() {
     } catch (error) {
       console.error("Failed to load contract details:", error);
     }
-  }, "loadContractDetails");
-  const handleAddContract = /* @__PURE__ */ __name(() => {
+  };
+  const handleAddContract = () => {
     const newContract = {
       id: uuidv4(),
       type: "FFP",
@@ -1289,13 +1284,13 @@ function ContractsPage() {
     setEditingContract(newContract);
     setSelectedContract(null);
     setViewMode("form");
-  }, "handleAddContract");
-  const handleEditContract = /* @__PURE__ */ __name((contract) => {
+  };
+  const handleEditContract = (contract) => {
     setEditingContract(contract);
     setSelectedContract(null);
     setViewMode("form");
-  }, "handleEditContract");
-  const handleArchiveContract = /* @__PURE__ */ __name(async (contractId) => {
+  };
+  const handleArchiveContract = async (contractId) => {
     try {
       await apiClient3.run({
         service: "contract",
@@ -1311,8 +1306,8 @@ function ContractsPage() {
     } catch (error) {
       console.error("Failed to archive contract:", error);
     }
-  }, "handleArchiveContract");
-  const handleSaveContract = /* @__PURE__ */ __name(async (contractData) => {
+  };
+  const handleSaveContract = async (contractData) => {
     try {
       if (editingContract) {
         await apiClient3.run({
@@ -1339,22 +1334,22 @@ function ContractsPage() {
     } catch (error) {
       console.error("Failed to save contract:", error);
     }
-  }, "handleSaveContract");
+  };
   const filteredContracts = (contracts || []).filter((contract) => {
     if (filter === "all") return true;
     if (filter === "active") return contract.status !== "closed";
     if (filter === "archived") return contract.status === "closed";
     return true;
   });
-  const handleCancelEdit = /* @__PURE__ */ __name(() => {
+  const handleCancelEdit = () => {
     setViewMode("list");
     setEditingContract(null);
     setIsFormOpen(false);
     if (contracts.length > 0) {
       setSelectedContract(contracts[0]);
     }
-  }, "handleCancelEdit");
-  const Breadcrumbs = /* @__PURE__ */ __name(() => /* @__PURE__ */ jsxs3("div", { className: "flex items-center space-x-2 text-sm text-muted-foreground mb-4", children: [
+  };
+  const Breadcrumbs = () => /* @__PURE__ */ jsxs3("div", { className: "flex items-center space-x-2 text-sm text-muted-foreground mb-4", children: [
     /* @__PURE__ */ jsx3(
       "button",
       {
@@ -1368,7 +1363,7 @@ function ContractsPage() {
     ),
     /* @__PURE__ */ jsx3("span", { children: "/" }),
     /* @__PURE__ */ jsx3("span", { className: "text-foreground", children: editingContract && contracts.some((c) => c.id === editingContract.id) ? editingContract.name || editingContract.contractNumber || "Edit Contract" : "New Contract" })
-  ] }), "Breadcrumbs");
+  ] });
   if (loading) {
     return /* @__PURE__ */ jsx3("div", { className: "flex items-center justify-center h-96", children: "Loading..." });
   }
@@ -1799,7 +1794,6 @@ function ContractsPage() {
     ] })
   ] });
 }
-__name(ContractsPage, "ContractsPage");
 var page_default = ContractsPage;
 
 // src/app/pages/ops/people/page.tsx
@@ -1827,7 +1821,7 @@ function CommandCenterPage() {
   useEffect4(() => {
     loadDashboardData();
   }, []);
-  const loadDashboardData = /* @__PURE__ */ __name(async () => {
+  const loadDashboardData = async () => {
     try {
       const hasAccess = session?.user?.groups?.includes("Operations");
       if (!hasAccess) {
@@ -1857,7 +1851,7 @@ function CommandCenterPage() {
     } finally {
       setLoading(false);
     }
-  }, "loadDashboardData");
+  };
   if (loading) {
     return /* @__PURE__ */ jsx4("div", { className: "flex items-center justify-center h-96", children: "Loading..." });
   }
@@ -2042,7 +2036,6 @@ function CommandCenterPage() {
     ] })
   ] });
 }
-__name(CommandCenterPage, "CommandCenterPage");
 
 // src/app/pages/ops/performance/page.tsx
 import { useEffect as useEffect5, useState as useState5 } from "react";
@@ -2063,7 +2056,7 @@ function PerformancePage() {
   useEffect5(() => {
     loadPerformanceData();
   }, []);
-  const loadPerformanceData = /* @__PURE__ */ __name(async () => {
+  const loadPerformanceData = async () => {
     try {
       const healthResponse = await apiClient5.run({
         service: "performance",
@@ -2082,13 +2075,13 @@ function PerformancePage() {
     } finally {
       setLoading(false);
     }
-  }, "loadPerformanceData");
-  const formatCurrency = /* @__PURE__ */ __name((amount) => {
+  };
+  const formatCurrency = (amount) => {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD"
     }).format(amount);
-  }, "formatCurrency");
+  };
   return /* @__PURE__ */ jsxs5("div", { className: "container mx-auto p-6", children: [
     /* @__PURE__ */ jsx5("h1", { className: "text-3xl font-bold mb-6", children: "Performance Analytics" }),
     /* @__PURE__ */ jsxs5("div", { className: "grid grid-cols-1 md:grid-cols-4 gap-6 mb-6", children: [
@@ -2213,7 +2206,6 @@ function PerformancePage() {
     ] })
   ] });
 }
-__name(PerformancePage, "PerformancePage");
 
 // src/app/pages/exe/value-streams/page.tsx
 import { useEffect as useEffect6, useState as useState6 } from "react";
@@ -2233,7 +2225,7 @@ function ValueStreamsPage() {
   useEffect6(() => {
     loadValueStreams();
   }, []);
-  const loadValueStreams = /* @__PURE__ */ __name(async () => {
+  const loadValueStreams = async () => {
     try {
       const response = await apiClient6.run({
         service: "execution",
@@ -2246,8 +2238,8 @@ function ValueStreamsPage() {
     } finally {
       setLoading(false);
     }
-  }, "loadValueStreams");
-  const getStatusColor = /* @__PURE__ */ __name((status) => {
+  };
+  const getStatusColor = (status) => {
     switch (status) {
       case "active":
         return "text-green-600 bg-green-50 border-green-200";
@@ -2258,7 +2250,7 @@ function ValueStreamsPage() {
       default:
         return "text-blue-600 bg-blue-50 border-blue-200";
     }
-  }, "getStatusColor");
+  };
   return /* @__PURE__ */ jsxs6("div", { className: "container mx-auto p-6", children: [
     /* @__PURE__ */ jsx6("h1", { className: "text-3xl font-bold mb-6", children: "Value Streams" }),
     loading ? /* @__PURE__ */ jsx6("p", { children: "Loading value streams..." }) : /* @__PURE__ */ jsx6("div", { className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6", children: valueStreams.length > 0 ? valueStreams.map((stream) => /* @__PURE__ */ jsxs6(Card6, { className: "hover:shadow-md transition-shadow", children: [
@@ -2309,7 +2301,6 @@ function ValueStreamsPage() {
     ] }, stream.id)) : /* @__PURE__ */ jsx6("div", { className: "col-span-full text-center py-12", children: /* @__PURE__ */ jsx6("p", { className: "text-muted-foreground", children: "No value streams configured" }) }) })
   ] });
 }
-__name(ValueStreamsPage, "ValueStreamsPage");
 var page_default2 = ValueStreamsPage;
 
 // src/app/pages/exe/my-tickets/page.tsx
@@ -2329,7 +2320,7 @@ function MyTicketsPage() {
   useEffect7(() => {
     loadMyTickets();
   }, [filter]);
-  const loadMyTickets = /* @__PURE__ */ __name(async () => {
+  const loadMyTickets = async () => {
     try {
       const response = await apiClient7.run({
         service: "execution",
@@ -2342,8 +2333,8 @@ function MyTicketsPage() {
     } finally {
       setLoading(false);
     }
-  }, "loadMyTickets");
-  const getStatusColor = /* @__PURE__ */ __name((status) => {
+  };
+  const getStatusColor = (status) => {
     switch (status) {
       case "todo":
         return "text-gray-600 bg-gray-50 border-gray-200";
@@ -2356,8 +2347,8 @@ function MyTicketsPage() {
       default:
         return "text-gray-600 bg-gray-50 border-gray-200";
     }
-  }, "getStatusColor");
-  const getPriorityColor = /* @__PURE__ */ __name((priority) => {
+  };
+  const getPriorityColor = (priority) => {
     switch (priority) {
       case "critical":
         return "text-red-600";
@@ -2370,7 +2361,7 @@ function MyTicketsPage() {
       default:
         return "text-gray-600";
     }
-  }, "getPriorityColor");
+  };
   const filteredTickets = tickets.filter((ticket) => {
     if (filter === "all") return true;
     return ticket.status === filter;
@@ -2439,7 +2430,6 @@ function MyTicketsPage() {
     ] }) }, ticket.id)) : /* @__PURE__ */ jsx7("div", { className: "text-center py-12", children: /* @__PURE__ */ jsx7("p", { className: "text-muted-foreground", children: filter === "all" ? "No tickets assigned to you" : `No ${filter.replace("-", " ")} tickets` }) }) })
   ] });
 }
-__name(MyTicketsPage, "MyTicketsPage");
 var page_default3 = MyTicketsPage;
 
 // src/app/pages/services/ServicesHub.tsx
@@ -2485,7 +2475,7 @@ function ServicesHubPage() {
     loadMarketplace();
     loadCatalog();
   }, []);
-  const loadMarketplace = /* @__PURE__ */ __name(async () => {
+  const loadMarketplace = async () => {
     try {
       const response = await apiClient8.run({
         service: "service",
@@ -2498,8 +2488,8 @@ function ServicesHubPage() {
     } finally {
       setLoading(false);
     }
-  }, "loadMarketplace");
-  const loadCatalog = /* @__PURE__ */ __name(async () => {
+  };
+  const loadCatalog = async () => {
     try {
       const response = await apiClient8.run({
         service: "service",
@@ -2509,8 +2499,8 @@ function ServicesHubPage() {
     } catch (error) {
       console.error("Failed to load catalog:", error);
     }
-  }, "loadCatalog");
-  const createTicket = /* @__PURE__ */ __name(async () => {
+  };
+  const createTicket = async () => {
     try {
       await apiClient8.run({
         service: "service",
@@ -2533,8 +2523,8 @@ function ServicesHubPage() {
     } catch (error) {
       console.error("Failed to create ticket:", error);
     }
-  }, "createTicket");
-  const claimTicket = /* @__PURE__ */ __name(async (ticketId) => {
+  };
+  const claimTicket = async (ticketId) => {
     try {
       await apiClient8.run({
         service: "service",
@@ -2548,7 +2538,7 @@ function ServicesHubPage() {
     } catch (error) {
       console.error("Failed to claim ticket:", error);
     }
-  }, "claimTicket");
+  };
   if (loading) {
     return /* @__PURE__ */ jsx8("div", { className: "flex items-center justify-center h-96", children: "Loading..." });
   }
@@ -2806,7 +2796,6 @@ function ServicesHubPage() {
     ] }) })
   ] });
 }
-__name(ServicesHubPage, "ServicesHubPage");
 function TicketCard({ ticket, onClaim, assigned, requested }) {
   return /* @__PURE__ */ jsxs8("div", { className: "flex items-center justify-between p-4 rounded-lg border bg-card", children: [
     /* @__PURE__ */ jsxs8("div", { className: "flex-1", children: [
@@ -2840,7 +2829,6 @@ function TicketCard({ ticket, onClaim, assigned, requested }) {
     requested && /* @__PURE__ */ jsx8(Badge3, { variant: "outline", children: ticket.status })
   ] });
 }
-__name(TicketCard, "TicketCard");
 
 // src/app/pages/work/WorkDashboard.tsx
 import { useEffect as useEffect9, useState as useState9 } from "react";
@@ -2877,7 +2865,7 @@ function WorkDashboardPage() {
     }, 1e3);
     return () => clearInterval(interval);
   }, [activeWork]);
-  const loadWorkData = /* @__PURE__ */ __name(async () => {
+  const loadWorkData = async () => {
     try {
       const [queueData, prodData] = await Promise.all([
         apiClient9.run({
@@ -2898,8 +2886,8 @@ function WorkDashboardPage() {
     } finally {
       setLoading(false);
     }
-  }, "loadWorkData");
-  const startWork = /* @__PURE__ */ __name(async (workItem) => {
+  };
+  const startWork = async (workItem) => {
     try {
       const workSession = await apiClient9.run({
         service: "work",
@@ -2914,8 +2902,8 @@ function WorkDashboardPage() {
     } catch (error) {
       console.error("Failed to start work:", error);
     }
-  }, "startWork");
-  const stopWork = /* @__PURE__ */ __name(async () => {
+  };
+  const stopWork = async () => {
     try {
       await apiClient9.run({
         service: "work",
@@ -2928,13 +2916,13 @@ function WorkDashboardPage() {
     } catch (error) {
       console.error("Failed to stop work:", error);
     }
-  }, "stopWork");
-  const formatTime = /* @__PURE__ */ __name((seconds) => {
+  };
+  const formatTime = (seconds) => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor(seconds % 3600 / 60);
     const secs = seconds % 60;
     return `${hours}h ${minutes}m ${secs}s`;
-  }, "formatTime");
+  };
   if (loading) {
     return /* @__PURE__ */ jsx9("div", { className: "flex items-center justify-center h-96", children: "Loading..." });
   }
@@ -3081,7 +3069,6 @@ function WorkDashboardPage() {
     ] })
   ] });
 }
-__name(WorkDashboardPage, "WorkDashboardPage");
 function WorkItem({ item, onStart, critical, blocked }) {
   return /* @__PURE__ */ jsxs9("div", { className: "flex items-center justify-between p-4 rounded-lg border bg-card", children: [
     /* @__PURE__ */ jsxs9("div", { className: "flex-1", children: [
@@ -3109,7 +3096,6 @@ function WorkItem({ item, onStart, critical, blocked }) {
     ] })
   ] });
 }
-__name(WorkItem, "WorkItem");
 
 // src/index.ts
 var PAGE_MAPPINGS = {
@@ -3143,27 +3129,24 @@ function generatePageRegistry() {
       }
     });
   }
-  __name(processMenuItems, "processMenuItems");
   processMenuItems(config_default);
   return registry;
 }
-__name(generatePageRegistry, "generatePageRegistry");
 function generateComponentRegistry() {
   return {
     // Operations components
-    IntelligencePage: /* @__PURE__ */ __name(async () => ({ default: IntelligencePage }), "IntelligencePage"),
-    ContractsPage: /* @__PURE__ */ __name(async () => ({ default: page_default }), "ContractsPage"),
-    CommandCenterPage: /* @__PURE__ */ __name(async () => ({ default: CommandCenterPage }), "CommandCenterPage"),
-    PerformancePage: /* @__PURE__ */ __name(async () => ({ default: PerformancePage }), "PerformancePage"),
+    IntelligencePage: async () => ({ default: IntelligencePage }),
+    ContractsPage: async () => ({ default: page_default }),
+    CommandCenterPage: async () => ({ default: CommandCenterPage }),
+    PerformancePage: async () => ({ default: PerformancePage }),
     // Execution components
-    ValueStreamsPage: /* @__PURE__ */ __name(async () => ({ default: page_default2 }), "ValueStreamsPage"),
-    MyTicketsPage: /* @__PURE__ */ __name(async () => ({ default: page_default3 }), "MyTicketsPage"),
-    ServicesHubPage: /* @__PURE__ */ __name(async () => ({ default: ServicesHubPage }), "ServicesHubPage"),
+    ValueStreamsPage: async () => ({ default: page_default2 }),
+    MyTicketsPage: async () => ({ default: page_default3 }),
+    ServicesHubPage: async () => ({ default: ServicesHubPage }),
     // Legacy compatibility
-    WorkDashboardPage: /* @__PURE__ */ __name(async () => ({ default: WorkDashboardPage }), "WorkDashboardPage")
+    WorkDashboardPage: async () => ({ default: WorkDashboardPage })
   };
 }
-__name(generateComponentRegistry, "generateComponentRegistry");
 var pageRegistry = generatePageRegistry();
 var componentRegistry = generateComponentRegistry();
 var menuConfiguration = config_default;
@@ -3180,4 +3163,4 @@ export {
   menuConfiguration,
   pageRegistry
 };
-//# sourceMappingURL=index.mjs.map
+//# sourceMappingURL=index.js.map

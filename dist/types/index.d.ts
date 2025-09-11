@@ -1,58 +1,6 @@
 import { Core } from '@captify-io/platform/types';
 
 /**
- * @captify/pmbook/services/config - Application configuration
- *
- * Contains configuration data that the platform needs to pick up
- */
-declare const config: {
-    appName: string;
-    version: string;
-    identityPoolId: string;
-    agentId: string;
-    agentAliasId: string;
-    description: string;
-    menu: ({
-        id: string;
-        label: string;
-        icon: string;
-        order: number;
-        description: string;
-        group: string;
-        role: string;
-        children: {
-            id: string;
-            label: string;
-            href: string;
-            icon: string;
-            description: string;
-        }[];
-    } | {
-        id: string;
-        label: string;
-        icon: string;
-        order: number;
-        description: string;
-        children: {
-            id: string;
-            label: string;
-            href: string;
-            icon: string;
-            description: string;
-        }[];
-        group?: undefined;
-        role?: undefined;
-    })[];
-    platform: {
-        deployment: {
-            dev: string;
-            staging: string;
-            production: string;
-        };
-    };
-};
-
-/**
  * Strategic alignment types for connecting vision to daily work
  */
 interface StrategicObjective extends Core {
@@ -1229,4 +1177,4 @@ interface RoadmapView {
     showMetrics: boolean;
 }
 
-export { type AnalyticsQuery, type ApprovalRecord, type BurnAnalysis, type CDRL, type CDRLSubmission, type Capability, type Comment, type CompanyHealth, type Contract, type ContractBurn, type ContractMetrics, type ContractMod, type Dependency, type EmployeeValue, type Epic, type Feature, type FinancialForecast, type ForecastPeriod, type ForecastScenario, type GroundTruth, type HealthAlert, type Initiative, type InitiativeMilestone, type InitiativeRisk, type InitiativeWorkStreamAllocation, type Insight, type IntelligenceAlert, type Invoice, type KeyResult, type LaborCategory, type LaborLineItem, type Milestone, type ODCLineItem, type Objective, type ObjectiveKeyResult, type ObjectiveMetrics, type OptionPeriod, type Prediction, type ProductivityMetrics, type ProposalDocument, type Recommendation, type Risk, type Roadmap, type RoadmapView, type SLA, type ServiceArea, type ServiceCatalog, type ServiceLevelAgreement, type ServiceLevelObjective, type ServiceMetrics, type ServiceOffering, type ServiceRequest, type ServiceTicket, type Sprint, type StrategicGoal, type StrategicObjective, type Subcontractor, type SubcontractorLineItem, type Task, type Team, type TeamMember, type TeamPerformance, type Ticket, type TicketComment, type TrendAnalysis, type UserStory, type WorkItem, type WorkLog, type WorkQueue, type WorkSession, type WorkStream, type WorkStreamAllocation, type WorkStreamMetrics, type WorkStreamRisk, type WorkStreamServiceCatalog, type WorkStreamTeamMember, type WorkStreamType, config };
+export type { AnalyticsQuery, ApprovalRecord, BurnAnalysis, CDRL, CDRLSubmission, Capability, Comment, CompanyHealth, Contract, ContractBurn, ContractMetrics, ContractMod, Dependency, EmployeeValue, Epic, Feature, FinancialForecast, ForecastPeriod, ForecastScenario, GroundTruth, HealthAlert, Initiative, InitiativeMilestone, InitiativeRisk, InitiativeWorkStreamAllocation, Insight, IntelligenceAlert, Invoice, KeyResult, LaborCategory, LaborLineItem, Milestone, ODCLineItem, Objective, ObjectiveKeyResult, ObjectiveMetrics, OptionPeriod, Prediction, ProductivityMetrics, ProposalDocument, Recommendation, Risk, Roadmap, RoadmapView, SLA, ServiceArea, ServiceCatalog, ServiceLevelAgreement, ServiceLevelObjective, ServiceMetrics, ServiceOffering, ServiceRequest, ServiceTicket, Sprint, StrategicGoal, StrategicObjective, Subcontractor, SubcontractorLineItem, Task, Team, TeamMember, TeamPerformance, Ticket, TicketComment, TrendAnalysis, UserStory, WorkItem, WorkLog, WorkQueue, WorkSession, WorkStream, WorkStreamAllocation, WorkStreamMetrics, WorkStreamRisk, WorkStreamServiceCatalog, WorkStreamTeamMember, WorkStreamType };
