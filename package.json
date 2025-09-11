@@ -1,6 +1,6 @@
 {
   "name": "@captify-io/pmbook",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "Strategic alignment and business operations platform for government contracting",
   "type": "module",
   "sideEffects": [
@@ -20,8 +20,8 @@
       "types": "./dist/index.d.ts"
     },
     "./app": {
-      "import": "./dist/index.mjs",
-      "types": "./dist/index.d.ts"
+      "import": "./dist/app/index.mjs",
+      "types": "./dist/app/index.d.ts"
     },
     "./components": {
       "import": "./dist/components.mjs",
@@ -82,7 +82,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/captify-io/pmbook.git"
+    "url": "git+https://github.com/captify-io/pmbook.git"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com",
