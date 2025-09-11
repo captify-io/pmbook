@@ -2,7 +2,7 @@
 
 /**
  * @captify/pmbook - App Module
- * 
+ *
  * Dynamically generates page registry from config.json menu structure
  * for automatic discovery by the Captify platform.
  */
@@ -18,7 +18,7 @@ export type PageRegistry = Record<string, PageImport>;
 // Generate page registry dynamically from config.json
 function generatePageRegistry(): PageRegistry {
   const registry: PageRegistry = {};
-  
+
   // Add default/home page - point to command center directly
   registry.home = async () => {
     const module = await import("./pages/ops/people/page");
@@ -28,7 +28,7 @@ function generatePageRegistry(): PageRegistry {
     const module = await import("./pages/ops/people/page");
     return { default: module.CommandCenterPage };
   };
-  
+
   // Process menu items recursively to generate dynamic imports
   function processMenuItems(items: any[], parentPath = "") {
     items.forEach((item) => {
@@ -38,32 +38,36 @@ function generatePageRegistry(): PageRegistry {
       } else if (item.href) {
         // Generate dynamic import path based on href
         const importPath = item.href.replace(/^\//, "").replace(/\//g, "/");
-        
-        // Create registry entries for different access patterns
-        const cleanId = item.id.replace("pmbook-", "").replace(/-/g, "-");
-        const hrefKey = item.href.slice(1).replace("/", "-"); // Remove leading slash, replace / with -
-        
-        // Dynamic import based on the href structure
+
+        // Static import mapping to avoid bundler warnings
+        const staticImports: Record<string, PageImport> = {
+          'exe/my-tickets': () => import('./pages/exe/my-tickets/page'),
+          'exe/value-streams': () => import('./pages/exe/value-streams/page'),
+          'ops/contracts': () => import('./pages/ops/contracts/page'),
+          'ops/insights': () => import('./pages/ops/insights/page'),
+          'ops/people': () => import('./pages/ops/people/page'),
+          'ops/performance': () => import('./pages/ops/performance/page'),
+          'services': () => import('./pages/services/page'),
+          'strategic': () => import('./pages/strategic/page'),
+          'work': () => import('./pages/work/page'),
+        };
+
         const dynamicImport = async () => {
-          try {
-            const module = await import(`./pages/${importPath}/page`);
-            return { default: module.default };
-          } catch (error) {
-            // Fallback to index if page.tsx doesn't exist
-            const module = await import(`./pages/${importPath}/index`);
+          const moduleImport = staticImports[importPath];
+          if (moduleImport) {
+            const module = await moduleImport();
             return { default: module.default };
           }
+          throw new Error(`Page not found: ${importPath}`);
         };
-        
-        registry[cleanId] = dynamicImport;
-        registry[hrefKey] = dynamicImport;
+
         registry[item.id] = dynamicImport;
       }
     });
   }
-  
+
   processMenuItems(menuConfig);
-  
+
   return registry;
 }
 
