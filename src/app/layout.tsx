@@ -1,21 +1,78 @@
-import { ReactNode } from "react";
+"use client";
+
+import { useState, useEffect, Suspense } from "react";
 import { ClientCaptifyLayout } from "@captify-io/platform/components";
+import { registeredApps } from "./pages";
+import { menu as menuConfig } from "../config";
 
 interface CaptifyLayoutProps {
   children: React.ReactNode;
-  params: Promise<{ captify: string[] }>;
+  params?: Promise<{ captify: string[] }> | { captify: string[] };
 }
 
-export default async function CaptifyPageLayout({
+export default function CaptifyPageLayout({
   children,
   params,
 }: CaptifyLayoutProps) {
-  const { captify } = await params;
+  const [currentHash, setCurrentHash] = useState("home");
+  const [PageComponent, setPageComponent] = useState<any>(null);
 
-  console.log("called [captify]/layout.tsx with package:", captify[0]);
+  // Listen for hash changes
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.slice(1) || "home";
+      setCurrentHash(hash);
+      loadComponent(hash);
+    };
+
+    // Load initial component
+    handleHashChange();
+    
+    // Listen for hash changes
+    window.addEventListener("hashchange", handleHashChange);
+    
+    return () => {
+      window.removeEventListener("hashchange", handleHashChange);
+    };
+  }, []);
+
+  const loadComponent = async (hash: string) => {
+    try {
+      if (registeredApps[hash]) {
+        const { default: Component } = await registeredApps[hash]();
+        setPageComponent(() => Component);
+      } else {
+        // Fallback to home if hash not found
+        const { default: Component } = await registeredApps.home();
+        setPageComponent(() => Component);
+      }
+    } catch (error) {
+      console.error(`Failed to load component for hash: ${hash}`, error);
+    }
+  };
+
+  const handleMenuClick = (item: any) => {
+    if (item.id) {
+      // Set hash to trigger component change
+      window.location.hash = item.id;
+    }
+  };
 
   return (
-    <ClientCaptifyLayout packageName={captify[0] || ""}>
+    <ClientCaptifyLayout 
+      packageName="pmbook"
+      menuItems={menuConfig}
+      onMenuClick={handleMenuClick}
+    >
+      <div className="flex-1 p-6">
+        {PageComponent ? (
+          <Suspense fallback={<div>Loading...</div>}>
+            <PageComponent />
+          </Suspense>
+        ) : (
+          <div>Loading page...</div>
+        )}
+      </div>
       {children}
     </ClientCaptifyLayout>
   );

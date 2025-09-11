@@ -5,10 +5,8 @@
  * Client-side data functions are located in data.ts files next to their respective pages.
  */
 
-import { config } from "./config";
-
-// Export configuration for platform discovery
-export { config } from "./config";
+// Export configuration for platform discovery (re-export from main config)
+export { config } from "../config";
 
 // Export types
 export type * from "../types";

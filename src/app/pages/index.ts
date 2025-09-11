@@ -1,18 +1,33 @@
 "use client";
 
-// Export only page components that are in the menu structure
-// These match the config.json and app/index.ts pageRegistry
+/**
+ * Simple page registry - maps IDs to dynamic imports
+ * Just a lookup for apps registered in the application
+ */
 
-// Operations pages
-export { IntelligencePage } from "./ops/insights/page";
-export { default as ContractsPage } from "./ops/contracts/page";
-export { CommandCenterPage } from "./ops/people/page";
-export { PerformancePage } from "./ops/performance/page";
+import { menu as menuConfig } from "../../config";
 
-// Execution pages
-export { default as ValueStreamsPage } from "./exe/value-streams/page";
-export { default as MyTicketsPage } from "./exe/my-tickets/page";
-export { ServicesHubPage } from "./services/ServicesHub";
+// Generate simple registry: id -> dynamic import function
+function generateRegisteredApps() {
+  const registeredApps: Record<string, () => Promise<{ default: any }>> = {};
+  
+  // Add home page
+  registeredApps.home = () => import("./ops/people/page").then(m => ({ default: m.CommandCenterPage }));
+  
+  // Process menu items to create simple lookups
+  function processMenuItems(items: any[]) {
+    items.forEach((item) => {
+      if (item.children) {
+        processMenuItems(item.children);
+      } else if (item.href && item.id) {
+        const importPath = `.${item.href}/page`;
+        registeredApps[item.id] = () => import(importPath).then(m => ({ default: m.default }));
+      }
+    });
+  }
+  
+  processMenuItems(menuConfig);
+  return registeredApps;
+}
 
-// Legacy exports (to maintain compatibility)
-export { WorkDashboardPage } from "./work/WorkDashboard";
+export const registeredApps = generateRegisteredApps();

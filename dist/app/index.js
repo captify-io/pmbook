@@ -221,6 +221,25 @@ var {
   platform
 } = config;
 
+// src/app/pages/index.ts
+function generateRegisteredApps() {
+  const registeredApps2 = {};
+  registeredApps2.home = () => Promise.resolve().then(() => (init_page(), page_exports)).then((m) => ({ default: m.CommandCenterPage }));
+  function processMenuItems(items) {
+    items.forEach((item) => {
+      if (item.children) {
+        processMenuItems(item.children);
+      } else if (item.href && item.id) {
+        const importPath = `.${item.href}/page`;
+        registeredApps2[item.id] = () => import(importPath).then((m) => ({ default: m.default }));
+      }
+    });
+  }
+  processMenuItems(menu);
+  return registeredApps2;
+}
+var registeredApps = generateRegisteredApps();
+
 // import("./pages/**/*/page") in src/app/index.ts
 var globImport_pages_page = __glob({});
 
@@ -271,5 +290,6 @@ export {
   description,
   menuConfiguration,
   pageRegistry,
+  registeredApps,
   slug
 };
