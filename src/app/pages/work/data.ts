@@ -1,4 +1,4 @@
-import { apiClient } from "@captify-io/platform/api";
+import { apiClient } from "@captify-io/platform/lib/api";
 import type { WorkItem, WorkSession } from "../../../types/work";
 
 export async function getUserWorkQueue(userId: string, session: any): Promise<WorkItem[]> {

@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useCaptify } from "@captify-io/platform/hooks";
-import { apiClient } from "@captify-io/platform/api";
+import { apiClient } from "@captify-io/platform/lib/api";
 import {
   Card,
   CardContent,
@@ -15,10 +15,10 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
-  DynamicIcon,
-} from "@captify-io/platform/ui";
+} from "@captify-io/platform/components/ui";
+import { DynamicIcon } from "lucide-react/dynamic";
 
-export function WorkDashboardPage() {
+function WorkDashboardPage() {
   const { session } = useCaptify();
   const [activeWork, setActiveWork] = useState<any>(null);
   const [workQueue, setWorkQueue] = useState<any>(null);

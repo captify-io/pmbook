@@ -20,14 +20,8 @@ function generatePageRegistry(): PageRegistry {
   const registry: PageRegistry = {};
 
   // Add default/home page - point to command center directly
-  registry.home = async () => {
-    const module = await import("./pages/ops/people/page");
-    return { default: module.CommandCenterPage };
-  };
-  registry.dashboard = async () => {
-    const module = await import("./pages/ops/people/page");
-    return { default: module.CommandCenterPage };
-  };
+  registry.home = () => import("./pages/ops/people/page");
+  registry.dashboard = () => import("./pages/ops/people/page");
 
   // Process menu items recursively to generate dynamic imports
   function processMenuItems(items: any[], parentPath = "") {

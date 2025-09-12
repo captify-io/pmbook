@@ -2,15 +2,15 @@
 
 import React, { useEffect, useState } from "react";
 import { useCaptify } from "@captify-io/platform/hooks";
-import { apiClient } from "@captify-io/platform/api";
+import { apiClient } from "@captify-io/platform/lib/api";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from "@captify-io/platform/ui";
+} from "@captify-io/platform/components/ui";
 
-export function IntelligencePage() {
+function InsightsPage() {
   const { session } = useCaptify();
   const [insights, setInsights] = useState([]);
   const [predictions, setPredictions] = useState([]);
@@ -273,4 +273,4 @@ export function IntelligencePage() {
 }
 
 // CRITICAL: Must have default export for dynamic imports
-export default IntelligencePage;
+export default InsightsPage;

@@ -1,4 +1,4 @@
-import { apiClient } from "@captify-io/platform/api";
+import { apiClient } from "@captify-io/platform/lib/api";
 
 export async function getDashboardData(session: any): Promise<any> {
   const response = await apiClient.run({

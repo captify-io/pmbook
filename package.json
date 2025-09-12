@@ -1,6 +1,6 @@
 {
   "name": "@captify-io/pmbook",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "Strategic alignment and business operations platform for government contracting",
   "type": "module",
   "sideEffects": [
@@ -12,81 +12,83 @@
   "engines": {
     "node": ">=18.18 || >=20"
   },
-  "main": "src/index.ts",
-  "types": "./src/index.ts",
+  "packageManager": "npm@9.8.1",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./src/index.ts",
-      "types": "./src/index.ts"
+      "development": {
+        "import": "./src/index.ts",
+        "types": "./src/index.ts"
+      },
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
     },
     "./app": {
-      "import": "./src/app/index.ts",
-      "types": "./src/app/index.ts"
+      "development": {
+        "import": "./src/app/index.ts",
+        "types": "./src/app/index.ts"
+      },
+      "import": "./dist/app/index.js",
+      "require": "./dist/app/index.cjs",
+      "types": "./dist/app/index.d.ts"
     },
     "./components": {
-      "import": "./src/components/index.ts",
-      "types": "./src/components/index.ts"
-    },
-    "./hooks": {
-      "import": "./src/hooks/index.ts",
-      "types": "./src/hooks/index.ts"
-    },
-    "./lib": {
-      "import": "./src/lib/index.ts",
-      "types": "./src/lib/index.ts"
+      "development": {
+        "import": "./src/components/index.ts",
+        "types": "./src/components/index.ts"
+      },
+      "import": "./dist/components/index.js",
+      "require": "./dist/components/index.cjs",
+      "types": "./dist/components/index.d.ts"
     },
     "./services": {
-      "import": "./src/services/index.ts",
-      "types": "./src/services/index.ts"
-    },
-    "./services/config": {
-      "import": "./src/services/index.ts",
-      "types": "./src/services/index.ts"
+      "development": {
+        "import": "./src/services/index.ts",
+        "types": "./src/services/index.ts"
+      },
+      "import": "./dist/services/index.js",
+      "require": "./dist/services/index.cjs",
+      "types": "./dist/services/index.d.ts"
     },
     "./types": {
-      "import": "./src/types/index.ts",
-      "types": "./src/types/index.ts"
+      "development": {
+        "import": "./src/types/index.ts",
+        "types": "./src/types/index.ts"
+      },
+      "import": "./dist/types/index.js",
+      "require": "./dist/types/index.cjs",
+      "types": "./dist/types/index.d.ts"
     },
     "./config": {
-      "import": "./src/configEntry.ts",
-      "types": "./src/configEntry.ts"
+      "development": {
+        "import": "./src/config.ts",
+        "types": "./src/config.ts"
+      },
+      "import": "./dist/config.js",
+      "require": "./dist/config.cjs",
+      "types": "./dist/config.d.ts"
     }
   },
   "scripts": {
-    "build": "npm run git:commit && npm run version:patch && npm run build:package && npm run git:push && npm run publish:package",
-    "build:app": "next build",
-    "build:package": "npm run dist",
-    "dev": "next dev -p 3052",
-    "dev:lib": "tsup --watch",
-    "dist": "tsup",
-    "git:commit": "git add package.json package-lock.json dist/ src/ && git commit -m \"Package update: $(date)\" || echo \"No changes to commit\"",
-    "git:push": "git push origin main",
+    "dev": "next dev -p 5000 --turbo",
+    "build": "next build ",
+    "start": "next start",
+    "dist": "tsup && tsc --project tsconfig.build.json --emitDeclarationOnly",
+    "push": "npm run build && npm run version:patch && git add -A && git commit -m 'chore: release v$npm_package_version' && git push origin main",
     "lint": "next lint",
-    "publish:package": "npm publish --legacy-peer-deps",
-    "start": "next start -p 3000",
-    "type-check": "npx tsc --noEmit",
-    "version:patch": "npm version patch --no-git-tag-version",
-    "clean": "rimraf dist .next",
-    "update": "npm install @captify-io/platform@github:captify-io/platform#main --legacy-peer-deps"
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf .next dist",
+    "turbo:dev": "turbo dev",
+    "turbo:build": "turbo build",
+    "turbo:lint": "turbo lint",
+    "turbo:type-check": "turbo type-check",
+    "turbo:clean": "turbo clean"
   },
   "dependencies": {
-    "rimraf": "^6.0.1"
-  },
-  "peerDependencies": {
-    "@captify-io/platform": "^1.0.45",
-    "react": ">=19.1.1",
-    "react-dom": ">=19.1.1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/captify-io/pmbook.git"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com",
-    "access": "public"
-  },
-  "devDependencies": {
-    "@captify-io/platform": "^1.0.45",
+    "@captify-io/platform": "^1.0.59",
     "@tailwindcss/postcss": "^4.1.13",
     "@types/node": "^24.3.1",
     "@types/react": "19.1.1",
@@ -95,23 +97,32 @@
     "autoprefixer": "^10.4.21",
     "clsx": "^2.0.0",
     "cross-env": "^7.0.3",
-    "esbuild": "0.25.8",
     "eslint": "^9.16.0",
     "eslint-config-next": "^15.5.2",
-    "ignore-loader": "^0.1.2",
     "next": "^15.5.2",
     "next-auth": "5.0.0-beta.25",
     "next-themes": "^0.4.0",
     "postcss": "^8.4.0",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
     "tailwind-merge": "^3.0.0",
     "tailwindcss": "^4.1.13",
-    "tsup": "^8.5.0",
+    "react": ">=19.1.1",
+    "react-dom": ">=19.1.1",
+    "lucide-react": "^0.544.0",
+    "rimraf": "^6.0.1"
+  },
+  "devDependencies": {
     "turbo": "^2.5.6",
-    "tw-animate-css": "^1.3.8",
+    "tsup": "^8.5.0",
     "typescript": "5.9.2",
     "uuid": "^11.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/captify-io/pmbook.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
   },
   "author": "Captify IO",
   "license": "MIT",

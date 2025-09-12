@@ -1,37 +1,36 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { apiClient } from "@captify-io/platform/api";
-import { cn } from "@captify-io/platform/utils";
+import { apiClient } from "@captify-io/platform/lib/api";
+import { cn } from "@captify-io/platform/lib/utils";
+import { DynamicIcon } from "lucide-react/dynamic";
 import {
-  Button,
-  Input,
-  Label,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-  Textarea,
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
   Tabs,
-  TabsContent,
   TabsList,
   TabsTrigger,
+  TabsContent,
+  Label,
+  Input,
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
   Popover,
-  PopoverContent,
   PopoverTrigger,
+  PopoverContent,
+  Button,
   Command,
+  CommandInput,
+  CommandList,
   CommandEmpty,
   CommandGroup,
-  CommandInput,
   CommandItem,
-  CommandList,
-  DynamicIcon,
-} from "@captify-io/platform/ui";
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from "@captify-io/platform/components/ui";
 import type { Contract } from "@/types/contract";
 
 interface ContractFormProps {

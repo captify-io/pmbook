@@ -2,15 +2,15 @@
 
 import React, { useEffect, useState } from "react";
 import { useCaptify } from "@captify-io/platform/hooks";
-import { apiClient } from "@captify-io/platform/api";
+import { apiClient } from "@captify-io/platform/lib/api";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from "@captify-io/platform/ui";
+} from "@captify-io/platform/components/ui";
 
-export function StrategicPage() {
+function StrategicPage() {
   const { session } = useCaptify();
   const [objectives, setObjectives] = useState([]);
   const [alignment, setAlignment] = useState<any>(null);

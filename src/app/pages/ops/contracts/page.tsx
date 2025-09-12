@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { apiClient } from "@captify-io/platform/api";
+import { apiClient } from "@captify-io/platform/lib/api";
 import { useCaptify } from "@captify-io/platform/hooks";
 import {
   Card,
@@ -21,12 +21,12 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-  DynamicIcon,
-} from "@captify-io/platform/ui";
+} from "@captify-io/platform/components/ui";
+import { DynamicIcon } from "lucide-react/dynamic";
 import { v4 as uuidv4 } from 'uuid';
 import { ContractForm } from "./form";
 
-export function ContractsPage() {
+function ContractsPage() {
   const { session } = useCaptify();
   const [contracts, setContracts] = useState<any[]>([]);
   const [selectedContract, setSelectedContract] = useState<any>(null);

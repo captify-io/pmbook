@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useCaptify } from "@captify-io/platform/hooks";
-import { apiClient } from "@captify-io/platform/api";
+import { apiClient } from "@captify-io/platform/lib/api";
 import {
   Card,
   CardContent,
@@ -21,10 +21,10 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
-  DynamicIcon,
-} from "@captify-io/platform/ui";
+} from "@captify-io/platform/components/ui";
+import { DynamicIcon } from "lucide-react/dynamic";
 
-export function ServicesHubPage() {
+function ServicesHubPage() {
   const { session } = useCaptify();
   const [marketplace, setMarketplace] = useState<any>(null);
   const [catalog, setCatalog] = useState<any[]>([]);

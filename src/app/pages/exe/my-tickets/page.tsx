@@ -2,15 +2,15 @@
 
 import React, { useEffect, useState } from "react";
 import { useCaptify } from "@captify-io/platform/hooks";
-import { apiClient } from "@captify-io/platform/api";
+import { apiClient } from "@captify-io/platform/lib/api";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from "@captify-io/platform/ui";
+} from "@captify-io/platform/components/ui";
 
-export function MyTicketsPage() {
+function MyTicketsPage() {
   const { session } = useCaptify();
   const [tickets, setTickets] = useState([]);
   const [loading, setLoading] = useState(true);

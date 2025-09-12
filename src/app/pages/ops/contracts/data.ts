@@ -1,4 +1,4 @@
-import { apiClient } from "@captify-io/platform/api";
+import { apiClient } from "@captify-io/platform/lib/api";
 import type { Contract, CDRL, Invoice, Milestone } from "../../../../types";
 
 export async function getActiveContracts(session: any): Promise<Contract[]> {

@@ -1,6 +1,24 @@
 "use client";
 var __defProp = Object.defineProperty;
+var __defProps = Object.defineProperties;
+var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
 var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
 var __esm = (fn, res) => function __init() {
   return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
 };
@@ -12,12 +30,11 @@ var __export = (target, all) => {
 // src/app/pages/ops/people/page.tsx
 var page_exports = {};
 __export(page_exports, {
-  CommandCenterPage: () => CommandCenterPage,
   default: () => page_default
 });
 import React, { useEffect, useState } from "react";
 import { useCaptify } from "@captify-io/platform/hooks";
-import { apiClient } from "@captify-io/platform/api";
+import { apiClient } from "@captify-io/platform/lib/api";
 import {
   Card,
   CardContent,
@@ -26,10 +43,11 @@ import {
   Badge,
   Progress,
   Alert,
-  AlertDescription,
-  DynamicIcon
-} from "@captify-io/platform/ui";
+  AlertDescription
+} from "@captify-io/platform/components/ui";
+import { DynamicIcon } from "lucide-react/dynamic";
 function CommandCenterPage() {
+  var _a2, _b2, _c2, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p, _q, _r, _s, _t, _u;
   const { session } = useCaptify();
   const [health, setHealth] = useState(null);
   const [dashboard, setDashboard] = useState(null);
@@ -39,8 +57,9 @@ function CommandCenterPage() {
     loadDashboardData();
   }, []);
   const loadDashboardData = async () => {
+    var _a3, _b3;
     try {
-      const hasAccess = session?.user?.groups?.includes("Operations");
+      const hasAccess = (_b3 = (_a3 = session == null ? void 0 : session.user) == null ? void 0 : _a3.groups) == null ? void 0 : _b3.includes("Operations");
       if (!hasAccess) {
         setLoading(false);
         return;
@@ -72,24 +91,24 @@ function CommandCenterPage() {
   if (loading) {
     return /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-center h-96" }, "Loading...");
   }
-  if (!session?.user?.groups?.includes("Operations")) {
+  if (!((_b2 = (_a2 = session == null ? void 0 : session.user) == null ? void 0 : _a2.groups) == null ? void 0 : _b2.includes("Operations"))) {
     return /* @__PURE__ */ React.createElement("div", { className: "container mx-auto p-6" }, /* @__PURE__ */ React.createElement(Alert, null, /* @__PURE__ */ React.createElement(DynamicIcon, { name: "alert-circle", className: "h-4 w-4" }), /* @__PURE__ */ React.createElement(AlertDescription, null, "You need Operations role to view this page.")));
   }
   return /* @__PURE__ */ React.createElement("div", { className: "container mx-auto p-6 space-y-6" }, /* @__PURE__ */ React.createElement("div", { className: "flex justify-between items-center" }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("h1", { className: "text-3xl font-bold" }, "Command Center"), /* @__PURE__ */ React.createElement("p", { className: "text-muted-foreground" }, "Strategic business intelligence")), /* @__PURE__ */ React.createElement(
     Badge,
     {
-      variant: health?.trend === "improving" ? "default" : "destructive"
+      variant: (health == null ? void 0 : health.trend) === "improving" ? "default" : "destructive"
     },
     "Health Score: ",
-    health?.score || 0,
+    (health == null ? void 0 : health.score) || 0,
     "/100"
-  )), dashboard?.health?.alerts?.length > 0 && /* @__PURE__ */ React.createElement(Alert, { variant: "destructive" }, /* @__PURE__ */ React.createElement(DynamicIcon, { name: "alert-circle", className: "h-4 w-4" }), /* @__PURE__ */ React.createElement(AlertDescription, null, dashboard.health.alerts[0].description)), /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" }, /* @__PURE__ */ React.createElement(Card, null, /* @__PURE__ */ React.createElement(CardHeader, { className: "flex flex-row items-center justify-between space-y-0 pb-2" }, /* @__PURE__ */ React.createElement(CardTitle, { className: "text-sm font-medium" }, "Runway"), /* @__PURE__ */ React.createElement(DynamicIcon, { name: "clock", className: "h-4 w-4 text-muted-foreground" })), /* @__PURE__ */ React.createElement(CardContent, null, /* @__PURE__ */ React.createElement("div", { className: "text-2xl font-bold" }, dashboard?.health?.runway?.toFixed(1) || 0, " months"), /* @__PURE__ */ React.createElement("p", { className: "text-xs text-muted-foreground" }, "Cash available"))), /* @__PURE__ */ React.createElement(Card, null, /* @__PURE__ */ React.createElement(CardHeader, { className: "flex flex-row items-center justify-between space-y-0 pb-2" }, /* @__PURE__ */ React.createElement(CardTitle, { className: "text-sm font-medium" }, "Monthly Burn"), /* @__PURE__ */ React.createElement(DynamicIcon, { name: "dollar-sign", className: "h-4 w-4 text-muted-foreground" })), /* @__PURE__ */ React.createElement(CardContent, null, /* @__PURE__ */ React.createElement("div", { className: "text-2xl font-bold" }, "$", (dashboard?.financial?.monthlyBurn / 1e3 || 0).toFixed(0), "k"), /* @__PURE__ */ React.createElement("div", { className: "flex items-center text-xs" }, dashboard?.health?.trend === "improving" ? /* @__PURE__ */ React.createElement(DynamicIcon, { name: "trending-down", className: "h-3 w-3 text-green-500 mr-1" }) : /* @__PURE__ */ React.createElement(DynamicIcon, { name: "trending-up", className: "h-3 w-3 text-red-500 mr-1" }), /* @__PURE__ */ React.createElement("span", null, "vs last month")))), /* @__PURE__ */ React.createElement(Card, null, /* @__PURE__ */ React.createElement(CardHeader, { className: "flex flex-row items-center justify-between space-y-0 pb-2" }, /* @__PURE__ */ React.createElement(CardTitle, { className: "text-sm font-medium" }, "Utilization"), /* @__PURE__ */ React.createElement(DynamicIcon, { name: "users", className: "h-4 w-4 text-muted-foreground" })), /* @__PURE__ */ React.createElement(CardContent, null, /* @__PURE__ */ React.createElement("div", { className: "text-2xl font-bold" }, dashboard?.operations?.utilizationRate?.toFixed(0) || 0, "%"), /* @__PURE__ */ React.createElement(
+  )), ((_d = (_c2 = dashboard == null ? void 0 : dashboard.health) == null ? void 0 : _c2.alerts) == null ? void 0 : _d.length) > 0 && /* @__PURE__ */ React.createElement(Alert, { variant: "destructive" }, /* @__PURE__ */ React.createElement(DynamicIcon, { name: "alert-circle", className: "h-4 w-4" }), /* @__PURE__ */ React.createElement(AlertDescription, null, dashboard.health.alerts[0].description)), /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" }, /* @__PURE__ */ React.createElement(Card, null, /* @__PURE__ */ React.createElement(CardHeader, { className: "flex flex-row items-center justify-between space-y-0 pb-2" }, /* @__PURE__ */ React.createElement(CardTitle, { className: "text-sm font-medium" }, "Runway"), /* @__PURE__ */ React.createElement(DynamicIcon, { name: "clock", className: "h-4 w-4 text-muted-foreground" })), /* @__PURE__ */ React.createElement(CardContent, null, /* @__PURE__ */ React.createElement("div", { className: "text-2xl font-bold" }, ((_f = (_e = dashboard == null ? void 0 : dashboard.health) == null ? void 0 : _e.runway) == null ? void 0 : _f.toFixed(1)) || 0, " months"), /* @__PURE__ */ React.createElement("p", { className: "text-xs text-muted-foreground" }, "Cash available"))), /* @__PURE__ */ React.createElement(Card, null, /* @__PURE__ */ React.createElement(CardHeader, { className: "flex flex-row items-center justify-between space-y-0 pb-2" }, /* @__PURE__ */ React.createElement(CardTitle, { className: "text-sm font-medium" }, "Monthly Burn"), /* @__PURE__ */ React.createElement(DynamicIcon, { name: "dollar-sign", className: "h-4 w-4 text-muted-foreground" })), /* @__PURE__ */ React.createElement(CardContent, null, /* @__PURE__ */ React.createElement("div", { className: "text-2xl font-bold" }, "$", (((_g = dashboard == null ? void 0 : dashboard.financial) == null ? void 0 : _g.monthlyBurn) / 1e3 || 0).toFixed(0), "k"), /* @__PURE__ */ React.createElement("div", { className: "flex items-center text-xs" }, ((_h = dashboard == null ? void 0 : dashboard.health) == null ? void 0 : _h.trend) === "improving" ? /* @__PURE__ */ React.createElement(DynamicIcon, { name: "trending-down", className: "h-3 w-3 text-green-500 mr-1" }) : /* @__PURE__ */ React.createElement(DynamicIcon, { name: "trending-up", className: "h-3 w-3 text-red-500 mr-1" }), /* @__PURE__ */ React.createElement("span", null, "vs last month")))), /* @__PURE__ */ React.createElement(Card, null, /* @__PURE__ */ React.createElement(CardHeader, { className: "flex flex-row items-center justify-between space-y-0 pb-2" }, /* @__PURE__ */ React.createElement(CardTitle, { className: "text-sm font-medium" }, "Utilization"), /* @__PURE__ */ React.createElement(DynamicIcon, { name: "users", className: "h-4 w-4 text-muted-foreground" })), /* @__PURE__ */ React.createElement(CardContent, null, /* @__PURE__ */ React.createElement("div", { className: "text-2xl font-bold" }, ((_j = (_i = dashboard == null ? void 0 : dashboard.operations) == null ? void 0 : _i.utilizationRate) == null ? void 0 : _j.toFixed(0)) || 0, "%"), /* @__PURE__ */ React.createElement(
     Progress,
     {
-      value: dashboard?.operations?.utilizationRate || 0,
+      value: ((_k = dashboard == null ? void 0 : dashboard.operations) == null ? void 0 : _k.utilizationRate) || 0,
       className: "mt-2"
     }
-  ))), /* @__PURE__ */ React.createElement(Card, null, /* @__PURE__ */ React.createElement(CardHeader, { className: "flex flex-row items-center justify-between space-y-0 pb-2" }, /* @__PURE__ */ React.createElement(CardTitle, { className: "text-sm font-medium" }, "Profit Margin"), /* @__PURE__ */ React.createElement(DynamicIcon, { name: "target", className: "h-4 w-4 text-muted-foreground" })), /* @__PURE__ */ React.createElement(CardContent, null, /* @__PURE__ */ React.createElement("div", { className: "text-2xl font-bold" }, dashboard?.health?.profitMargin?.toFixed(1) || 0, "%"), /* @__PURE__ */ React.createElement("p", { className: "text-xs text-muted-foreground" }, "Target: 15%")))), /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-1 lg:grid-cols-2 gap-6" }, /* @__PURE__ */ React.createElement(Card, null, /* @__PURE__ */ React.createElement(CardHeader, null, /* @__PURE__ */ React.createElement(CardTitle, null, "Financial Forecast")), /* @__PURE__ */ React.createElement(CardContent, { className: "space-y-4" }, /* @__PURE__ */ React.createElement("div", { className: "space-y-2" }, /* @__PURE__ */ React.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React.createElement("span", { className: "text-sm" }, "Best Case"), /* @__PURE__ */ React.createElement("span", { className: "text-sm font-medium" }, "$", (dashboard?.forecast?.bestCase / 1e6 || 0).toFixed(1), "M")), /* @__PURE__ */ React.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React.createElement("span", { className: "text-sm" }, "Likely"), /* @__PURE__ */ React.createElement("span", { className: "text-sm font-medium" }, "$", (dashboard?.forecast?.nextQuarter?.revenue / 1e6 || 0).toFixed(1), "M")), /* @__PURE__ */ React.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React.createElement("span", { className: "text-sm" }, "Worst Case"), /* @__PURE__ */ React.createElement("span", { className: "text-sm font-medium" }, "$", (dashboard?.forecast?.worstCase / 1e6 || 0).toFixed(1), "M"))))), /* @__PURE__ */ React.createElement(Card, null, /* @__PURE__ */ React.createElement(CardHeader, null, /* @__PURE__ */ React.createElement(CardTitle, null, "Operational Metrics")), /* @__PURE__ */ React.createElement(CardContent, { className: "space-y-4" }, /* @__PURE__ */ React.createElement("div", { className: "space-y-2" }, /* @__PURE__ */ React.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React.createElement("span", { className: "text-sm" }, "Delivery Velocity"), /* @__PURE__ */ React.createElement("span", { className: "text-sm font-medium" }, dashboard?.operations?.deliveryVelocity || 0, " pts/sprint")), /* @__PURE__ */ React.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React.createElement("span", { className: "text-sm" }, "Customer Satisfaction"), /* @__PURE__ */ React.createElement("span", { className: "text-sm font-medium" }, dashboard?.operations?.customerSatisfaction?.toFixed(1) || 0, "/5")), /* @__PURE__ */ React.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React.createElement("span", { className: "text-sm" }, "SLA Compliance"), /* @__PURE__ */ React.createElement("span", { className: "text-sm font-medium" }, dashboard?.operations?.slaCompliance || 0, "%")))))), recommendations.length > 0 && /* @__PURE__ */ React.createElement(Card, null, /* @__PURE__ */ React.createElement(CardHeader, null, /* @__PURE__ */ React.createElement(CardTitle, { className: "flex items-center gap-2" }, /* @__PURE__ */ React.createElement(DynamicIcon, { name: "activity", className: "h-5 w-5" }), "AI Recommendations")), /* @__PURE__ */ React.createElement(CardContent, null, /* @__PURE__ */ React.createElement("div", { className: "space-y-3" }, recommendations.slice(0, 3).map((rec, idx) => /* @__PURE__ */ React.createElement(
+  ))), /* @__PURE__ */ React.createElement(Card, null, /* @__PURE__ */ React.createElement(CardHeader, { className: "flex flex-row items-center justify-between space-y-0 pb-2" }, /* @__PURE__ */ React.createElement(CardTitle, { className: "text-sm font-medium" }, "Profit Margin"), /* @__PURE__ */ React.createElement(DynamicIcon, { name: "target", className: "h-4 w-4 text-muted-foreground" })), /* @__PURE__ */ React.createElement(CardContent, null, /* @__PURE__ */ React.createElement("div", { className: "text-2xl font-bold" }, ((_m = (_l = dashboard == null ? void 0 : dashboard.health) == null ? void 0 : _l.profitMargin) == null ? void 0 : _m.toFixed(1)) || 0, "%"), /* @__PURE__ */ React.createElement("p", { className: "text-xs text-muted-foreground" }, "Target: 15%")))), /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-1 lg:grid-cols-2 gap-6" }, /* @__PURE__ */ React.createElement(Card, null, /* @__PURE__ */ React.createElement(CardHeader, null, /* @__PURE__ */ React.createElement(CardTitle, null, "Financial Forecast")), /* @__PURE__ */ React.createElement(CardContent, { className: "space-y-4" }, /* @__PURE__ */ React.createElement("div", { className: "space-y-2" }, /* @__PURE__ */ React.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React.createElement("span", { className: "text-sm" }, "Best Case"), /* @__PURE__ */ React.createElement("span", { className: "text-sm font-medium" }, "$", (((_n = dashboard == null ? void 0 : dashboard.forecast) == null ? void 0 : _n.bestCase) / 1e6 || 0).toFixed(1), "M")), /* @__PURE__ */ React.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React.createElement("span", { className: "text-sm" }, "Likely"), /* @__PURE__ */ React.createElement("span", { className: "text-sm font-medium" }, "$", (((_p = (_o = dashboard == null ? void 0 : dashboard.forecast) == null ? void 0 : _o.nextQuarter) == null ? void 0 : _p.revenue) / 1e6 || 0).toFixed(1), "M")), /* @__PURE__ */ React.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React.createElement("span", { className: "text-sm" }, "Worst Case"), /* @__PURE__ */ React.createElement("span", { className: "text-sm font-medium" }, "$", (((_q = dashboard == null ? void 0 : dashboard.forecast) == null ? void 0 : _q.worstCase) / 1e6 || 0).toFixed(1), "M"))))), /* @__PURE__ */ React.createElement(Card, null, /* @__PURE__ */ React.createElement(CardHeader, null, /* @__PURE__ */ React.createElement(CardTitle, null, "Operational Metrics")), /* @__PURE__ */ React.createElement(CardContent, { className: "space-y-4" }, /* @__PURE__ */ React.createElement("div", { className: "space-y-2" }, /* @__PURE__ */ React.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React.createElement("span", { className: "text-sm" }, "Delivery Velocity"), /* @__PURE__ */ React.createElement("span", { className: "text-sm font-medium" }, ((_r = dashboard == null ? void 0 : dashboard.operations) == null ? void 0 : _r.deliveryVelocity) || 0, " pts/sprint")), /* @__PURE__ */ React.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React.createElement("span", { className: "text-sm" }, "Customer Satisfaction"), /* @__PURE__ */ React.createElement("span", { className: "text-sm font-medium" }, ((_t = (_s = dashboard == null ? void 0 : dashboard.operations) == null ? void 0 : _s.customerSatisfaction) == null ? void 0 : _t.toFixed(1)) || 0, "/5")), /* @__PURE__ */ React.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React.createElement("span", { className: "text-sm" }, "SLA Compliance"), /* @__PURE__ */ React.createElement("span", { className: "text-sm font-medium" }, ((_u = dashboard == null ? void 0 : dashboard.operations) == null ? void 0 : _u.slaCompliance) || 0, "%")))))), recommendations.length > 0 && /* @__PURE__ */ React.createElement(Card, null, /* @__PURE__ */ React.createElement(CardHeader, null, /* @__PURE__ */ React.createElement(CardTitle, { className: "flex items-center gap-2" }, /* @__PURE__ */ React.createElement(DynamicIcon, { name: "activity", className: "h-5 w-5" }), "AI Recommendations")), /* @__PURE__ */ React.createElement(CardContent, null, /* @__PURE__ */ React.createElement("div", { className: "space-y-3" }, recommendations.slice(0, 3).map((rec, idx) => /* @__PURE__ */ React.createElement(
     "div",
     {
       key: idx,
@@ -108,6 +127,7 @@ function CommandCenterPage() {
 var page_default;
 var init_page = __esm({
   "src/app/pages/ops/people/page.tsx"() {
+    "use strict";
     "use client";
     page_default = CommandCenterPage;
   }
@@ -116,16 +136,15 @@ var init_page = __esm({
 // src/app/pages/exe/my-tickets/page.tsx
 var page_exports2 = {};
 __export(page_exports2, {
-  MyTicketsPage: () => MyTicketsPage,
   default: () => page_default2
 });
 import React2, { useEffect as useEffect2, useState as useState2 } from "react";
 import { useCaptify as useCaptify2 } from "@captify-io/platform/hooks";
-import { apiClient as apiClient2 } from "@captify-io/platform/api";
+import { apiClient as apiClient2 } from "@captify-io/platform/lib/api";
 import {
   Card as Card2,
   CardContent as CardContent2
-} from "@captify-io/platform/ui";
+} from "@captify-io/platform/components/ui";
 function MyTicketsPage() {
   const { session } = useCaptify2();
   const [tickets, setTickets] = useState2([]);
@@ -201,6 +220,7 @@ function MyTicketsPage() {
 var page_default2;
 var init_page2 = __esm({
   "src/app/pages/exe/my-tickets/page.tsx"() {
+    "use strict";
     "use client";
     page_default2 = MyTicketsPage;
   }
@@ -209,18 +229,17 @@ var init_page2 = __esm({
 // src/app/pages/exe/value-streams/page.tsx
 var page_exports3 = {};
 __export(page_exports3, {
-  ValueStreamsPage: () => ValueStreamsPage,
   default: () => page_default3
 });
 import React3, { useEffect as useEffect3, useState as useState3 } from "react";
 import { useCaptify as useCaptify3 } from "@captify-io/platform/hooks";
-import { apiClient as apiClient3 } from "@captify-io/platform/api";
+import { apiClient as apiClient3 } from "@captify-io/platform/lib/api";
 import {
   Card as Card3,
   CardContent as CardContent3,
   CardHeader as CardHeader3,
   CardTitle as CardTitle3
-} from "@captify-io/platform/ui";
+} from "@captify-io/platform/components/ui";
 function ValueStreamsPage() {
   const { session } = useCaptify3();
   const [valueStreams, setValueStreams] = useState3([]);
@@ -267,6 +286,7 @@ function ValueStreamsPage() {
 var page_default3;
 var init_page3 = __esm({
   "src/app/pages/exe/value-streams/page.tsx"() {
+    "use strict";
     "use client";
     page_default3 = ValueStreamsPage;
   }
@@ -279,6 +299,7 @@ function unsafeStringify(arr, offset = 0) {
 var byteToHex;
 var init_stringify = __esm({
   "node_modules/uuid/dist/esm/stringify.js"() {
+    "use strict";
     byteToHex = [];
     for (let i = 0; i < 256; ++i) {
       byteToHex.push((i + 256).toString(16).slice(1));
@@ -298,6 +319,7 @@ function rng() {
 var rnds8Pool, poolPtr;
 var init_rng = __esm({
   "node_modules/uuid/dist/esm/rng.js"() {
+    "use strict";
     rnds8Pool = new Uint8Array(256);
     poolPtr = rnds8Pool.length;
   }
@@ -308,17 +330,19 @@ import { randomUUID } from "crypto";
 var native_default;
 var init_native = __esm({
   "node_modules/uuid/dist/esm/native.js"() {
+    "use strict";
     native_default = { randomUUID };
   }
 });
 
 // node_modules/uuid/dist/esm/v4.js
 function v4(options, buf, offset) {
+  var _a2, _b2, _c2;
   if (native_default.randomUUID && !buf && !options) {
     return native_default.randomUUID();
   }
   options = options || {};
-  const rnds = options.random ?? options.rng?.() ?? rng();
+  const rnds = (_c2 = (_b2 = options.random) != null ? _b2 : (_a2 = options.rng) == null ? void 0 : _a2.call(options)) != null ? _c2 : rng();
   if (rnds.length < 16) {
     throw new Error("Random bytes length must be >= 16");
   }
@@ -339,6 +363,7 @@ function v4(options, buf, offset) {
 var v4_default;
 var init_v4 = __esm({
   "node_modules/uuid/dist/esm/v4.js"() {
+    "use strict";
     init_native();
     init_rng();
     init_stringify();
@@ -349,50 +374,52 @@ var init_v4 = __esm({
 // node_modules/uuid/dist/esm/index.js
 var init_esm = __esm({
   "node_modules/uuid/dist/esm/index.js"() {
+    "use strict";
     init_v4();
   }
 });
 
 // src/app/pages/ops/contracts/form.tsx
 import React4, { useState as useState4, useEffect as useEffect4 } from "react";
-import { apiClient as apiClient4 } from "@captify-io/platform/api";
-import { cn } from "@captify-io/platform/utils";
+import { apiClient as apiClient4 } from "@captify-io/platform/lib/api";
+import { cn } from "@captify-io/platform/lib/utils";
+import { DynamicIcon as DynamicIcon2 } from "lucide-react/dynamic";
 import {
-  Button as Button2,
-  Input,
-  Label,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-  Card as Card4,
-  CardContent as CardContent4,
-  CardHeader as CardHeader4,
-  CardTitle as CardTitle4,
   Tabs,
-  TabsContent,
   TabsList,
   TabsTrigger,
+  TabsContent,
+  Label,
+  Input,
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
   Popover,
-  PopoverContent,
   PopoverTrigger,
+  PopoverContent,
+  Button as Button2,
   Command,
+  CommandInput,
+  CommandList,
   CommandEmpty,
   CommandGroup,
-  CommandInput,
   CommandItem,
-  CommandList,
-  DynamicIcon as DynamicIcon2
-} from "@captify-io/platform/ui";
+  Card as Card4,
+  CardHeader as CardHeader4,
+  CardTitle as CardTitle4,
+  CardContent as CardContent4
+} from "@captify-io/platform/components/ui";
 function ContractForm({
   contract,
   isOpen,
   onClose,
   onSave
 }) {
+  var _a2, _b2, _c2, _d, _e, _f, _g, _h, _i, _j, _k, _l;
   const getInitialFormData = () => {
-    if (contract) return { ...contract };
+    if (contract) return __spreadValues({}, contract);
     const today = (/* @__PURE__ */ new Date()).toISOString().split("T")[0];
     const oneYearFromNow = new Date(Date.now() + 365 * 24 * 60 * 60 * 1e3).toISOString().split("T")[0];
     return {
@@ -483,33 +510,32 @@ function ContractForm({
         service: "user",
         operation: "listUsers"
       });
-      setUsers(usersRes?.data || []);
+      setUsers((usersRes == null ? void 0 : usersRes.data) || []);
     } catch (error) {
       console.log("Error loading dropdown data:", error);
     }
   };
   const handleInputChange = (field, value) => {
-    setFormData((prev) => ({
-      ...prev,
+    setFormData((prev) => __spreadProps(__spreadValues({}, prev), {
       [field]: value
     }));
   };
   const handleCostChange = (costType, field, value) => {
     setFormData((prev) => {
-      const costs = { ...prev[costType] };
+      const costs = __spreadValues({}, prev[costType]);
       costs[field] = value;
       costs.total = (costs.direct || 0) + (costs.indirect || 0) + (costs.materials || 0) + (costs.subcontracts || 0) + (costs.profit || 0);
-      return {
-        ...prev,
+      return __spreadProps(__spreadValues({}, prev), {
         [costType]: costs
-      };
+      });
     });
   };
   const handleSubmit = async () => {
+    var _a3, _b3;
     setLoading(true);
     try {
-      const submitData = { ...formData };
-      if (submitData.startDate && submitData.expendedCosts?.total) {
+      const submitData = __spreadValues({}, formData);
+      if (submitData.startDate && ((_a3 = submitData.expendedCosts) == null ? void 0 : _a3.total)) {
         const start = new Date(submitData.startDate);
         const now = /* @__PURE__ */ new Date();
         const monthsElapsed = (now.getFullYear() - start.getFullYear()) * 12 + (now.getMonth() - start.getMonth()) + 1;
@@ -518,7 +544,7 @@ function ContractForm({
       if (submitData.totalValue && submitData.burnedValue !== void 0) {
         submitData.remainingValue = submitData.totalValue - (submitData.burnedValue || 0);
       }
-      if (submitData.expendedCosts?.total && !submitData.burnedValue) {
+      if (((_b3 = submitData.expendedCosts) == null ? void 0 : _b3.total) && !submitData.burnedValue) {
         submitData.burnedValue = submitData.expendedCosts.total;
       }
       await onSave(submitData);
@@ -529,7 +555,7 @@ function ContractForm({
       setLoading(false);
     }
   };
-  return /* @__PURE__ */ React4.createElement("div", { className: "max-w-6xl" }, /* @__PURE__ */ React4.createElement("div", { className: "flex justify-between items-center mb-6" }, /* @__PURE__ */ React4.createElement("h2", { className: "text-2xl font-bold" }, contract?.id && contract?.name ? "Edit Contract" : "New Contract")), /* @__PURE__ */ React4.createElement(Tabs, { value: activeTab, onValueChange: setActiveTab }, /* @__PURE__ */ React4.createElement(TabsList, { className: "grid w-full grid-cols-5" }, /* @__PURE__ */ React4.createElement(TabsTrigger, { value: "info" }, "Info"), /* @__PURE__ */ React4.createElement(TabsTrigger, { value: "financial" }, "Financial"), /* @__PURE__ */ React4.createElement(TabsTrigger, { value: "costs" }, "Cost Breakdown"), /* @__PURE__ */ React4.createElement(TabsTrigger, { value: "team" }, "Team"), /* @__PURE__ */ React4.createElement(TabsTrigger, { value: "documents" }, "Documents")), /* @__PURE__ */ React4.createElement(TabsContent, { value: "info", className: "space-y-4" }, /* @__PURE__ */ React4.createElement("div", { className: "grid grid-cols-2 gap-4" }, /* @__PURE__ */ React4.createElement("div", { className: "space-y-2" }, /* @__PURE__ */ React4.createElement(Label, { htmlFor: "contractNumber" }, "Contract Number*"), /* @__PURE__ */ React4.createElement(
+  return /* @__PURE__ */ React4.createElement("div", { className: "max-w-6xl" }, /* @__PURE__ */ React4.createElement("div", { className: "flex justify-between items-center mb-6" }, /* @__PURE__ */ React4.createElement("h2", { className: "text-2xl font-bold" }, (contract == null ? void 0 : contract.id) && (contract == null ? void 0 : contract.name) ? "Edit Contract" : "New Contract")), /* @__PURE__ */ React4.createElement(Tabs, { value: activeTab, onValueChange: setActiveTab }, /* @__PURE__ */ React4.createElement(TabsList, { className: "grid w-full grid-cols-5" }, /* @__PURE__ */ React4.createElement(TabsTrigger, { value: "info" }, "Info"), /* @__PURE__ */ React4.createElement(TabsTrigger, { value: "financial" }, "Financial"), /* @__PURE__ */ React4.createElement(TabsTrigger, { value: "costs" }, "Cost Breakdown"), /* @__PURE__ */ React4.createElement(TabsTrigger, { value: "team" }, "Team"), /* @__PURE__ */ React4.createElement(TabsTrigger, { value: "documents" }, "Documents")), /* @__PURE__ */ React4.createElement(TabsContent, { value: "info", className: "space-y-4" }, /* @__PURE__ */ React4.createElement("div", { className: "grid grid-cols-2 gap-4" }, /* @__PURE__ */ React4.createElement("div", { className: "space-y-2" }, /* @__PURE__ */ React4.createElement(Label, { htmlFor: "contractNumber" }, "Contract Number*"), /* @__PURE__ */ React4.createElement(
     Input,
     {
       id: "contractNumber",
@@ -797,7 +823,7 @@ function ContractForm({
     Input,
     {
       type: "number",
-      value: formData.budgetedCosts?.direct || 0,
+      value: ((_a2 = formData.budgetedCosts) == null ? void 0 : _a2.direct) || 0,
       onChange: (e) => handleCostChange(
         "budgetedCosts",
         "direct",
@@ -808,7 +834,7 @@ function ContractForm({
     Input,
     {
       type: "number",
-      value: formData.budgetedCosts?.indirect || 0,
+      value: ((_b2 = formData.budgetedCosts) == null ? void 0 : _b2.indirect) || 0,
       onChange: (e) => handleCostChange(
         "budgetedCosts",
         "indirect",
@@ -819,7 +845,7 @@ function ContractForm({
     Input,
     {
       type: "number",
-      value: formData.budgetedCosts?.materials || 0,
+      value: ((_c2 = formData.budgetedCosts) == null ? void 0 : _c2.materials) || 0,
       onChange: (e) => handleCostChange(
         "budgetedCosts",
         "materials",
@@ -830,7 +856,7 @@ function ContractForm({
     Input,
     {
       type: "number",
-      value: formData.budgetedCosts?.subcontracts || 0,
+      value: ((_d = formData.budgetedCosts) == null ? void 0 : _d.subcontracts) || 0,
       onChange: (e) => handleCostChange(
         "budgetedCosts",
         "subcontracts",
@@ -841,7 +867,7 @@ function ContractForm({
     Input,
     {
       type: "number",
-      value: formData.budgetedCosts?.profit || 0,
+      value: ((_e = formData.budgetedCosts) == null ? void 0 : _e.profit) || 0,
       onChange: (e) => handleCostChange(
         "budgetedCosts",
         "profit",
@@ -852,7 +878,7 @@ function ContractForm({
     Input,
     {
       type: "number",
-      value: formData.budgetedCosts?.total || 0,
+      value: ((_f = formData.budgetedCosts) == null ? void 0 : _f.total) || 0,
       disabled: true,
       className: "font-bold"
     }
@@ -860,7 +886,7 @@ function ContractForm({
     Input,
     {
       type: "number",
-      value: formData.expendedCosts?.direct || 0,
+      value: ((_g = formData.expendedCosts) == null ? void 0 : _g.direct) || 0,
       onChange: (e) => handleCostChange(
         "expendedCosts",
         "direct",
@@ -871,7 +897,7 @@ function ContractForm({
     Input,
     {
       type: "number",
-      value: formData.expendedCosts?.indirect || 0,
+      value: ((_h = formData.expendedCosts) == null ? void 0 : _h.indirect) || 0,
       onChange: (e) => handleCostChange(
         "expendedCosts",
         "indirect",
@@ -882,7 +908,7 @@ function ContractForm({
     Input,
     {
       type: "number",
-      value: formData.expendedCosts?.materials || 0,
+      value: ((_i = formData.expendedCosts) == null ? void 0 : _i.materials) || 0,
       onChange: (e) => handleCostChange(
         "expendedCosts",
         "materials",
@@ -893,7 +919,7 @@ function ContractForm({
     Input,
     {
       type: "number",
-      value: formData.expendedCosts?.subcontracts || 0,
+      value: ((_j = formData.expendedCosts) == null ? void 0 : _j.subcontracts) || 0,
       onChange: (e) => handleCostChange(
         "expendedCosts",
         "subcontracts",
@@ -904,7 +930,7 @@ function ContractForm({
     Input,
     {
       type: "number",
-      value: formData.expendedCosts?.profit || 0,
+      value: ((_k = formData.expendedCosts) == null ? void 0 : _k.profit) || 0,
       onChange: (e) => handleCostChange(
         "expendedCosts",
         "profit",
@@ -915,7 +941,7 @@ function ContractForm({
     Input,
     {
       type: "number",
-      value: formData.expendedCosts?.total || 0,
+      value: ((_l = formData.expendedCosts) == null ? void 0 : _l.total) || 0,
       disabled: true,
       className: "font-bold"
     }
@@ -989,6 +1015,7 @@ function ContractForm({
 }
 var init_form = __esm({
   "src/app/pages/ops/contracts/form.tsx"() {
+    "use strict";
     "use client";
   }
 });
@@ -996,11 +1023,10 @@ var init_form = __esm({
 // src/app/pages/ops/contracts/page.tsx
 var page_exports4 = {};
 __export(page_exports4, {
-  ContractsPage: () => ContractsPage,
   default: () => page_default4
 });
 import React5, { useEffect as useEffect5, useState as useState5 } from "react";
-import { apiClient as apiClient5 } from "@captify-io/platform/api";
+import { apiClient as apiClient5 } from "@captify-io/platform/lib/api";
 import { useCaptify as useCaptify4 } from "@captify-io/platform/hooks";
 import {
   Card as Card5,
@@ -1019,10 +1045,11 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuTrigger,
-  DynamicIcon as DynamicIcon3
-} from "@captify-io/platform/ui";
+  DropdownMenuTrigger
+} from "@captify-io/platform/components/ui";
+import { DynamicIcon as DynamicIcon3 } from "lucide-react/dynamic";
 function ContractsPage() {
+  var _a2, _b2, _c2, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p, _q, _r, _s, _t, _u, _v, _w;
   const { session } = useCaptify4();
   const [contracts, setContracts] = useState5([]);
   const [selectedContract, setSelectedContract] = useState5(null);
@@ -1047,7 +1074,7 @@ function ContractsPage() {
         operation: "getActiveContracts",
         app: "pmbook"
       });
-      const data = response?.data || [];
+      const data = (response == null ? void 0 : response.data) || [];
       setContracts(data);
       if (data.length > 0) {
         setSelectedContract(data[0]);
@@ -1173,10 +1200,9 @@ function ContractsPage() {
         await apiClient5.run({
           service: "contract",
           operation: "updateContract",
-          data: {
-            ...contractData,
+          data: __spreadProps(__spreadValues({}, contractData), {
             contractId: editingContract.id
-          },
+          }),
           app: "pmbook"
         });
       } else {
@@ -1268,7 +1294,7 @@ function ContractsPage() {
     Button3,
     {
       key: contract.id,
-      variant: selectedContract?.id === contract.id ? "default" : "outline",
+      variant: (selectedContract == null ? void 0 : selectedContract.id) === contract.id ? "default" : "outline",
       onClick: () => setSelectedContract(contract),
       className: "flex-shrink-0"
     },
@@ -1293,7 +1319,7 @@ function ContractsPage() {
       value: selectedContract.burnedValue / selectedContract.totalValue * 100,
       className: "mt-2"
     }
-  ), /* @__PURE__ */ React5.createElement("p", { className: "text-xs text-muted-foreground mt-1" }, (selectedContract.burnedValue / selectedContract.totalValue * 100).toFixed(0), "% burned"))), /* @__PURE__ */ React5.createElement(Card5, null, /* @__PURE__ */ React5.createElement(CardHeader5, { className: "pb-2" }, /* @__PURE__ */ React5.createElement(CardTitle5, { className: "text-sm" }, "Monthly Burn")), /* @__PURE__ */ React5.createElement(CardContent5, null, /* @__PURE__ */ React5.createElement("div", { className: "text-2xl font-bold" }, "$", (contractDetails?.burn?.currentMonthBurn / 1e3 || 0).toFixed(0), "k"), /* @__PURE__ */ React5.createElement("div", { className: "flex items-center text-xs text-muted-foreground mt-1" }, /* @__PURE__ */ React5.createElement(DynamicIcon3, { name: "trending-up", className: "h-3 w-3 mr-1" }), contractDetails?.burn?.trend || "stable"))), /* @__PURE__ */ React5.createElement(Card5, null, /* @__PURE__ */ React5.createElement(CardHeader5, { className: "pb-2" }, /* @__PURE__ */ React5.createElement(CardTitle5, { className: "text-sm" }, "Health Score")), /* @__PURE__ */ React5.createElement(CardContent5, null, /* @__PURE__ */ React5.createElement("div", { className: "text-2xl font-bold" }, selectedContract.healthScore, "%"), /* @__PURE__ */ React5.createElement(
+  ), /* @__PURE__ */ React5.createElement("p", { className: "text-xs text-muted-foreground mt-1" }, (selectedContract.burnedValue / selectedContract.totalValue * 100).toFixed(0), "% burned"))), /* @__PURE__ */ React5.createElement(Card5, null, /* @__PURE__ */ React5.createElement(CardHeader5, { className: "pb-2" }, /* @__PURE__ */ React5.createElement(CardTitle5, { className: "text-sm" }, "Monthly Burn")), /* @__PURE__ */ React5.createElement(CardContent5, null, /* @__PURE__ */ React5.createElement("div", { className: "text-2xl font-bold" }, "$", (((_a2 = contractDetails == null ? void 0 : contractDetails.burn) == null ? void 0 : _a2.currentMonthBurn) / 1e3 || 0).toFixed(0), "k"), /* @__PURE__ */ React5.createElement("div", { className: "flex items-center text-xs text-muted-foreground mt-1" }, /* @__PURE__ */ React5.createElement(DynamicIcon3, { name: "trending-up", className: "h-3 w-3 mr-1" }), ((_b2 = contractDetails == null ? void 0 : contractDetails.burn) == null ? void 0 : _b2.trend) || "stable"))), /* @__PURE__ */ React5.createElement(Card5, null, /* @__PURE__ */ React5.createElement(CardHeader5, { className: "pb-2" }, /* @__PURE__ */ React5.createElement(CardTitle5, { className: "text-sm" }, "Health Score")), /* @__PURE__ */ React5.createElement(CardContent5, null, /* @__PURE__ */ React5.createElement("div", { className: "text-2xl font-bold" }, selectedContract.healthScore, "%"), /* @__PURE__ */ React5.createElement(
     Badge2,
     {
       variant: selectedContract.healthScore > 80 ? "default" : "destructive",
@@ -1302,7 +1328,7 @@ function ContractsPage() {
     selectedContract.healthScore > 80 ? "Healthy" : "At Risk"
   ))), /* @__PURE__ */ React5.createElement(Card5, null, /* @__PURE__ */ React5.createElement(CardHeader5, { className: "pb-2" }, /* @__PURE__ */ React5.createElement(CardTitle5, { className: "text-sm" }, "Time Remaining")), /* @__PURE__ */ React5.createElement(CardContent5, null, /* @__PURE__ */ React5.createElement("div", { className: "text-2xl font-bold" }, Math.floor(
     (new Date(selectedContract.endDate).getTime() - Date.now()) / (1e3 * 60 * 60 * 24)
-  ), " ", "days"), /* @__PURE__ */ React5.createElement("p", { className: "text-xs text-muted-foreground mt-1" }, "Ends ", new Date(selectedContract.endDate).toLocaleDateString())))), /* @__PURE__ */ React5.createElement(Card5, null, /* @__PURE__ */ React5.createElement(CardContent5, { className: "p-0" }, /* @__PURE__ */ React5.createElement(Tabs2, { defaultValue: "cdrls" }, /* @__PURE__ */ React5.createElement(TabsList2, { className: "w-full justify-start rounded-none border-b" }, /* @__PURE__ */ React5.createElement(TabsTrigger2, { value: "cdrls" }, "CDRLs"), /* @__PURE__ */ React5.createElement(TabsTrigger2, { value: "milestones" }, "Milestones"), /* @__PURE__ */ React5.createElement(TabsTrigger2, { value: "financial" }, "Financial"), /* @__PURE__ */ React5.createElement(TabsTrigger2, { value: "team" }, "Team"), /* @__PURE__ */ React5.createElement(TabsTrigger2, { value: "strategic" }, "Strategic Goals"), /* @__PURE__ */ React5.createElement(TabsTrigger2, { value: "workstreams" }, "Work Streams")), /* @__PURE__ */ React5.createElement("div", { className: "p-6" }, /* @__PURE__ */ React5.createElement(TabsContent2, { value: "cdrls", className: "space-y-4" }, /* @__PURE__ */ React5.createElement("div", { className: "grid grid-cols-4 gap-4" }, /* @__PURE__ */ React5.createElement("div", { className: "text-center" }, /* @__PURE__ */ React5.createElement("div", { className: "text-2xl font-bold" }, contractDetails?.cdrls?.summary?.total || 0), /* @__PURE__ */ React5.createElement("p", { className: "text-xs text-muted-foreground" }, "Total CDRLs")), /* @__PURE__ */ React5.createElement("div", { className: "text-center" }, /* @__PURE__ */ React5.createElement("div", { className: "text-2xl font-bold text-green-600" }, contractDetails?.cdrls?.summary?.completed || 0), /* @__PURE__ */ React5.createElement("p", { className: "text-xs text-muted-foreground" }, "Completed")), /* @__PURE__ */ React5.createElement("div", { className: "text-center" }, /* @__PURE__ */ React5.createElement("div", { className: "text-2xl font-bold text-yellow-600" }, contractDetails?.cdrls?.summary?.pending || 0), /* @__PURE__ */ React5.createElement("p", { className: "text-xs text-muted-foreground" }, "Pending")), /* @__PURE__ */ React5.createElement("div", { className: "text-center" }, /* @__PURE__ */ React5.createElement("div", { className: "text-2xl font-bold text-red-600" }, contractDetails?.cdrls?.summary?.overdue || 0), /* @__PURE__ */ React5.createElement("p", { className: "text-xs text-muted-foreground" }, "Overdue"))), /* @__PURE__ */ React5.createElement("div", { className: "space-y-3" }, /* @__PURE__ */ React5.createElement("h4", { className: "font-medium" }, "Upcoming Deadlines"), contractDetails?.cdrls?.upcoming?.map((cdrl) => /* @__PURE__ */ React5.createElement(
+  ), " ", "days"), /* @__PURE__ */ React5.createElement("p", { className: "text-xs text-muted-foreground mt-1" }, "Ends ", new Date(selectedContract.endDate).toLocaleDateString())))), /* @__PURE__ */ React5.createElement(Card5, null, /* @__PURE__ */ React5.createElement(CardContent5, { className: "p-0" }, /* @__PURE__ */ React5.createElement(Tabs2, { defaultValue: "cdrls" }, /* @__PURE__ */ React5.createElement(TabsList2, { className: "w-full justify-start rounded-none border-b" }, /* @__PURE__ */ React5.createElement(TabsTrigger2, { value: "cdrls" }, "CDRLs"), /* @__PURE__ */ React5.createElement(TabsTrigger2, { value: "milestones" }, "Milestones"), /* @__PURE__ */ React5.createElement(TabsTrigger2, { value: "financial" }, "Financial"), /* @__PURE__ */ React5.createElement(TabsTrigger2, { value: "team" }, "Team"), /* @__PURE__ */ React5.createElement(TabsTrigger2, { value: "strategic" }, "Strategic Goals"), /* @__PURE__ */ React5.createElement(TabsTrigger2, { value: "workstreams" }, "Work Streams")), /* @__PURE__ */ React5.createElement("div", { className: "p-6" }, /* @__PURE__ */ React5.createElement(TabsContent2, { value: "cdrls", className: "space-y-4" }, /* @__PURE__ */ React5.createElement("div", { className: "grid grid-cols-4 gap-4" }, /* @__PURE__ */ React5.createElement("div", { className: "text-center" }, /* @__PURE__ */ React5.createElement("div", { className: "text-2xl font-bold" }, ((_d = (_c2 = contractDetails == null ? void 0 : contractDetails.cdrls) == null ? void 0 : _c2.summary) == null ? void 0 : _d.total) || 0), /* @__PURE__ */ React5.createElement("p", { className: "text-xs text-muted-foreground" }, "Total CDRLs")), /* @__PURE__ */ React5.createElement("div", { className: "text-center" }, /* @__PURE__ */ React5.createElement("div", { className: "text-2xl font-bold text-green-600" }, ((_f = (_e = contractDetails == null ? void 0 : contractDetails.cdrls) == null ? void 0 : _e.summary) == null ? void 0 : _f.completed) || 0), /* @__PURE__ */ React5.createElement("p", { className: "text-xs text-muted-foreground" }, "Completed")), /* @__PURE__ */ React5.createElement("div", { className: "text-center" }, /* @__PURE__ */ React5.createElement("div", { className: "text-2xl font-bold text-yellow-600" }, ((_h = (_g = contractDetails == null ? void 0 : contractDetails.cdrls) == null ? void 0 : _g.summary) == null ? void 0 : _h.pending) || 0), /* @__PURE__ */ React5.createElement("p", { className: "text-xs text-muted-foreground" }, "Pending")), /* @__PURE__ */ React5.createElement("div", { className: "text-center" }, /* @__PURE__ */ React5.createElement("div", { className: "text-2xl font-bold text-red-600" }, ((_j = (_i = contractDetails == null ? void 0 : contractDetails.cdrls) == null ? void 0 : _i.summary) == null ? void 0 : _j.overdue) || 0), /* @__PURE__ */ React5.createElement("p", { className: "text-xs text-muted-foreground" }, "Overdue"))), /* @__PURE__ */ React5.createElement("div", { className: "space-y-3" }, /* @__PURE__ */ React5.createElement("h4", { className: "font-medium" }, "Upcoming Deadlines"), (_l = (_k = contractDetails == null ? void 0 : contractDetails.cdrls) == null ? void 0 : _k.upcoming) == null ? void 0 : _l.map((cdrl) => /* @__PURE__ */ React5.createElement(
     "div",
     {
       key: cdrl.id,
@@ -1316,7 +1342,7 @@ function ContractsPage() {
       },
       cdrl.status
     ), /* @__PURE__ */ React5.createElement("p", { className: "text-xs text-muted-foreground mt-1" }, "Due: ", new Date(cdrl.dueDate).toLocaleDateString()))
-  )))), /* @__PURE__ */ React5.createElement(TabsContent2, { value: "milestones", className: "space-y-4" }, /* @__PURE__ */ React5.createElement("div", { className: "space-y-3" }, contractDetails?.milestones?.milestones?.map(
+  )))), /* @__PURE__ */ React5.createElement(TabsContent2, { value: "milestones", className: "space-y-4" }, /* @__PURE__ */ React5.createElement("div", { className: "space-y-3" }, (_n = (_m = contractDetails == null ? void 0 : contractDetails.milestones) == null ? void 0 : _m.milestones) == null ? void 0 : _n.map(
     (milestone) => /* @__PURE__ */ React5.createElement(
       "div",
       {
@@ -1339,11 +1365,11 @@ function ContractsPage() {
       ),
       /* @__PURE__ */ React5.createElement("p", { className: "text-xs text-muted-foreground mt-1" }, milestone.progress || 0, "% complete - Due", " ", new Date(milestone.dueDate).toLocaleDateString())
     )
-  ))), /* @__PURE__ */ React5.createElement(TabsContent2, { value: "financial", className: "space-y-4" }, /* @__PURE__ */ React5.createElement("div", { className: "grid grid-cols-3 gap-4" }, /* @__PURE__ */ React5.createElement(Card5, null, /* @__PURE__ */ React5.createElement(CardHeader5, { className: "pb-2" }, /* @__PURE__ */ React5.createElement(CardTitle5, { className: "text-sm" }, "Profit Margin")), /* @__PURE__ */ React5.createElement(CardContent5, null, /* @__PURE__ */ React5.createElement("div", { className: "text-2xl font-bold" }, contractDetails?.profitability?.margin?.toFixed(
+  ))), /* @__PURE__ */ React5.createElement(TabsContent2, { value: "financial", className: "space-y-4" }, /* @__PURE__ */ React5.createElement("div", { className: "grid grid-cols-3 gap-4" }, /* @__PURE__ */ React5.createElement(Card5, null, /* @__PURE__ */ React5.createElement(CardHeader5, { className: "pb-2" }, /* @__PURE__ */ React5.createElement(CardTitle5, { className: "text-sm" }, "Profit Margin")), /* @__PURE__ */ React5.createElement(CardContent5, null, /* @__PURE__ */ React5.createElement("div", { className: "text-2xl font-bold" }, ((_p = (_o = contractDetails == null ? void 0 : contractDetails.profitability) == null ? void 0 : _o.margin) == null ? void 0 : _p.toFixed(
     1
-  ) || 0, "%"), /* @__PURE__ */ React5.createElement("p", { className: "text-xs text-muted-foreground" }, "Target: 15%"))), /* @__PURE__ */ React5.createElement(Card5, null, /* @__PURE__ */ React5.createElement(CardHeader5, { className: "pb-2" }, /* @__PURE__ */ React5.createElement(CardTitle5, { className: "text-sm" }, "Revenue")), /* @__PURE__ */ React5.createElement(CardContent5, null, /* @__PURE__ */ React5.createElement("div", { className: "text-2xl font-bold" }, "$", (contractDetails?.profitability?.revenue / 1e6 || 0).toFixed(1), "M"))), /* @__PURE__ */ React5.createElement(Card5, null, /* @__PURE__ */ React5.createElement(CardHeader5, { className: "pb-2" }, /* @__PURE__ */ React5.createElement(CardTitle5, { className: "text-sm" }, "Profit")), /* @__PURE__ */ React5.createElement(CardContent5, null, /* @__PURE__ */ React5.createElement("div", { className: "text-2xl font-bold" }, "$", (contractDetails?.profitability?.profit / 1e3 || 0).toFixed(0), "k")))), contractDetails?.burn?.recommendations?.map(
+  )) || 0, "%"), /* @__PURE__ */ React5.createElement("p", { className: "text-xs text-muted-foreground" }, "Target: 15%"))), /* @__PURE__ */ React5.createElement(Card5, null, /* @__PURE__ */ React5.createElement(CardHeader5, { className: "pb-2" }, /* @__PURE__ */ React5.createElement(CardTitle5, { className: "text-sm" }, "Revenue")), /* @__PURE__ */ React5.createElement(CardContent5, null, /* @__PURE__ */ React5.createElement("div", { className: "text-2xl font-bold" }, "$", (((_q = contractDetails == null ? void 0 : contractDetails.profitability) == null ? void 0 : _q.revenue) / 1e6 || 0).toFixed(1), "M"))), /* @__PURE__ */ React5.createElement(Card5, null, /* @__PURE__ */ React5.createElement(CardHeader5, { className: "pb-2" }, /* @__PURE__ */ React5.createElement(CardTitle5, { className: "text-sm" }, "Profit")), /* @__PURE__ */ React5.createElement(CardContent5, null, /* @__PURE__ */ React5.createElement("div", { className: "text-2xl font-bold" }, "$", (((_r = contractDetails == null ? void 0 : contractDetails.profitability) == null ? void 0 : _r.profit) / 1e3 || 0).toFixed(0), "k")))), (_t = (_s = contractDetails == null ? void 0 : contractDetails.burn) == null ? void 0 : _s.recommendations) == null ? void 0 : _t.map(
     (rec, idx) => /* @__PURE__ */ React5.createElement(Alert2, { key: idx }, /* @__PURE__ */ React5.createElement(DynamicIcon3, { name: "alert-circle", className: "h-4 w-4" }), /* @__PURE__ */ React5.createElement(AlertDescription2, null, /* @__PURE__ */ React5.createElement("strong", null, rec.message), /* @__PURE__ */ React5.createElement("br", null), rec.action))
-  )), /* @__PURE__ */ React5.createElement(TabsContent2, { value: "team" }, /* @__PURE__ */ React5.createElement("div", { className: "space-y-4" }, /* @__PURE__ */ React5.createElement("div", null, /* @__PURE__ */ React5.createElement("p", { className: "text-sm font-medium" }, "Program Manager"), /* @__PURE__ */ React5.createElement("p", { className: "text-muted-foreground" }, selectedContract.programManager)), /* @__PURE__ */ React5.createElement("div", null, /* @__PURE__ */ React5.createElement("p", { className: "text-sm font-medium" }, "Technical Lead"), /* @__PURE__ */ React5.createElement("p", { className: "text-muted-foreground" }, selectedContract.technicalLead || "Not assigned")), /* @__PURE__ */ React5.createElement("div", null, /* @__PURE__ */ React5.createElement("p", { className: "text-sm font-medium" }, "Teams"), /* @__PURE__ */ React5.createElement("div", { className: "flex gap-2 mt-1" }, selectedContract.teams?.map((team) => /* @__PURE__ */ React5.createElement(Badge2, { key: team, variant: "outline" }, team)))))), /* @__PURE__ */ React5.createElement(TabsContent2, { value: "strategic", className: "space-y-4" }, /* @__PURE__ */ React5.createElement("div", { className: "space-y-3" }, /* @__PURE__ */ React5.createElement("h4", { className: "font-medium" }, "Strategic Goals"), selectedContract.strategicGoals?.length > 0 ? selectedContract.strategicGoals.map((goal) => /* @__PURE__ */ React5.createElement(
+  )), /* @__PURE__ */ React5.createElement(TabsContent2, { value: "team" }, /* @__PURE__ */ React5.createElement("div", { className: "space-y-4" }, /* @__PURE__ */ React5.createElement("div", null, /* @__PURE__ */ React5.createElement("p", { className: "text-sm font-medium" }, "Program Manager"), /* @__PURE__ */ React5.createElement("p", { className: "text-muted-foreground" }, selectedContract.programManager)), /* @__PURE__ */ React5.createElement("div", null, /* @__PURE__ */ React5.createElement("p", { className: "text-sm font-medium" }, "Technical Lead"), /* @__PURE__ */ React5.createElement("p", { className: "text-muted-foreground" }, selectedContract.technicalLead || "Not assigned")), /* @__PURE__ */ React5.createElement("div", null, /* @__PURE__ */ React5.createElement("p", { className: "text-sm font-medium" }, "Teams"), /* @__PURE__ */ React5.createElement("div", { className: "flex gap-2 mt-1" }, (_u = selectedContract.teams) == null ? void 0 : _u.map((team) => /* @__PURE__ */ React5.createElement(Badge2, { key: team, variant: "outline" }, team)))))), /* @__PURE__ */ React5.createElement(TabsContent2, { value: "strategic", className: "space-y-4" }, /* @__PURE__ */ React5.createElement("div", { className: "space-y-3" }, /* @__PURE__ */ React5.createElement("h4", { className: "font-medium" }, "Strategic Goals"), ((_v = selectedContract.strategicGoals) == null ? void 0 : _v.length) > 0 ? selectedContract.strategicGoals.map((goal) => /* @__PURE__ */ React5.createElement(
     "div",
     {
       key: goal.id,
@@ -1364,18 +1390,22 @@ function ContractsPage() {
       }
     ),
     /* @__PURE__ */ React5.createElement("div", { className: "flex justify-between text-xs text-muted-foreground" }, /* @__PURE__ */ React5.createElement("span", null, goal.status), /* @__PURE__ */ React5.createElement("span", null, "Target:", " ", new Date(goal.targetDate).toLocaleDateString()))
-  )) : /* @__PURE__ */ React5.createElement("p", { className: "text-muted-foreground" }, "No strategic goals defined"))), /* @__PURE__ */ React5.createElement(TabsContent2, { value: "workstreams", className: "space-y-4" }, /* @__PURE__ */ React5.createElement("div", { className: "space-y-3" }, /* @__PURE__ */ React5.createElement("h4", { className: "font-medium" }, "Work Stream Allocations"), selectedContract.workStreams?.length > 0 ? /* @__PURE__ */ React5.createElement("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-4" }, selectedContract.workStreams.map((ws) => /* @__PURE__ */ React5.createElement(Card5, { key: ws.workStreamId }, /* @__PURE__ */ React5.createElement(CardHeader5, { className: "pb-2" }, /* @__PURE__ */ React5.createElement("div", { className: "flex justify-between items-start" }, /* @__PURE__ */ React5.createElement(CardTitle5, { className: "text-sm" }, ws.workStreamName), /* @__PURE__ */ React5.createElement(Badge2, { variant: "outline" }, ws.allocation, "%"))), /* @__PURE__ */ React5.createElement(CardContent5, { className: "space-y-2" }, /* @__PURE__ */ React5.createElement("div", null, /* @__PURE__ */ React5.createElement("p", { className: "text-xs font-medium" }, "Lead"), /* @__PURE__ */ React5.createElement("p", { className: "text-sm text-muted-foreground" }, ws.lead)), /* @__PURE__ */ React5.createElement("div", null, /* @__PURE__ */ React5.createElement("p", { className: "text-xs font-medium" }, "Team Size"), /* @__PURE__ */ React5.createElement("p", { className: "text-sm text-muted-foreground" }, ws.teamMembers?.length || 0, " members")), /* @__PURE__ */ React5.createElement("div", null, /* @__PURE__ */ React5.createElement("p", { className: "text-xs font-medium" }, "Status"), /* @__PURE__ */ React5.createElement(
-    Badge2,
-    {
-      variant: ws.status === "active" ? "default" : "secondary",
-      className: "mt-1"
-    },
-    ws.status
-  )))))) : /* @__PURE__ */ React5.createElement("p", { className: "text-muted-foreground" }, "No work stream allocations defined")))))))));
+  )) : /* @__PURE__ */ React5.createElement("p", { className: "text-muted-foreground" }, "No strategic goals defined"))), /* @__PURE__ */ React5.createElement(TabsContent2, { value: "workstreams", className: "space-y-4" }, /* @__PURE__ */ React5.createElement("div", { className: "space-y-3" }, /* @__PURE__ */ React5.createElement("h4", { className: "font-medium" }, "Work Stream Allocations"), ((_w = selectedContract.workStreams) == null ? void 0 : _w.length) > 0 ? /* @__PURE__ */ React5.createElement("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-4" }, selectedContract.workStreams.map((ws) => {
+    var _a3;
+    return /* @__PURE__ */ React5.createElement(Card5, { key: ws.workStreamId }, /* @__PURE__ */ React5.createElement(CardHeader5, { className: "pb-2" }, /* @__PURE__ */ React5.createElement("div", { className: "flex justify-between items-start" }, /* @__PURE__ */ React5.createElement(CardTitle5, { className: "text-sm" }, ws.workStreamName), /* @__PURE__ */ React5.createElement(Badge2, { variant: "outline" }, ws.allocation, "%"))), /* @__PURE__ */ React5.createElement(CardContent5, { className: "space-y-2" }, /* @__PURE__ */ React5.createElement("div", null, /* @__PURE__ */ React5.createElement("p", { className: "text-xs font-medium" }, "Lead"), /* @__PURE__ */ React5.createElement("p", { className: "text-sm text-muted-foreground" }, ws.lead)), /* @__PURE__ */ React5.createElement("div", null, /* @__PURE__ */ React5.createElement("p", { className: "text-xs font-medium" }, "Team Size"), /* @__PURE__ */ React5.createElement("p", { className: "text-sm text-muted-foreground" }, ((_a3 = ws.teamMembers) == null ? void 0 : _a3.length) || 0, " members")), /* @__PURE__ */ React5.createElement("div", null, /* @__PURE__ */ React5.createElement("p", { className: "text-xs font-medium" }, "Status"), /* @__PURE__ */ React5.createElement(
+      Badge2,
+      {
+        variant: ws.status === "active" ? "default" : "secondary",
+        className: "mt-1"
+      },
+      ws.status
+    ))));
+  })) : /* @__PURE__ */ React5.createElement("p", { className: "text-muted-foreground" }, "No work stream allocations defined")))))))));
 }
 var page_default4;
 var init_page4 = __esm({
   "src/app/pages/ops/contracts/page.tsx"() {
+    "use strict";
     "use client";
     init_esm();
     init_form();
@@ -1386,19 +1416,18 @@ var init_page4 = __esm({
 // src/app/pages/ops/insights/page.tsx
 var page_exports5 = {};
 __export(page_exports5, {
-  IntelligencePage: () => IntelligencePage,
   default: () => page_default5
 });
 import React6, { useEffect as useEffect6, useState as useState6 } from "react";
 import { useCaptify as useCaptify5 } from "@captify-io/platform/hooks";
-import { apiClient as apiClient6 } from "@captify-io/platform/api";
+import { apiClient as apiClient6 } from "@captify-io/platform/lib/api";
 import {
   Card as Card6,
   CardContent as CardContent6,
   CardHeader as CardHeader6,
   CardTitle as CardTitle6
-} from "@captify-io/platform/ui";
-function IntelligencePage() {
+} from "@captify-io/platform/components/ui";
+function InsightsPage() {
   const { session } = useCaptify5();
   const [insights, setInsights] = useState6([]);
   const [predictions, setPredictions] = useState6([]);
@@ -1529,27 +1558,28 @@ function IntelligencePage() {
 var page_default5;
 var init_page5 = __esm({
   "src/app/pages/ops/insights/page.tsx"() {
+    "use strict";
     "use client";
-    page_default5 = IntelligencePage;
+    page_default5 = InsightsPage;
   }
 });
 
 // src/app/pages/ops/performance/page.tsx
 var page_exports6 = {};
 __export(page_exports6, {
-  PerformancePage: () => PerformancePage,
   default: () => page_default6
 });
 import React7, { useEffect as useEffect7, useState as useState7 } from "react";
 import { useCaptify as useCaptify6 } from "@captify-io/platform/hooks";
-import { apiClient as apiClient7 } from "@captify-io/platform/api";
+import { apiClient as apiClient7 } from "@captify-io/platform/lib/api";
 import {
   Card as Card7,
   CardContent as CardContent7,
   CardHeader as CardHeader7,
   CardTitle as CardTitle7
-} from "@captify-io/platform/ui";
+} from "@captify-io/platform/components/ui";
 function PerformancePage() {
+  var _a2, _b2, _c2;
   const { session } = useCaptify6();
   const [businessHealth, setBusinessHealth] = useState7(null);
   const [burnAnalysis, setBurnAnalysis] = useState7(null);
@@ -1583,13 +1613,14 @@ function PerformancePage() {
       currency: "USD"
     }).format(amount);
   };
-  return /* @__PURE__ */ React7.createElement("div", { className: "container mx-auto p-6" }, /* @__PURE__ */ React7.createElement("h1", { className: "text-3xl font-bold mb-6" }, "Performance Analytics"), /* @__PURE__ */ React7.createElement("div", { className: "grid grid-cols-1 md:grid-cols-4 gap-6 mb-6" }, /* @__PURE__ */ React7.createElement(Card7, null, /* @__PURE__ */ React7.createElement(CardHeader7, null, /* @__PURE__ */ React7.createElement(CardTitle7, { className: "text-sm" }, "Overall Health")), /* @__PURE__ */ React7.createElement(CardContent7, null, /* @__PURE__ */ React7.createElement("div", { className: "text-2xl font-bold text-green-600" }, loading ? "..." : businessHealth?.overallScore || 0), /* @__PURE__ */ React7.createElement("p", { className: "text-xs text-muted-foreground" }, "Health Score"))), /* @__PURE__ */ React7.createElement(Card7, null, /* @__PURE__ */ React7.createElement(CardHeader7, null, /* @__PURE__ */ React7.createElement(CardTitle7, { className: "text-sm" }, "Monthly Revenue")), /* @__PURE__ */ React7.createElement(CardContent7, null, /* @__PURE__ */ React7.createElement("div", { className: "text-2xl font-bold text-blue-600" }, loading ? "..." : formatCurrency(businessHealth?.financial?.revenue || 0)), /* @__PURE__ */ React7.createElement("p", { className: "text-xs text-muted-foreground" }, "Current Month"))), /* @__PURE__ */ React7.createElement(Card7, null, /* @__PURE__ */ React7.createElement(CardHeader7, null, /* @__PURE__ */ React7.createElement(CardTitle7, { className: "text-sm" }, "Profit Margin")), /* @__PURE__ */ React7.createElement(CardContent7, null, /* @__PURE__ */ React7.createElement("div", { className: "text-2xl font-bold text-purple-600" }, loading ? "..." : `${Math.round(
-    businessHealth?.financial?.profitMargin || 0
-  )}%`), /* @__PURE__ */ React7.createElement("p", { className: "text-xs text-muted-foreground" }, "Current Margin"))), /* @__PURE__ */ React7.createElement(Card7, null, /* @__PURE__ */ React7.createElement(CardHeader7, null, /* @__PURE__ */ React7.createElement(CardTitle7, { className: "text-sm" }, "Team Utilization")), /* @__PURE__ */ React7.createElement(CardContent7, null, /* @__PURE__ */ React7.createElement("div", { className: "text-2xl font-bold text-orange-600" }, loading ? "..." : `${businessHealth?.employee?.utilization || 0}%`), /* @__PURE__ */ React7.createElement("p", { className: "text-xs text-muted-foreground" }, "Current Rate")))), /* @__PURE__ */ React7.createElement("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-6 mb-6" }, /* @__PURE__ */ React7.createElement(Card7, null, /* @__PURE__ */ React7.createElement(CardHeader7, null, /* @__PURE__ */ React7.createElement(CardTitle7, null, "Financial Health")), /* @__PURE__ */ React7.createElement(CardContent7, null, loading ? /* @__PURE__ */ React7.createElement("p", null, "Loading...") : businessHealth?.financial ? /* @__PURE__ */ React7.createElement("div", { className: "space-y-3" }, /* @__PURE__ */ React7.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React7.createElement("span", null, "Revenue:"), /* @__PURE__ */ React7.createElement("span", { className: "font-medium" }, formatCurrency(businessHealth.financial.revenue))), /* @__PURE__ */ React7.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React7.createElement("span", null, "Costs:"), /* @__PURE__ */ React7.createElement("span", { className: "font-medium" }, formatCurrency(businessHealth.financial.costs))), /* @__PURE__ */ React7.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React7.createElement("span", null, "Profit:"), /* @__PURE__ */ React7.createElement("span", { className: "font-medium text-green-600" }, formatCurrency(businessHealth.financial.profit))), /* @__PURE__ */ React7.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React7.createElement("span", null, "Runway:"), /* @__PURE__ */ React7.createElement("span", { className: "font-medium" }, Math.round(businessHealth.financial.runway), " months")), /* @__PURE__ */ React7.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React7.createElement("span", null, "Backlog:"), /* @__PURE__ */ React7.createElement("span", { className: "font-medium" }, formatCurrency(businessHealth.financial.backlog)))) : /* @__PURE__ */ React7.createElement("p", null, "No financial data available"))), /* @__PURE__ */ React7.createElement(Card7, null, /* @__PURE__ */ React7.createElement(CardHeader7, null, /* @__PURE__ */ React7.createElement(CardTitle7, null, "Employee Metrics")), /* @__PURE__ */ React7.createElement(CardContent7, null, loading ? /* @__PURE__ */ React7.createElement("p", null, "Loading...") : businessHealth?.employee ? /* @__PURE__ */ React7.createElement("div", { className: "space-y-3" }, /* @__PURE__ */ React7.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React7.createElement("span", null, "Headcount:"), /* @__PURE__ */ React7.createElement("span", { className: "font-medium" }, businessHealth.employee.headcount)), /* @__PURE__ */ React7.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React7.createElement("span", null, "Utilization:"), /* @__PURE__ */ React7.createElement("span", { className: "font-medium" }, businessHealth.employee.utilization, "%")), /* @__PURE__ */ React7.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React7.createElement("span", null, "Satisfaction:"), /* @__PURE__ */ React7.createElement("span", { className: "font-medium" }, businessHealth.employee.satisfaction, "/5.0")), /* @__PURE__ */ React7.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React7.createElement("span", null, "Retention:"), /* @__PURE__ */ React7.createElement("span", { className: "font-medium" }, businessHealth.employee.retention, "%")), /* @__PURE__ */ React7.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React7.createElement("span", null, "Value/Employee:"), /* @__PURE__ */ React7.createElement("span", { className: "font-medium" }, formatCurrency(businessHealth.employee.valuePerEmployee)))) : /* @__PURE__ */ React7.createElement("p", null, "No employee data available")))), /* @__PURE__ */ React7.createElement(Card7, null, /* @__PURE__ */ React7.createElement(CardHeader7, null, /* @__PURE__ */ React7.createElement(CardTitle7, null, "Monthly Burn Analysis")), /* @__PURE__ */ React7.createElement(CardContent7, null, loading ? /* @__PURE__ */ React7.createElement("p", null, "Loading...") : burnAnalysis ? /* @__PURE__ */ React7.createElement("div", { className: "grid grid-cols-1 md:grid-cols-3 gap-6" }, /* @__PURE__ */ React7.createElement("div", null, /* @__PURE__ */ React7.createElement("h4", { className: "font-semibold mb-2" }, "Revenue"), /* @__PURE__ */ React7.createElement("p", { className: "text-2xl font-bold text-green-600" }, formatCurrency(burnAnalysis.revenue))), /* @__PURE__ */ React7.createElement("div", null, /* @__PURE__ */ React7.createElement("h4", { className: "font-semibold mb-2" }, "Total Costs"), /* @__PURE__ */ React7.createElement("p", { className: "text-2xl font-bold text-red-600" }, formatCurrency(burnAnalysis.totalCosts))), /* @__PURE__ */ React7.createElement("div", null, /* @__PURE__ */ React7.createElement("h4", { className: "font-semibold mb-2" }, "Net Profit"), /* @__PURE__ */ React7.createElement("p", { className: "text-2xl font-bold text-blue-600" }, formatCurrency(burnAnalysis.profit))), /* @__PURE__ */ React7.createElement("div", { className: "mt-4" }, /* @__PURE__ */ React7.createElement("h4", { className: "font-semibold mb-2" }, "Efficiency"), /* @__PURE__ */ React7.createElement("p", { className: "text-lg" }, burnAnalysis.efficiency, "% cost efficiency"))) : /* @__PURE__ */ React7.createElement("p", null, "No burn analysis data available"))));
+  return /* @__PURE__ */ React7.createElement("div", { className: "container mx-auto p-6" }, /* @__PURE__ */ React7.createElement("h1", { className: "text-3xl font-bold mb-6" }, "Performance Analytics"), /* @__PURE__ */ React7.createElement("div", { className: "grid grid-cols-1 md:grid-cols-4 gap-6 mb-6" }, /* @__PURE__ */ React7.createElement(Card7, null, /* @__PURE__ */ React7.createElement(CardHeader7, null, /* @__PURE__ */ React7.createElement(CardTitle7, { className: "text-sm" }, "Overall Health")), /* @__PURE__ */ React7.createElement(CardContent7, null, /* @__PURE__ */ React7.createElement("div", { className: "text-2xl font-bold text-green-600" }, loading ? "..." : (businessHealth == null ? void 0 : businessHealth.overallScore) || 0), /* @__PURE__ */ React7.createElement("p", { className: "text-xs text-muted-foreground" }, "Health Score"))), /* @__PURE__ */ React7.createElement(Card7, null, /* @__PURE__ */ React7.createElement(CardHeader7, null, /* @__PURE__ */ React7.createElement(CardTitle7, { className: "text-sm" }, "Monthly Revenue")), /* @__PURE__ */ React7.createElement(CardContent7, null, /* @__PURE__ */ React7.createElement("div", { className: "text-2xl font-bold text-blue-600" }, loading ? "..." : formatCurrency(((_a2 = businessHealth == null ? void 0 : businessHealth.financial) == null ? void 0 : _a2.revenue) || 0)), /* @__PURE__ */ React7.createElement("p", { className: "text-xs text-muted-foreground" }, "Current Month"))), /* @__PURE__ */ React7.createElement(Card7, null, /* @__PURE__ */ React7.createElement(CardHeader7, null, /* @__PURE__ */ React7.createElement(CardTitle7, { className: "text-sm" }, "Profit Margin")), /* @__PURE__ */ React7.createElement(CardContent7, null, /* @__PURE__ */ React7.createElement("div", { className: "text-2xl font-bold text-purple-600" }, loading ? "..." : `${Math.round(
+    ((_b2 = businessHealth == null ? void 0 : businessHealth.financial) == null ? void 0 : _b2.profitMargin) || 0
+  )}%`), /* @__PURE__ */ React7.createElement("p", { className: "text-xs text-muted-foreground" }, "Current Margin"))), /* @__PURE__ */ React7.createElement(Card7, null, /* @__PURE__ */ React7.createElement(CardHeader7, null, /* @__PURE__ */ React7.createElement(CardTitle7, { className: "text-sm" }, "Team Utilization")), /* @__PURE__ */ React7.createElement(CardContent7, null, /* @__PURE__ */ React7.createElement("div", { className: "text-2xl font-bold text-orange-600" }, loading ? "..." : `${((_c2 = businessHealth == null ? void 0 : businessHealth.employee) == null ? void 0 : _c2.utilization) || 0}%`), /* @__PURE__ */ React7.createElement("p", { className: "text-xs text-muted-foreground" }, "Current Rate")))), /* @__PURE__ */ React7.createElement("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-6 mb-6" }, /* @__PURE__ */ React7.createElement(Card7, null, /* @__PURE__ */ React7.createElement(CardHeader7, null, /* @__PURE__ */ React7.createElement(CardTitle7, null, "Financial Health")), /* @__PURE__ */ React7.createElement(CardContent7, null, loading ? /* @__PURE__ */ React7.createElement("p", null, "Loading...") : (businessHealth == null ? void 0 : businessHealth.financial) ? /* @__PURE__ */ React7.createElement("div", { className: "space-y-3" }, /* @__PURE__ */ React7.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React7.createElement("span", null, "Revenue:"), /* @__PURE__ */ React7.createElement("span", { className: "font-medium" }, formatCurrency(businessHealth.financial.revenue))), /* @__PURE__ */ React7.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React7.createElement("span", null, "Costs:"), /* @__PURE__ */ React7.createElement("span", { className: "font-medium" }, formatCurrency(businessHealth.financial.costs))), /* @__PURE__ */ React7.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React7.createElement("span", null, "Profit:"), /* @__PURE__ */ React7.createElement("span", { className: "font-medium text-green-600" }, formatCurrency(businessHealth.financial.profit))), /* @__PURE__ */ React7.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React7.createElement("span", null, "Runway:"), /* @__PURE__ */ React7.createElement("span", { className: "font-medium" }, Math.round(businessHealth.financial.runway), " months")), /* @__PURE__ */ React7.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React7.createElement("span", null, "Backlog:"), /* @__PURE__ */ React7.createElement("span", { className: "font-medium" }, formatCurrency(businessHealth.financial.backlog)))) : /* @__PURE__ */ React7.createElement("p", null, "No financial data available"))), /* @__PURE__ */ React7.createElement(Card7, null, /* @__PURE__ */ React7.createElement(CardHeader7, null, /* @__PURE__ */ React7.createElement(CardTitle7, null, "Employee Metrics")), /* @__PURE__ */ React7.createElement(CardContent7, null, loading ? /* @__PURE__ */ React7.createElement("p", null, "Loading...") : (businessHealth == null ? void 0 : businessHealth.employee) ? /* @__PURE__ */ React7.createElement("div", { className: "space-y-3" }, /* @__PURE__ */ React7.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React7.createElement("span", null, "Headcount:"), /* @__PURE__ */ React7.createElement("span", { className: "font-medium" }, businessHealth.employee.headcount)), /* @__PURE__ */ React7.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React7.createElement("span", null, "Utilization:"), /* @__PURE__ */ React7.createElement("span", { className: "font-medium" }, businessHealth.employee.utilization, "%")), /* @__PURE__ */ React7.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React7.createElement("span", null, "Satisfaction:"), /* @__PURE__ */ React7.createElement("span", { className: "font-medium" }, businessHealth.employee.satisfaction, "/5.0")), /* @__PURE__ */ React7.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React7.createElement("span", null, "Retention:"), /* @__PURE__ */ React7.createElement("span", { className: "font-medium" }, businessHealth.employee.retention, "%")), /* @__PURE__ */ React7.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React7.createElement("span", null, "Value/Employee:"), /* @__PURE__ */ React7.createElement("span", { className: "font-medium" }, formatCurrency(businessHealth.employee.valuePerEmployee)))) : /* @__PURE__ */ React7.createElement("p", null, "No employee data available")))), /* @__PURE__ */ React7.createElement(Card7, null, /* @__PURE__ */ React7.createElement(CardHeader7, null, /* @__PURE__ */ React7.createElement(CardTitle7, null, "Monthly Burn Analysis")), /* @__PURE__ */ React7.createElement(CardContent7, null, loading ? /* @__PURE__ */ React7.createElement("p", null, "Loading...") : burnAnalysis ? /* @__PURE__ */ React7.createElement("div", { className: "grid grid-cols-1 md:grid-cols-3 gap-6" }, /* @__PURE__ */ React7.createElement("div", null, /* @__PURE__ */ React7.createElement("h4", { className: "font-semibold mb-2" }, "Revenue"), /* @__PURE__ */ React7.createElement("p", { className: "text-2xl font-bold text-green-600" }, formatCurrency(burnAnalysis.revenue))), /* @__PURE__ */ React7.createElement("div", null, /* @__PURE__ */ React7.createElement("h4", { className: "font-semibold mb-2" }, "Total Costs"), /* @__PURE__ */ React7.createElement("p", { className: "text-2xl font-bold text-red-600" }, formatCurrency(burnAnalysis.totalCosts))), /* @__PURE__ */ React7.createElement("div", null, /* @__PURE__ */ React7.createElement("h4", { className: "font-semibold mb-2" }, "Net Profit"), /* @__PURE__ */ React7.createElement("p", { className: "text-2xl font-bold text-blue-600" }, formatCurrency(burnAnalysis.profit))), /* @__PURE__ */ React7.createElement("div", { className: "mt-4" }, /* @__PURE__ */ React7.createElement("h4", { className: "font-semibold mb-2" }, "Efficiency"), /* @__PURE__ */ React7.createElement("p", { className: "text-lg" }, burnAnalysis.efficiency, "% cost efficiency"))) : /* @__PURE__ */ React7.createElement("p", null, "No burn analysis data available"))));
 }
 var page_default6;
 var init_page6 = __esm({
   "src/app/pages/ops/performance/page.tsx"() {
+    "use strict";
     "use client";
     page_default6 = PerformancePage;
   }
@@ -1598,12 +1629,11 @@ var init_page6 = __esm({
 // src/app/pages/services/page.tsx
 var page_exports7 = {};
 __export(page_exports7, {
-  ServicesHubPage: () => ServicesHubPage,
   default: () => page_default7
 });
 import React8, { useEffect as useEffect8, useState as useState8 } from "react";
 import { useCaptify as useCaptify7 } from "@captify-io/platform/hooks";
-import { apiClient as apiClient8 } from "@captify-io/platform/api";
+import { apiClient as apiClient8 } from "@captify-io/platform/lib/api";
 import {
   Card as Card8,
   CardContent as CardContent8,
@@ -1612,7 +1642,7 @@ import {
   Badge as Badge3,
   Button as Button4,
   Input as Input2,
-  Textarea as Textarea2,
+  Textarea,
   Select as Select2,
   SelectContent as SelectContent2,
   SelectItem as SelectItem2,
@@ -1621,10 +1651,11 @@ import {
   Tabs as Tabs3,
   TabsContent as TabsContent3,
   TabsList as TabsList3,
-  TabsTrigger as TabsTrigger3,
-  DynamicIcon as DynamicIcon4
-} from "@captify-io/platform/ui";
+  TabsTrigger as TabsTrigger3
+} from "@captify-io/platform/components/ui";
+import { DynamicIcon as DynamicIcon4 } from "lucide-react/dynamic";
 function ServicesHubPage() {
+  var _a2, _b2, _c2, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p, _q;
   const { session } = useCaptify7();
   const [marketplace, setMarketplace] = useState8(null);
   const [catalog, setCatalog] = useState8([]);
@@ -1643,13 +1674,14 @@ function ServicesHubPage() {
     loadCatalog();
   }, []);
   const loadMarketplace = async () => {
+    var _a3;
     try {
       const response = await apiClient8.run({
         service: "service",
         operation: "getMarketplace",
-        data: { userId: session?.user?.id }
+        data: { userId: (_a3 = session == null ? void 0 : session.user) == null ? void 0 : _a3.id }
       });
-      setMarketplace(response?.data || []);
+      setMarketplace((response == null ? void 0 : response.data) || []);
     } catch (error) {
       console.error("Failed to load marketplace:", error);
     } finally {
@@ -1662,20 +1694,20 @@ function ServicesHubPage() {
         service: "service",
         operation: "getServiceCatalog"
       });
-      setCatalog(response?.data || []);
+      setCatalog((response == null ? void 0 : response.data) || []);
     } catch (error) {
       console.error("Failed to load catalog:", error);
     }
   };
   const createTicket = async () => {
+    var _a3;
     try {
       await apiClient8.run({
         service: "service",
         operation: "createTicket",
-        data: {
-          ...newTicket,
-          requestor: session?.user?.id
-        }
+        data: __spreadProps(__spreadValues({}, newTicket), {
+          requestor: (_a3 = session == null ? void 0 : session.user) == null ? void 0 : _a3.id
+        })
       });
       setShowCreateTicket(false);
       setNewTicket({
@@ -1692,13 +1724,14 @@ function ServicesHubPage() {
     }
   };
   const claimTicket = async (ticketId) => {
+    var _a3;
     try {
       await apiClient8.run({
         service: "service",
         operation: "claimTicket",
         data: {
           ticketId,
-          userId: session?.user?.id
+          userId: (_a3 = session == null ? void 0 : session.user) == null ? void 0 : _a3.id
         }
       });
       loadMarketplace();
@@ -1709,21 +1742,21 @@ function ServicesHubPage() {
   if (loading) {
     return /* @__PURE__ */ React8.createElement("div", { className: "flex items-center justify-center h-96" }, "Loading...");
   }
-  return /* @__PURE__ */ React8.createElement("div", { className: "container mx-auto p-6 space-y-6" }, /* @__PURE__ */ React8.createElement("div", { className: "flex justify-between items-center" }, /* @__PURE__ */ React8.createElement("div", null, /* @__PURE__ */ React8.createElement("h1", { className: "text-3xl font-bold" }, "Services Hub"), /* @__PURE__ */ React8.createElement("p", { className: "text-muted-foreground" }, "Internal service marketplace")), /* @__PURE__ */ React8.createElement(Button4, { onClick: () => setShowCreateTicket(true) }, /* @__PURE__ */ React8.createElement(DynamicIcon4, { name: "plus", className: "h-4 w-4 mr-2" }), "Create Ticket")), /* @__PURE__ */ React8.createElement("div", { className: "grid grid-cols-1 md:grid-cols-4 gap-4" }, /* @__PURE__ */ React8.createElement(Card8, null, /* @__PURE__ */ React8.createElement(CardHeader8, { className: "pb-2" }, /* @__PURE__ */ React8.createElement(CardTitle8, { className: "text-sm" }, "Available Tickets")), /* @__PURE__ */ React8.createElement(CardContent8, null, /* @__PURE__ */ React8.createElement("div", { className: "text-2xl font-bold" }, marketplace?.available?.urgent?.length + marketplace?.available?.highBounty?.length || 0), /* @__PURE__ */ React8.createElement("p", { className: "text-xs text-muted-foreground" }, "$", marketplace?.potentialEarnings || 0, " potential"))), /* @__PURE__ */ React8.createElement(Card8, null, /* @__PURE__ */ React8.createElement(CardHeader8, { className: "pb-2" }, /* @__PURE__ */ React8.createElement(CardTitle8, { className: "text-sm" }, "My Active")), /* @__PURE__ */ React8.createElement(CardContent8, null, /* @__PURE__ */ React8.createElement("div", { className: "text-2xl font-bold" }, marketplace?.myTickets?.assigned?.length || 0), /* @__PURE__ */ React8.createElement("div", { className: "flex items-center text-xs text-muted-foreground" }, /* @__PURE__ */ React8.createElement(DynamicIcon4, { name: "clock", className: "h-3 w-3 mr-1" }), "In progress"))), /* @__PURE__ */ React8.createElement(Card8, null, /* @__PURE__ */ React8.createElement(CardHeader8, { className: "pb-2" }, /* @__PURE__ */ React8.createElement(CardTitle8, { className: "text-sm" }, "My Requests")), /* @__PURE__ */ React8.createElement(CardContent8, null, /* @__PURE__ */ React8.createElement("div", { className: "text-2xl font-bold" }, marketplace?.myTickets?.requested?.length || 0), /* @__PURE__ */ React8.createElement("div", { className: "flex items-center text-xs text-muted-foreground" }, /* @__PURE__ */ React8.createElement(DynamicIcon4, { name: "ticket", className: "h-3 w-3 mr-1" }), "Submitted"))), /* @__PURE__ */ React8.createElement(Card8, null, /* @__PURE__ */ React8.createElement(CardHeader8, { className: "pb-2" }, /* @__PURE__ */ React8.createElement(CardTitle8, { className: "text-sm" }, "Leaderboard Rank")), /* @__PURE__ */ React8.createElement(CardContent8, null, /* @__PURE__ */ React8.createElement("div", { className: "text-2xl font-bold" }, "#5"), /* @__PURE__ */ React8.createElement("div", { className: "flex items-center text-xs text-muted-foreground" }, /* @__PURE__ */ React8.createElement(DynamicIcon4, { name: "star", className: "h-3 w-3 mr-1" }), "Top performer")))), /* @__PURE__ */ React8.createElement(Card8, null, /* @__PURE__ */ React8.createElement(CardHeader8, null, /* @__PURE__ */ React8.createElement(CardTitle8, null, "Service Marketplace")), /* @__PURE__ */ React8.createElement(CardContent8, null, /* @__PURE__ */ React8.createElement(Tabs3, { defaultValue: "available" }, /* @__PURE__ */ React8.createElement(TabsList3, null, /* @__PURE__ */ React8.createElement(TabsTrigger3, { value: "available" }, "Available"), /* @__PURE__ */ React8.createElement(TabsTrigger3, { value: "mytickets" }, "My Tickets"), /* @__PURE__ */ React8.createElement(TabsTrigger3, { value: "catalog" }, "Service Catalog"), /* @__PURE__ */ React8.createElement(TabsTrigger3, { value: "leaderboard" }, "Leaderboard")), /* @__PURE__ */ React8.createElement(TabsContent3, { value: "available", className: "space-y-4" }, marketplace?.available?.urgent?.length > 0 && /* @__PURE__ */ React8.createElement("div", null, /* @__PURE__ */ React8.createElement("h4", { className: "font-medium mb-3 flex items-center gap-2" }, /* @__PURE__ */ React8.createElement(Badge3, { variant: "destructive" }, "Urgent"), "High Priority Tickets"), /* @__PURE__ */ React8.createElement("div", { className: "space-y-3" }, marketplace.available.urgent.map((ticket) => /* @__PURE__ */ React8.createElement(
+  return /* @__PURE__ */ React8.createElement("div", { className: "container mx-auto p-6 space-y-6" }, /* @__PURE__ */ React8.createElement("div", { className: "flex justify-between items-center" }, /* @__PURE__ */ React8.createElement("div", null, /* @__PURE__ */ React8.createElement("h1", { className: "text-3xl font-bold" }, "Services Hub"), /* @__PURE__ */ React8.createElement("p", { className: "text-muted-foreground" }, "Internal service marketplace")), /* @__PURE__ */ React8.createElement(Button4, { onClick: () => setShowCreateTicket(true) }, /* @__PURE__ */ React8.createElement(DynamicIcon4, { name: "plus", className: "h-4 w-4 mr-2" }), "Create Ticket")), /* @__PURE__ */ React8.createElement("div", { className: "grid grid-cols-1 md:grid-cols-4 gap-4" }, /* @__PURE__ */ React8.createElement(Card8, null, /* @__PURE__ */ React8.createElement(CardHeader8, { className: "pb-2" }, /* @__PURE__ */ React8.createElement(CardTitle8, { className: "text-sm" }, "Available Tickets")), /* @__PURE__ */ React8.createElement(CardContent8, null, /* @__PURE__ */ React8.createElement("div", { className: "text-2xl font-bold" }, ((_b2 = (_a2 = marketplace == null ? void 0 : marketplace.available) == null ? void 0 : _a2.urgent) == null ? void 0 : _b2.length) + ((_d = (_c2 = marketplace == null ? void 0 : marketplace.available) == null ? void 0 : _c2.highBounty) == null ? void 0 : _d.length) || 0), /* @__PURE__ */ React8.createElement("p", { className: "text-xs text-muted-foreground" }, "$", (marketplace == null ? void 0 : marketplace.potentialEarnings) || 0, " potential"))), /* @__PURE__ */ React8.createElement(Card8, null, /* @__PURE__ */ React8.createElement(CardHeader8, { className: "pb-2" }, /* @__PURE__ */ React8.createElement(CardTitle8, { className: "text-sm" }, "My Active")), /* @__PURE__ */ React8.createElement(CardContent8, null, /* @__PURE__ */ React8.createElement("div", { className: "text-2xl font-bold" }, ((_f = (_e = marketplace == null ? void 0 : marketplace.myTickets) == null ? void 0 : _e.assigned) == null ? void 0 : _f.length) || 0), /* @__PURE__ */ React8.createElement("div", { className: "flex items-center text-xs text-muted-foreground" }, /* @__PURE__ */ React8.createElement(DynamicIcon4, { name: "clock", className: "h-3 w-3 mr-1" }), "In progress"))), /* @__PURE__ */ React8.createElement(Card8, null, /* @__PURE__ */ React8.createElement(CardHeader8, { className: "pb-2" }, /* @__PURE__ */ React8.createElement(CardTitle8, { className: "text-sm" }, "My Requests")), /* @__PURE__ */ React8.createElement(CardContent8, null, /* @__PURE__ */ React8.createElement("div", { className: "text-2xl font-bold" }, ((_h = (_g = marketplace == null ? void 0 : marketplace.myTickets) == null ? void 0 : _g.requested) == null ? void 0 : _h.length) || 0), /* @__PURE__ */ React8.createElement("div", { className: "flex items-center text-xs text-muted-foreground" }, /* @__PURE__ */ React8.createElement(DynamicIcon4, { name: "ticket", className: "h-3 w-3 mr-1" }), "Submitted"))), /* @__PURE__ */ React8.createElement(Card8, null, /* @__PURE__ */ React8.createElement(CardHeader8, { className: "pb-2" }, /* @__PURE__ */ React8.createElement(CardTitle8, { className: "text-sm" }, "Leaderboard Rank")), /* @__PURE__ */ React8.createElement(CardContent8, null, /* @__PURE__ */ React8.createElement("div", { className: "text-2xl font-bold" }, "#5"), /* @__PURE__ */ React8.createElement("div", { className: "flex items-center text-xs text-muted-foreground" }, /* @__PURE__ */ React8.createElement(DynamicIcon4, { name: "star", className: "h-3 w-3 mr-1" }), "Top performer")))), /* @__PURE__ */ React8.createElement(Card8, null, /* @__PURE__ */ React8.createElement(CardHeader8, null, /* @__PURE__ */ React8.createElement(CardTitle8, null, "Service Marketplace")), /* @__PURE__ */ React8.createElement(CardContent8, null, /* @__PURE__ */ React8.createElement(Tabs3, { defaultValue: "available" }, /* @__PURE__ */ React8.createElement(TabsList3, null, /* @__PURE__ */ React8.createElement(TabsTrigger3, { value: "available" }, "Available"), /* @__PURE__ */ React8.createElement(TabsTrigger3, { value: "mytickets" }, "My Tickets"), /* @__PURE__ */ React8.createElement(TabsTrigger3, { value: "catalog" }, "Service Catalog"), /* @__PURE__ */ React8.createElement(TabsTrigger3, { value: "leaderboard" }, "Leaderboard")), /* @__PURE__ */ React8.createElement(TabsContent3, { value: "available", className: "space-y-4" }, ((_j = (_i = marketplace == null ? void 0 : marketplace.available) == null ? void 0 : _i.urgent) == null ? void 0 : _j.length) > 0 && /* @__PURE__ */ React8.createElement("div", null, /* @__PURE__ */ React8.createElement("h4", { className: "font-medium mb-3 flex items-center gap-2" }, /* @__PURE__ */ React8.createElement(Badge3, { variant: "destructive" }, "Urgent"), "High Priority Tickets"), /* @__PURE__ */ React8.createElement("div", { className: "space-y-3" }, marketplace.available.urgent.map((ticket) => /* @__PURE__ */ React8.createElement(
     TicketCard,
     {
       key: ticket.id,
       ticket,
       onClaim: claimTicket
     }
-  )))), marketplace?.available?.highBounty?.length > 0 && /* @__PURE__ */ React8.createElement("div", null, /* @__PURE__ */ React8.createElement("h4", { className: "font-medium mb-3 flex items-center gap-2" }, /* @__PURE__ */ React8.createElement(DynamicIcon4, { name: "dollar-sign", className: "h-4 w-4" }), "High Bounty"), /* @__PURE__ */ React8.createElement("div", { className: "space-y-3" }, marketplace.available.highBounty.map((ticket) => /* @__PURE__ */ React8.createElement(
+  )))), ((_l = (_k = marketplace == null ? void 0 : marketplace.available) == null ? void 0 : _k.highBounty) == null ? void 0 : _l.length) > 0 && /* @__PURE__ */ React8.createElement("div", null, /* @__PURE__ */ React8.createElement("h4", { className: "font-medium mb-3 flex items-center gap-2" }, /* @__PURE__ */ React8.createElement(DynamicIcon4, { name: "dollar-sign", className: "h-4 w-4" }), "High Bounty"), /* @__PURE__ */ React8.createElement("div", { className: "space-y-3" }, marketplace.available.highBounty.map((ticket) => /* @__PURE__ */ React8.createElement(
     TicketCard,
     {
       key: ticket.id,
       ticket,
       onClaim: claimTicket
     }
-  ))))), /* @__PURE__ */ React8.createElement(TabsContent3, { value: "mytickets", className: "space-y-4" }, /* @__PURE__ */ React8.createElement("div", null, /* @__PURE__ */ React8.createElement("h4", { className: "font-medium mb-3" }, "Assigned to Me"), /* @__PURE__ */ React8.createElement("div", { className: "space-y-3" }, marketplace?.myTickets?.assigned?.map((ticket) => /* @__PURE__ */ React8.createElement(TicketCard, { key: ticket.id, ticket, assigned: true })))), /* @__PURE__ */ React8.createElement("div", null, /* @__PURE__ */ React8.createElement("h4", { className: "font-medium mb-3" }, "My Requests"), /* @__PURE__ */ React8.createElement("div", { className: "space-y-3" }, marketplace?.myTickets?.requested?.map((ticket) => /* @__PURE__ */ React8.createElement(TicketCard, { key: ticket.id, ticket, requested: true }))))), /* @__PURE__ */ React8.createElement(TabsContent3, { value: "catalog", className: "space-y-3" }, catalog.map((service) => /* @__PURE__ */ React8.createElement("div", { key: service.id, className: "p-4 rounded-lg border" }, /* @__PURE__ */ React8.createElement("div", { className: "flex justify-between items-start" }, /* @__PURE__ */ React8.createElement("div", null, /* @__PURE__ */ React8.createElement("h4", { className: "font-medium" }, service.service), /* @__PURE__ */ React8.createElement("p", { className: "text-sm text-muted-foreground mt-1" }, service.description), /* @__PURE__ */ React8.createElement("div", { className: "flex gap-2 mt-2" }, /* @__PURE__ */ React8.createElement(Badge3, { variant: "outline" }, service.serviceArea), /* @__PURE__ */ React8.createElement(Badge3, { variant: "outline" }, service.complexity), /* @__PURE__ */ React8.createElement(Badge3, { variant: "outline" }, service.estimatedTime, "h"))), service.selfService && /* @__PURE__ */ React8.createElement(Button4, { size: "sm" }, "Request"))))), /* @__PURE__ */ React8.createElement(TabsContent3, { value: "leaderboard" }, /* @__PURE__ */ React8.createElement("div", { className: "space-y-3" }, marketplace?.leaderboard?.map((entry, idx) => /* @__PURE__ */ React8.createElement(
+  ))))), /* @__PURE__ */ React8.createElement(TabsContent3, { value: "mytickets", className: "space-y-4" }, /* @__PURE__ */ React8.createElement("div", null, /* @__PURE__ */ React8.createElement("h4", { className: "font-medium mb-3" }, "Assigned to Me"), /* @__PURE__ */ React8.createElement("div", { className: "space-y-3" }, (_n = (_m = marketplace == null ? void 0 : marketplace.myTickets) == null ? void 0 : _m.assigned) == null ? void 0 : _n.map((ticket) => /* @__PURE__ */ React8.createElement(TicketCard, { key: ticket.id, ticket, assigned: true })))), /* @__PURE__ */ React8.createElement("div", null, /* @__PURE__ */ React8.createElement("h4", { className: "font-medium mb-3" }, "My Requests"), /* @__PURE__ */ React8.createElement("div", { className: "space-y-3" }, (_p = (_o = marketplace == null ? void 0 : marketplace.myTickets) == null ? void 0 : _o.requested) == null ? void 0 : _p.map((ticket) => /* @__PURE__ */ React8.createElement(TicketCard, { key: ticket.id, ticket, requested: true }))))), /* @__PURE__ */ React8.createElement(TabsContent3, { value: "catalog", className: "space-y-3" }, catalog.map((service) => /* @__PURE__ */ React8.createElement("div", { key: service.id, className: "p-4 rounded-lg border" }, /* @__PURE__ */ React8.createElement("div", { className: "flex justify-between items-start" }, /* @__PURE__ */ React8.createElement("div", null, /* @__PURE__ */ React8.createElement("h4", { className: "font-medium" }, service.service), /* @__PURE__ */ React8.createElement("p", { className: "text-sm text-muted-foreground mt-1" }, service.description), /* @__PURE__ */ React8.createElement("div", { className: "flex gap-2 mt-2" }, /* @__PURE__ */ React8.createElement(Badge3, { variant: "outline" }, service.serviceArea), /* @__PURE__ */ React8.createElement(Badge3, { variant: "outline" }, service.complexity), /* @__PURE__ */ React8.createElement(Badge3, { variant: "outline" }, service.estimatedTime, "h"))), service.selfService && /* @__PURE__ */ React8.createElement(Button4, { size: "sm" }, "Request"))))), /* @__PURE__ */ React8.createElement(TabsContent3, { value: "leaderboard" }, /* @__PURE__ */ React8.createElement("div", { className: "space-y-3" }, (_q = marketplace == null ? void 0 : marketplace.leaderboard) == null ? void 0 : _q.map((entry, idx) => /* @__PURE__ */ React8.createElement(
     "div",
     {
       key: entry.userId,
@@ -1735,14 +1768,14 @@ function ServicesHubPage() {
     Input2,
     {
       value: newTicket.title,
-      onChange: (e) => setNewTicket({ ...newTicket, title: e.target.value }),
+      onChange: (e) => setNewTicket(__spreadProps(__spreadValues({}, newTicket), { title: e.target.value })),
       placeholder: "Brief description of what you need"
     }
   )), /* @__PURE__ */ React8.createElement("div", null, /* @__PURE__ */ React8.createElement("label", { className: "text-sm font-medium" }, "Description"), /* @__PURE__ */ React8.createElement(
-    Textarea2,
+    Textarea,
     {
       value: newTicket.description,
-      onChange: (e) => setNewTicket({ ...newTicket, description: e.target.value }),
+      onChange: (e) => setNewTicket(__spreadProps(__spreadValues({}, newTicket), { description: e.target.value })),
       placeholder: "Detailed description and acceptance criteria",
       rows: 4
     }
@@ -1750,7 +1783,7 @@ function ServicesHubPage() {
     Select2,
     {
       value: newTicket.serviceArea,
-      onValueChange: (value) => setNewTicket({ ...newTicket, serviceArea: value })
+      onValueChange: (value) => setNewTicket(__spreadProps(__spreadValues({}, newTicket), { serviceArea: value }))
     },
     /* @__PURE__ */ React8.createElement(SelectTrigger2, null, /* @__PURE__ */ React8.createElement(SelectValue2, null)),
     /* @__PURE__ */ React8.createElement(SelectContent2, null, /* @__PURE__ */ React8.createElement(SelectItem2, { value: "DevOps" }, "DevOps"), /* @__PURE__ */ React8.createElement(SelectItem2, { value: "DataOps" }, "DataOps"), /* @__PURE__ */ React8.createElement(SelectItem2, { value: "PlatformOps" }, "PlatformOps"), /* @__PURE__ */ React8.createElement(SelectItem2, { value: "HelpDesk" }, "Help Desk"), /* @__PURE__ */ React8.createElement(SelectItem2, { value: "Security" }, "Security"))
@@ -1758,7 +1791,7 @@ function ServicesHubPage() {
     Select2,
     {
       value: newTicket.priority,
-      onValueChange: (value) => setNewTicket({ ...newTicket, priority: value })
+      onValueChange: (value) => setNewTicket(__spreadProps(__spreadValues({}, newTicket), { priority: value }))
     },
     /* @__PURE__ */ React8.createElement(SelectTrigger2, null, /* @__PURE__ */ React8.createElement(SelectValue2, null)),
     /* @__PURE__ */ React8.createElement(SelectContent2, null, /* @__PURE__ */ React8.createElement(SelectItem2, { value: "low" }, "Low"), /* @__PURE__ */ React8.createElement(SelectItem2, { value: "medium" }, "Medium"), /* @__PURE__ */ React8.createElement(SelectItem2, { value: "high" }, "High"), /* @__PURE__ */ React8.createElement(SelectItem2, { value: "critical" }, "Critical"))
@@ -1767,10 +1800,9 @@ function ServicesHubPage() {
     {
       type: "number",
       value: newTicket.bounty,
-      onChange: (e) => setNewTicket({
-        ...newTicket,
+      onChange: (e) => setNewTicket(__spreadProps(__spreadValues({}, newTicket), {
         bounty: parseInt(e.target.value) || 0
-      }),
+      })),
       placeholder: "Incentive amount for faster completion"
     }
   )), /* @__PURE__ */ React8.createElement("div", { className: "flex gap-2" }, /* @__PURE__ */ React8.createElement(Button4, { onClick: createTicket, className: "flex-1" }, "Create Ticket"), /* @__PURE__ */ React8.createElement(
@@ -1795,6 +1827,7 @@ function TicketCard({ ticket, onClaim, assigned, requested }) {
 var page_default7;
 var init_page7 = __esm({
   "src/app/pages/services/page.tsx"() {
+    "use strict";
     "use client";
     page_default7 = ServicesHubPage;
   }
@@ -1803,18 +1836,17 @@ var init_page7 = __esm({
 // src/app/pages/strategic/page.tsx
 var page_exports8 = {};
 __export(page_exports8, {
-  StrategicPage: () => StrategicPage,
   default: () => page_default8
 });
 import React9, { useEffect as useEffect9, useState as useState9 } from "react";
 import { useCaptify as useCaptify8 } from "@captify-io/platform/hooks";
-import { apiClient as apiClient9 } from "@captify-io/platform/api";
+import { apiClient as apiClient9 } from "@captify-io/platform/lib/api";
 import {
   Card as Card9,
   CardContent as CardContent9,
   CardHeader as CardHeader9,
   CardTitle as CardTitle9
-} from "@captify-io/platform/ui";
+} from "@captify-io/platform/components/ui";
 function StrategicPage() {
   const { session } = useCaptify8();
   const [objectives, setObjectives] = useState9([]);
@@ -1824,6 +1856,7 @@ function StrategicPage() {
     loadStrategicData();
   }, []);
   const loadStrategicData = async () => {
+    var _a2;
     try {
       const objectivesResponse = await apiClient9.run({
         service: "strategic",
@@ -1834,7 +1867,7 @@ function StrategicPage() {
       const alignmentResponse = await apiClient9.run({
         service: "strategic",
         operation: "calculateAlignment",
-        data: { userId: session?.user?.id }
+        data: { userId: (_a2 = session == null ? void 0 : session.user) == null ? void 0 : _a2.id }
       });
       setAlignment(alignmentResponse.data || null);
     } catch (error) {
@@ -1843,7 +1876,7 @@ function StrategicPage() {
       setLoading(false);
     }
   };
-  return /* @__PURE__ */ React9.createElement("div", { className: "container mx-auto p-6" }, /* @__PURE__ */ React9.createElement("h1", { className: "text-3xl font-bold mb-6" }, "Strategic Alignment"), /* @__PURE__ */ React9.createElement("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-6 mb-6" }, /* @__PURE__ */ React9.createElement(Card9, null, /* @__PURE__ */ React9.createElement(CardHeader9, null, /* @__PURE__ */ React9.createElement(CardTitle9, null, "Strategic Alignment Score")), /* @__PURE__ */ React9.createElement(CardContent9, null, loading ? /* @__PURE__ */ React9.createElement("p", null, "Loading...") : alignment ? /* @__PURE__ */ React9.createElement("div", null, /* @__PURE__ */ React9.createElement("div", { className: "text-3xl font-bold text-blue-600 mb-2" }, Math.round(alignment.alignmentScore), "%"), /* @__PURE__ */ React9.createElement("p", { className: "text-sm text-muted-foreground" }, alignment.strategicHours, " of ", alignment.totalHours, " hours aligned")) : /* @__PURE__ */ React9.createElement("p", null, "No alignment data available"))), /* @__PURE__ */ React9.createElement(Card9, null, /* @__PURE__ */ React9.createElement(CardHeader9, null, /* @__PURE__ */ React9.createElement(CardTitle9, null, "Work Breakdown")), /* @__PURE__ */ React9.createElement(CardContent9, null, loading ? /* @__PURE__ */ React9.createElement("p", null, "Loading...") : alignment?.workBreakdown ? /* @__PURE__ */ React9.createElement("div", { className: "space-y-2" }, /* @__PURE__ */ React9.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React9.createElement("span", null, "Strategic:"), /* @__PURE__ */ React9.createElement("span", { className: "font-medium" }, alignment.workBreakdown.strategic)), /* @__PURE__ */ React9.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React9.createElement("span", null, "Operational:"), /* @__PURE__ */ React9.createElement("span", { className: "font-medium" }, alignment.workBreakdown.operational)), /* @__PURE__ */ React9.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React9.createElement("span", null, "Maintenance:"), /* @__PURE__ */ React9.createElement("span", { className: "font-medium" }, alignment.workBreakdown.maintenance))) : /* @__PURE__ */ React9.createElement("p", null, "No breakdown data available")))), /* @__PURE__ */ React9.createElement(Card9, null, /* @__PURE__ */ React9.createElement(CardHeader9, null, /* @__PURE__ */ React9.createElement(CardTitle9, null, "Strategic Objectives")), /* @__PURE__ */ React9.createElement(CardContent9, null, loading ? /* @__PURE__ */ React9.createElement("p", null, "Loading objectives...") : objectives.length > 0 ? /* @__PURE__ */ React9.createElement("div", { className: "space-y-4" }, objectives.map((objective) => /* @__PURE__ */ React9.createElement(
+  return /* @__PURE__ */ React9.createElement("div", { className: "container mx-auto p-6" }, /* @__PURE__ */ React9.createElement("h1", { className: "text-3xl font-bold mb-6" }, "Strategic Alignment"), /* @__PURE__ */ React9.createElement("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-6 mb-6" }, /* @__PURE__ */ React9.createElement(Card9, null, /* @__PURE__ */ React9.createElement(CardHeader9, null, /* @__PURE__ */ React9.createElement(CardTitle9, null, "Strategic Alignment Score")), /* @__PURE__ */ React9.createElement(CardContent9, null, loading ? /* @__PURE__ */ React9.createElement("p", null, "Loading...") : alignment ? /* @__PURE__ */ React9.createElement("div", null, /* @__PURE__ */ React9.createElement("div", { className: "text-3xl font-bold text-blue-600 mb-2" }, Math.round(alignment.alignmentScore), "%"), /* @__PURE__ */ React9.createElement("p", { className: "text-sm text-muted-foreground" }, alignment.strategicHours, " of ", alignment.totalHours, " hours aligned")) : /* @__PURE__ */ React9.createElement("p", null, "No alignment data available"))), /* @__PURE__ */ React9.createElement(Card9, null, /* @__PURE__ */ React9.createElement(CardHeader9, null, /* @__PURE__ */ React9.createElement(CardTitle9, null, "Work Breakdown")), /* @__PURE__ */ React9.createElement(CardContent9, null, loading ? /* @__PURE__ */ React9.createElement("p", null, "Loading...") : (alignment == null ? void 0 : alignment.workBreakdown) ? /* @__PURE__ */ React9.createElement("div", { className: "space-y-2" }, /* @__PURE__ */ React9.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React9.createElement("span", null, "Strategic:"), /* @__PURE__ */ React9.createElement("span", { className: "font-medium" }, alignment.workBreakdown.strategic)), /* @__PURE__ */ React9.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React9.createElement("span", null, "Operational:"), /* @__PURE__ */ React9.createElement("span", { className: "font-medium" }, alignment.workBreakdown.operational)), /* @__PURE__ */ React9.createElement("div", { className: "flex justify-between" }, /* @__PURE__ */ React9.createElement("span", null, "Maintenance:"), /* @__PURE__ */ React9.createElement("span", { className: "font-medium" }, alignment.workBreakdown.maintenance))) : /* @__PURE__ */ React9.createElement("p", null, "No breakdown data available")))), /* @__PURE__ */ React9.createElement(Card9, null, /* @__PURE__ */ React9.createElement(CardHeader9, null, /* @__PURE__ */ React9.createElement(CardTitle9, null, "Strategic Objectives")), /* @__PURE__ */ React9.createElement(CardContent9, null, loading ? /* @__PURE__ */ React9.createElement("p", null, "Loading objectives...") : objectives.length > 0 ? /* @__PURE__ */ React9.createElement("div", { className: "space-y-4" }, objectives.map((objective) => /* @__PURE__ */ React9.createElement(
     "div",
     {
       key: objective.id,
@@ -1857,6 +1890,7 @@ function StrategicPage() {
 var page_default8;
 var init_page8 = __esm({
   "src/app/pages/strategic/page.tsx"() {
+    "use strict";
     "use client";
     page_default8 = StrategicPage;
   }
@@ -1865,12 +1899,11 @@ var init_page8 = __esm({
 // src/app/pages/work/page.tsx
 var page_exports9 = {};
 __export(page_exports9, {
-  WorkDashboardPage: () => WorkDashboardPage,
   default: () => page_default9
 });
 import React10, { useEffect as useEffect10, useState as useState10 } from "react";
 import { useCaptify as useCaptify9 } from "@captify-io/platform/hooks";
-import { apiClient as apiClient10 } from "@captify-io/platform/api";
+import { apiClient as apiClient10 } from "@captify-io/platform/lib/api";
 import {
   Card as Card10,
   CardContent as CardContent10,
@@ -1882,10 +1915,11 @@ import {
   Tabs as Tabs4,
   TabsContent as TabsContent4,
   TabsList as TabsList4,
-  TabsTrigger as TabsTrigger4,
-  DynamicIcon as DynamicIcon5
-} from "@captify-io/platform/ui";
+  TabsTrigger as TabsTrigger4
+} from "@captify-io/platform/components/ui";
+import { DynamicIcon as DynamicIcon5 } from "lucide-react/dynamic";
 function WorkDashboardPage() {
+  var _a2, _b2, _c2, _d, _e, _f, _g, _h, _i;
   const { session } = useCaptify9();
   const [activeWork, setActiveWork] = useState10(null);
   const [workQueue, setWorkQueue] = useState10(null);
@@ -1902,17 +1936,18 @@ function WorkDashboardPage() {
     return () => clearInterval(interval);
   }, [activeWork]);
   const loadWorkData = async () => {
+    var _a3, _b3;
     try {
       const [queueData, prodData] = await Promise.all([
         apiClient10.run({
           service: "work",
           operation: "getWorkQueue",
-          data: { userId: session?.user?.id }
+          data: { userId: (_a3 = session == null ? void 0 : session.user) == null ? void 0 : _a3.id }
         }),
         apiClient10.run({
           service: "work",
           operation: "calculateProductivity",
-          data: { userId: session?.user?.id, period: "daily" }
+          data: { userId: (_b3 = session == null ? void 0 : session.user) == null ? void 0 : _b3.id, period: "daily" }
         })
       ]);
       setWorkQueue(queueData);
@@ -1924,12 +1959,13 @@ function WorkDashboardPage() {
     }
   };
   const startWork = async (workItem) => {
+    var _a3;
     try {
       const workSession = await apiClient10.run({
         service: "work",
         operation: "startWork",
         data: {
-          userId: session?.user?.id,
+          userId: (_a3 = session == null ? void 0 : session.user) == null ? void 0 : _a3.id,
           workItemId: workItem.id
         }
       });
@@ -1940,11 +1976,12 @@ function WorkDashboardPage() {
     }
   };
   const stopWork = async () => {
+    var _a3;
     try {
       await apiClient10.run({
         service: "work",
         operation: "stopActiveWork",
-        data: { userId: session?.user?.id }
+        data: { userId: (_a3 = session == null ? void 0 : session.user) == null ? void 0 : _a3.id }
       });
       setActiveWork(null);
       setTimer(0);
@@ -1980,13 +2017,13 @@ function WorkDashboardPage() {
     },
     /* @__PURE__ */ React10.createElement(DynamicIcon5, { name: "check-circle", className: "h-4 w-4 mr-2" }),
     "Complete"
-  )))) : /* @__PURE__ */ React10.createElement(Card10, null, /* @__PURE__ */ React10.createElement(CardHeader10, null, /* @__PURE__ */ React10.createElement(CardTitle10, null, "Ready to Work")), /* @__PURE__ */ React10.createElement(CardContent10, null, /* @__PURE__ */ React10.createElement("p", { className: "text-muted-foreground" }, "Select a work item below to start tracking"))), /* @__PURE__ */ React10.createElement("div", { className: "grid grid-cols-1 md:grid-cols-4 gap-4" }, /* @__PURE__ */ React10.createElement(Card10, null, /* @__PURE__ */ React10.createElement(CardHeader10, { className: "pb-2" }, /* @__PURE__ */ React10.createElement(CardTitle10, { className: "text-sm" }, "Today's Progress")), /* @__PURE__ */ React10.createElement(CardContent10, null, /* @__PURE__ */ React10.createElement("div", { className: "text-2xl font-bold" }, productivity?.totalHours?.toFixed(1) || 0, "h"), /* @__PURE__ */ React10.createElement(
+  )))) : /* @__PURE__ */ React10.createElement(Card10, null, /* @__PURE__ */ React10.createElement(CardHeader10, null, /* @__PURE__ */ React10.createElement(CardTitle10, null, "Ready to Work")), /* @__PURE__ */ React10.createElement(CardContent10, null, /* @__PURE__ */ React10.createElement("p", { className: "text-muted-foreground" }, "Select a work item below to start tracking"))), /* @__PURE__ */ React10.createElement("div", { className: "grid grid-cols-1 md:grid-cols-4 gap-4" }, /* @__PURE__ */ React10.createElement(Card10, null, /* @__PURE__ */ React10.createElement(CardHeader10, { className: "pb-2" }, /* @__PURE__ */ React10.createElement(CardTitle10, { className: "text-sm" }, "Today's Progress")), /* @__PURE__ */ React10.createElement(CardContent10, null, /* @__PURE__ */ React10.createElement("div", { className: "text-2xl font-bold" }, ((_a2 = productivity == null ? void 0 : productivity.totalHours) == null ? void 0 : _a2.toFixed(1)) || 0, "h"), /* @__PURE__ */ React10.createElement(
     Progress3,
     {
-      value: productivity?.totalHours / 8 * 100 || 0,
+      value: (productivity == null ? void 0 : productivity.totalHours) / 8 * 100 || 0,
       className: "mt-2"
     }
-  ))), /* @__PURE__ */ React10.createElement(Card10, null, /* @__PURE__ */ React10.createElement(CardHeader10, { className: "pb-2" }, /* @__PURE__ */ React10.createElement(CardTitle10, { className: "text-sm" }, "Value Delivered")), /* @__PURE__ */ React10.createElement(CardContent10, null, /* @__PURE__ */ React10.createElement("div", { className: "text-2xl font-bold" }, "$", (productivity?.totalValue || 0).toLocaleString()), /* @__PURE__ */ React10.createElement("p", { className: "text-xs text-muted-foreground" }, "ROI: ", productivity?.valuePerHour?.toFixed(0) || 0, "/hr"))), /* @__PURE__ */ React10.createElement(Card10, null, /* @__PURE__ */ React10.createElement(CardHeader10, { className: "pb-2" }, /* @__PURE__ */ React10.createElement(CardTitle10, { className: "text-sm" }, "Strategic Alignment")), /* @__PURE__ */ React10.createElement(CardContent10, null, /* @__PURE__ */ React10.createElement("div", { className: "text-2xl font-bold" }, productivity?.strategicAlignment?.toFixed(0) || 0, "%"), /* @__PURE__ */ React10.createElement("div", { className: "flex items-center text-xs text-muted-foreground" }, /* @__PURE__ */ React10.createElement(DynamicIcon5, { name: "target", className: "h-3 w-3 mr-1" }), "On critical path"))), /* @__PURE__ */ React10.createElement(Card10, null, /* @__PURE__ */ React10.createElement(CardHeader10, { className: "pb-2" }, /* @__PURE__ */ React10.createElement(CardTitle10, { className: "text-sm" }, "Focus Time")), /* @__PURE__ */ React10.createElement(CardContent10, null, /* @__PURE__ */ React10.createElement("div", { className: "text-2xl font-bold" }, productivity?.focusTime?.toFixed(1) || 0, "h"), /* @__PURE__ */ React10.createElement("div", { className: "flex items-center text-xs text-muted-foreground" }, /* @__PURE__ */ React10.createElement(DynamicIcon5, { name: "zap", className: "h-3 w-3 mr-1" }), "Deep work")))), /* @__PURE__ */ React10.createElement(Card10, null, /* @__PURE__ */ React10.createElement(CardHeader10, null, /* @__PURE__ */ React10.createElement(CardTitle10, null, "Work Queue")), /* @__PURE__ */ React10.createElement(CardContent10, null, /* @__PURE__ */ React10.createElement(Tabs4, { defaultValue: "recommended" }, /* @__PURE__ */ React10.createElement(TabsList4, { className: "grid w-full grid-cols-5" }, /* @__PURE__ */ React10.createElement(TabsTrigger4, { value: "recommended" }, "Recommended"), /* @__PURE__ */ React10.createElement(TabsTrigger4, { value: "critical" }, "Critical Path"), /* @__PURE__ */ React10.createElement(TabsTrigger4, { value: "quick" }, "Quick Wins"), /* @__PURE__ */ React10.createElement(TabsTrigger4, { value: "debt" }, "Tech Debt"), /* @__PURE__ */ React10.createElement(TabsTrigger4, { value: "blocked" }, "Blocked")), /* @__PURE__ */ React10.createElement(TabsContent4, { value: "recommended", className: "space-y-3" }, workQueue?.recommended?.map((item) => /* @__PURE__ */ React10.createElement(WorkItem, { key: item.id, item, onStart: startWork }))), /* @__PURE__ */ React10.createElement(TabsContent4, { value: "critical", className: "space-y-3" }, workQueue?.criticalPath?.map((item) => /* @__PURE__ */ React10.createElement(
+  ))), /* @__PURE__ */ React10.createElement(Card10, null, /* @__PURE__ */ React10.createElement(CardHeader10, { className: "pb-2" }, /* @__PURE__ */ React10.createElement(CardTitle10, { className: "text-sm" }, "Value Delivered")), /* @__PURE__ */ React10.createElement(CardContent10, null, /* @__PURE__ */ React10.createElement("div", { className: "text-2xl font-bold" }, "$", ((productivity == null ? void 0 : productivity.totalValue) || 0).toLocaleString()), /* @__PURE__ */ React10.createElement("p", { className: "text-xs text-muted-foreground" }, "ROI: ", ((_b2 = productivity == null ? void 0 : productivity.valuePerHour) == null ? void 0 : _b2.toFixed(0)) || 0, "/hr"))), /* @__PURE__ */ React10.createElement(Card10, null, /* @__PURE__ */ React10.createElement(CardHeader10, { className: "pb-2" }, /* @__PURE__ */ React10.createElement(CardTitle10, { className: "text-sm" }, "Strategic Alignment")), /* @__PURE__ */ React10.createElement(CardContent10, null, /* @__PURE__ */ React10.createElement("div", { className: "text-2xl font-bold" }, ((_c2 = productivity == null ? void 0 : productivity.strategicAlignment) == null ? void 0 : _c2.toFixed(0)) || 0, "%"), /* @__PURE__ */ React10.createElement("div", { className: "flex items-center text-xs text-muted-foreground" }, /* @__PURE__ */ React10.createElement(DynamicIcon5, { name: "target", className: "h-3 w-3 mr-1" }), "On critical path"))), /* @__PURE__ */ React10.createElement(Card10, null, /* @__PURE__ */ React10.createElement(CardHeader10, { className: "pb-2" }, /* @__PURE__ */ React10.createElement(CardTitle10, { className: "text-sm" }, "Focus Time")), /* @__PURE__ */ React10.createElement(CardContent10, null, /* @__PURE__ */ React10.createElement("div", { className: "text-2xl font-bold" }, ((_d = productivity == null ? void 0 : productivity.focusTime) == null ? void 0 : _d.toFixed(1)) || 0, "h"), /* @__PURE__ */ React10.createElement("div", { className: "flex items-center text-xs text-muted-foreground" }, /* @__PURE__ */ React10.createElement(DynamicIcon5, { name: "zap", className: "h-3 w-3 mr-1" }), "Deep work")))), /* @__PURE__ */ React10.createElement(Card10, null, /* @__PURE__ */ React10.createElement(CardHeader10, null, /* @__PURE__ */ React10.createElement(CardTitle10, null, "Work Queue")), /* @__PURE__ */ React10.createElement(CardContent10, null, /* @__PURE__ */ React10.createElement(Tabs4, { defaultValue: "recommended" }, /* @__PURE__ */ React10.createElement(TabsList4, { className: "grid w-full grid-cols-5" }, /* @__PURE__ */ React10.createElement(TabsTrigger4, { value: "recommended" }, "Recommended"), /* @__PURE__ */ React10.createElement(TabsTrigger4, { value: "critical" }, "Critical Path"), /* @__PURE__ */ React10.createElement(TabsTrigger4, { value: "quick" }, "Quick Wins"), /* @__PURE__ */ React10.createElement(TabsTrigger4, { value: "debt" }, "Tech Debt"), /* @__PURE__ */ React10.createElement(TabsTrigger4, { value: "blocked" }, "Blocked")), /* @__PURE__ */ React10.createElement(TabsContent4, { value: "recommended", className: "space-y-3" }, (_e = workQueue == null ? void 0 : workQueue.recommended) == null ? void 0 : _e.map((item) => /* @__PURE__ */ React10.createElement(WorkItem, { key: item.id, item, onStart: startWork }))), /* @__PURE__ */ React10.createElement(TabsContent4, { value: "critical", className: "space-y-3" }, (_f = workQueue == null ? void 0 : workQueue.criticalPath) == null ? void 0 : _f.map((item) => /* @__PURE__ */ React10.createElement(
     WorkItem,
     {
       key: item.id,
@@ -1994,7 +2031,7 @@ function WorkDashboardPage() {
       onStart: startWork,
       critical: true
     }
-  ))), /* @__PURE__ */ React10.createElement(TabsContent4, { value: "quick", className: "space-y-3" }, workQueue?.quickWins?.map((item) => /* @__PURE__ */ React10.createElement(WorkItem, { key: item.id, item, onStart: startWork }))), /* @__PURE__ */ React10.createElement(TabsContent4, { value: "debt", className: "space-y-3" }, workQueue?.techDebt?.map((item) => /* @__PURE__ */ React10.createElement(WorkItem, { key: item.id, item, onStart: startWork }))), /* @__PURE__ */ React10.createElement(TabsContent4, { value: "blocked", className: "space-y-3" }, workQueue?.blocked?.map((item) => /* @__PURE__ */ React10.createElement(WorkItem, { key: item.id, item, blocked: true })))))));
+  ))), /* @__PURE__ */ React10.createElement(TabsContent4, { value: "quick", className: "space-y-3" }, (_g = workQueue == null ? void 0 : workQueue.quickWins) == null ? void 0 : _g.map((item) => /* @__PURE__ */ React10.createElement(WorkItem, { key: item.id, item, onStart: startWork }))), /* @__PURE__ */ React10.createElement(TabsContent4, { value: "debt", className: "space-y-3" }, (_h = workQueue == null ? void 0 : workQueue.techDebt) == null ? void 0 : _h.map((item) => /* @__PURE__ */ React10.createElement(WorkItem, { key: item.id, item, onStart: startWork }))), /* @__PURE__ */ React10.createElement(TabsContent4, { value: "blocked", className: "space-y-3" }, (_i = workQueue == null ? void 0 : workQueue.blocked) == null ? void 0 : _i.map((item) => /* @__PURE__ */ React10.createElement(WorkItem, { key: item.id, item, blocked: true })))))));
 }
 function WorkItem({ item, onStart, critical, blocked }) {
   return /* @__PURE__ */ React10.createElement("div", { className: "flex items-center justify-between p-4 rounded-lg border bg-card" }, /* @__PURE__ */ React10.createElement("div", { className: "flex-1" }, /* @__PURE__ */ React10.createElement("div", { className: "flex items-center gap-2" }, /* @__PURE__ */ React10.createElement("h4", { className: "font-medium" }, item.title), critical && /* @__PURE__ */ React10.createElement(DynamicIcon5, { name: "alert-circle", className: "h-4 w-4 text-red-500" })), /* @__PURE__ */ React10.createElement("p", { className: "text-sm text-muted-foreground mt-1" }, item.description), /* @__PURE__ */ React10.createElement("div", { className: "flex gap-2 mt-2" }, /* @__PURE__ */ React10.createElement(Badge4, { variant: "outline" }, item.type), /* @__PURE__ */ React10.createElement(Badge4, { variant: "outline" }, item.complexity), /* @__PURE__ */ React10.createElement(Badge4, { variant: "outline" }, item.estimatedHours, "h"), /* @__PURE__ */ React10.createElement(Badge4, { variant: "default" }, "Value: ", item.valueScore))), /* @__PURE__ */ React10.createElement(Button5, { onClick: () => onStart(item), disabled: blocked, size: "sm" }, /* @__PURE__ */ React10.createElement(DynamicIcon5, { name: "play", className: "h-4 w-4 mr-1" }), "Start"));
@@ -2002,20 +2039,22 @@ function WorkItem({ item, onStart, critical, blocked }) {
 var page_default9;
 var init_page9 = __esm({
   "src/app/pages/work/page.tsx"() {
+    "use strict";
     "use client";
     page_default9 = WorkDashboardPage;
   }
 });
 
 // src/config.ts
+var _a, _b, _c;
 var config = {
   // App attributes
   slug: "pmbook",
   appName: "pmbook",
   version: "1.0.13",
-  identityPoolId: typeof process !== "undefined" && process.env?.COGNITO_IDENTITY_POOL_ID || "",
-  agentId: typeof process !== "undefined" && process.env?.BEDROCK_AGENT_ID || "",
-  agentAliasId: typeof process !== "undefined" && process.env?.BEDROCK_AGENT_ALIAS_ID || "",
+  identityPoolId: typeof process !== "undefined" && ((_a = process.env) == null ? void 0 : _a.COGNITO_IDENTITY_POOL_ID) || "",
+  agentId: typeof process !== "undefined" && ((_b = process.env) == null ? void 0 : _b.BEDROCK_AGENT_ID) || "",
+  agentAliasId: typeof process !== "undefined" && ((_c = process.env) == null ? void 0 : _c.BEDROCK_AGENT_ALIAS_ID) || "",
   description: "Strategic alignment and business operations platform for government contracting",
   // Menu structure
   menu: [
@@ -2113,14 +2152,8 @@ var {
 // src/app/index.ts
 function generatePageRegistry() {
   const registry = {};
-  registry.home = async () => {
-    const module = await Promise.resolve().then(() => (init_page(), page_exports));
-    return { default: module.CommandCenterPage };
-  };
-  registry.dashboard = async () => {
-    const module = await Promise.resolve().then(() => (init_page(), page_exports));
-    return { default: module.CommandCenterPage };
-  };
+  registry.home = () => Promise.resolve().then(() => (init_page(), page_exports));
+  registry.dashboard = () => Promise.resolve().then(() => (init_page(), page_exports));
   function processMenuItems(items, parentPath = "") {
     items.forEach((item) => {
       if (item.children) {
@@ -2156,9 +2189,16 @@ function generatePageRegistry() {
 var pageRegistry = generatePageRegistry();
 var menuConfiguration = menu;
 export {
+  agentAliasId,
+  agentId,
+  appName,
   config,
   description,
+  identityPoolId,
+  menu,
   menuConfiguration,
   pageRegistry,
-  slug
+  platform,
+  slug,
+  version
 };

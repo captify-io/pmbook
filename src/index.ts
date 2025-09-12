@@ -20,3 +20,5 @@ export * from "./types";
 
 // Export other modules
 export * from "./services";
+
+export * from "./config";

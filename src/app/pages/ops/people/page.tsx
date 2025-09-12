@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useCaptify } from "@captify-io/platform/hooks";
-import { apiClient } from "@captify-io/platform/api";
+import { apiClient } from "@captify-io/platform/lib/api";
 import {
   Card,
   CardContent,
@@ -13,10 +13,10 @@ import {
   Progress,
   Alert,
   AlertDescription,
-  DynamicIcon,
-} from "@captify-io/platform/ui";
+} from "@captify-io/platform/components/ui";
+import { DynamicIcon } from "lucide-react/dynamic";
 
-export function CommandCenterPage() {
+function CommandCenterPage() {
   const { session } = useCaptify();
   const [health, setHealth] = useState<any>(null);
   const [dashboard, setDashboard] = useState<any>(null);

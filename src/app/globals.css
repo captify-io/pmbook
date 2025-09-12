@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
-/* Content detection handled by tailwind.config.ts */
-
-@import "tw-animate-css";
+/* Content sources for Tailwind CSS v4 */
+@source "../**/*.{js,ts,jsx,tsx,mdx}";
+@source "../../node_modules/@captify-io/platform/**/*.{js,ts,jsx,tsx,mdx}";
 
 @custom-variant dark (&:is(.dark *));
 
