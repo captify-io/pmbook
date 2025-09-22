@@ -47,7 +47,8 @@
       "Bash(npx tailwindcss:*)",
       "Bash(npx --package=tailwindcss tailwindcss --version)",
       "Bash(dir dist)",
-      "Bash(dir:*)"
+      "Bash(dir:*)",
+      "Bash(npm ci:*)"
     ],
     "deny": [],
     "ask": []
