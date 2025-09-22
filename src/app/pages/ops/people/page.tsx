@@ -114,7 +114,10 @@ function CommandCenterPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Runway</CardTitle>
-            <DynamicIcon name="clock" className="h-4 w-4 text-muted-foreground" />
+            <DynamicIcon
+              name="clock"
+              className="h-4 w-4 text-muted-foreground"
+            />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
@@ -127,7 +130,10 @@ function CommandCenterPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Monthly Burn</CardTitle>
-            <DynamicIcon name="dollar-sign" className="h-4 w-4 text-muted-foreground" />
+            <DynamicIcon
+              name="dollar-sign"
+              className="h-4 w-4 text-muted-foreground"
+            />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
@@ -135,9 +141,15 @@ function CommandCenterPage() {
             </div>
             <div className="flex items-center text-xs">
               {dashboard?.health?.trend === "improving" ? (
-                <DynamicIcon name="trending-down" className="h-3 w-3 text-green-500 mr-1" />
+                <DynamicIcon
+                  name="trending-down"
+                  className="h-3 w-3 text-green-500 mr-1"
+                />
               ) : (
-                <DynamicIcon name="trending-up" className="h-3 w-3 text-red-500 mr-1" />
+                <DynamicIcon
+                  name="trending-up"
+                  className="h-3 w-3 text-red-500 mr-1"
+                />
               )}
               <span>vs last month</span>
             </div>
@@ -147,7 +159,10 @@ function CommandCenterPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Utilization</CardTitle>
-            <DynamicIcon name="users" className="h-4 w-4 text-muted-foreground" />
+            <DynamicIcon
+              name="users"
+              className="h-4 w-4 text-muted-foreground"
+            />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
@@ -163,7 +178,10 @@ function CommandCenterPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Profit Margin</CardTitle>
-            <DynamicIcon name="target" className="h-4 w-4 text-muted-foreground" />
+            <DynamicIcon
+              name="target"
+              className="h-4 w-4 text-muted-foreground"
+            />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">

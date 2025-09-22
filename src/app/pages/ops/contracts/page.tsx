@@ -23,7 +23,7 @@ import {
   DropdownMenuTrigger,
 } from "@captify-io/platform/components/ui";
 import { DynamicIcon } from "@captify-io/platform/components/ui";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 import { ContractForm } from "./form";
 
 function ContractsPage() {
@@ -638,7 +638,10 @@ function ContractsPage() {
                     {contractDetails?.burn?.recommendations?.map(
                       (rec: any, idx: number) => (
                         <Alert key={idx}>
-                          <DynamicIcon name="alert-circle" className="h-4 w-4" />
+                          <DynamicIcon
+                            name="alert-circle"
+                            className="h-4 w-4"
+                          />
                           <AlertDescription>
                             <strong>{rec.message}</strong>
                             <br />

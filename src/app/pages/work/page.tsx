@@ -295,7 +295,9 @@ function WorkItem({ item, onStart, critical, blocked }: any) {
       <div className="flex-1">
         <div className="flex items-center gap-2">
           <h4 className="font-medium">{item.title}</h4>
-          {critical && <DynamicIcon name="alert-circle" className="h-4 w-4 text-red-500" />}
+          {critical && (
+            <DynamicIcon name="alert-circle" className="h-4 w-4 text-red-500" />
+          )}
         </div>
         <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
         <div className="flex gap-2 mt-2">

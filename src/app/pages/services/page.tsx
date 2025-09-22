@@ -305,7 +305,10 @@ function ServicesHubPage() {
                     </div>
                     <div className="text-right">
                       <div className="flex items-center gap-1">
-                        <DynamicIcon name="star" className="h-4 w-4 text-yellow-500" />
+                        <DynamicIcon
+                          name="star"
+                          className="h-4 w-4 text-yellow-500"
+                        />
                         <span className="font-medium">
                           {entry.satisfaction}%
                         </span>
