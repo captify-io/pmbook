@@ -7,3 +7,5 @@ export { pageRegistry, menuConfiguration, config, slug, description, } from "./a
 export * from "./types";
 export * from "./services";
 export * from "./config";
+export * from "./components";
+export { default } from "./components/PageRouter";

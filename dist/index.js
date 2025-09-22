@@ -2188,11 +2188,31 @@ function generatePageRegistry() {
 }
 var pageRegistry = generatePageRegistry();
 var menuConfiguration = menu;
+
+// src/components/PageRouter.tsx
+import React11, { Suspense, useMemo } from "react";
+var PageRouter = ({ href, fallback }) => {
+  const PageComponent = useMemo(() => {
+    const pageImport = pageRegistry[href];
+    if (!pageImport) {
+      return () => React11.createElement("div", null, `Page not found: ${href}`);
+    }
+    return React11.lazy(pageImport);
+  }, [href]);
+  return React11.createElement(
+    Suspense,
+    { fallback: fallback || React11.createElement("div", null, "Loading...") },
+    React11.createElement(PageComponent)
+  );
+};
+var PageRouter_default = PageRouter;
 export {
+  PageRouter_default as PageRouter,
   agentAliasId,
   agentId,
   appName,
   config,
+  PageRouter_default as default,
   description,
   identityPoolId,
   menu,

@@ -4,7 +4,5 @@
  * Re-exports for component library
  */
 
-// Currently no components to export
-// Add component exports here as they are created
-
-export {};
+export { default as PageRouter } from "./PageRouter";
+export type { PageRouterProps } from "./PageRouter";

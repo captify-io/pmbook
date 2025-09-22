@@ -22,3 +22,9 @@ export * from "./types";
 export * from "./services";
 
 export * from "./config";
+
+// Export components
+export * from "./components";
+
+// Default export for easy consumption
+export { default } from "./components/PageRouter";

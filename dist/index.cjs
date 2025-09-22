@@ -1964,10 +1964,12 @@ var init_page9 = __esm({
 // src/index.ts
 var index_exports = {};
 __export(index_exports, {
+  PageRouter: () => PageRouter_default,
   agentAliasId: () => agentAliasId,
   agentId: () => agentId,
   appName: () => appName,
   config: () => config,
+  default: () => PageRouter_default,
   description: () => description,
   identityPoolId: () => identityPoolId,
   menu: () => menu,
@@ -2122,8 +2124,27 @@ function generatePageRegistry() {
 }
 var pageRegistry = generatePageRegistry();
 var menuConfiguration = menu;
+
+// src/components/PageRouter.tsx
+var import_react11 = __toESM(require("react"), 1);
+var PageRouter = ({ href, fallback }) => {
+  const PageComponent = (0, import_react11.useMemo)(() => {
+    const pageImport = pageRegistry[href];
+    if (!pageImport) {
+      return () => import_react11.default.createElement("div", null, `Page not found: ${href}`);
+    }
+    return import_react11.default.lazy(pageImport);
+  }, [href]);
+  return import_react11.default.createElement(
+    import_react11.Suspense,
+    { fallback: fallback || import_react11.default.createElement("div", null, "Loading...") },
+    import_react11.default.createElement(PageComponent)
+  );
+};
+var PageRouter_default = PageRouter;
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
+  PageRouter,
   agentAliasId,
   agentId,
   appName,
