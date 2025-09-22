@@ -22,7 +22,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "@captify-io/platform/components/ui";
-import { DynamicIcon } from "@captify-io/platform/components/ui";
+import { DynamicIcon } from "lucide-react/dynamic";
 
 function ServicesHubPage() {
   const { session } = useCaptify();

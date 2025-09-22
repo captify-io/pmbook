@@ -49,7 +49,8 @@
       "Bash(dir dist)",
       "Bash(dir:*)",
       "Bash(npm ci:*)",
-      "Bash(findstr:*)"
+      "Bash(findstr:*)",
+      "Bash(rimraf:*)"
     ],
     "deny": [],
     "ask": []

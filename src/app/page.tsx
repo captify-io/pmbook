@@ -10,7 +10,7 @@ import {
   SidebarMenuButton,
   SidebarGroup,
   SidebarGroupLabel
-} from "@captify-io/platform/components";
+} from "@captify-io/platform/components/ui";
 import { useHashContext } from "./hooks/useHashContext";
 import { PageRouter } from "../components";
 import { menu } from "../config";
