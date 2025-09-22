@@ -20,5 +20,12 @@ export default defineConfig({
   sourcemap: false,
   clean: true,
 
-  external: ["react", "react-dom", "@captify-io/platform"],
+  external: [
+    "react",
+    "react-dom",
+    "@captify-io/platform",
+    "lucide-react",
+    "next",
+    "next-auth"
+  ],
 });
