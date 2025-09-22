@@ -23,8 +23,6 @@ function generateRegisteredApps() {
     "pmbook-ops-people": () => import("./ops/people/page"),
     "pmbook-ops-performance": () => import("./ops/performance/page"),
     "pmbook-service-hub": () => import("./services/page"),
-    strategic: () => import("./strategic/page"),
-    work: () => import("./work/page"),
   };
 
   // Process menu items to create simple lookups

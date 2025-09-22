@@ -22,7 +22,7 @@ const PageRouter: React.FC<PageRouterProps> = ({ href, fallback }) => {
 
   return React.createElement(
     Suspense,
-    { fallback: fallback || React.createElement("div", null, "Loading...") },
+    { fallback: fallback || null },
     React.createElement(PageComponent)
   );
 };
