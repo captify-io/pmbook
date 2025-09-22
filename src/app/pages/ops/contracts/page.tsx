@@ -22,7 +22,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@captify-io/platform/components/ui";
-import { DynamicIcon } from "lucide-react/dynamic";
+import { DynamicIcon } from "@captify-io/platform/components/ui";
 import { v4 as uuidv4 } from 'uuid';
 import { ContractForm } from "./form";
 

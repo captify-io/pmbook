@@ -44,7 +44,7 @@ import {
   Alert,
   AlertDescription
 } from "@captify-io/platform/components/ui";
-import { DynamicIcon } from "lucide-react/dynamic";
+import { DynamicIcon } from "@captify-io/platform/components/ui";
 function CommandCenterPage() {
   var _a2, _b2, _c2, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p, _q, _r, _s, _t, _u;
   const { session } = useCaptify();
@@ -382,7 +382,7 @@ var init_esm = __esm({
 import React4, { useState as useState4, useEffect as useEffect4 } from "react";
 import { apiClient as apiClient4 } from "@captify-io/platform/lib/api";
 import { cn } from "@captify-io/platform/lib/utils";
-import { DynamicIcon as DynamicIcon2 } from "lucide-react/dynamic";
+import { DynamicIcon as DynamicIcon2 } from "@captify-io/platform/components/ui";
 import {
   Tabs,
   TabsList,
@@ -1046,7 +1046,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger
 } from "@captify-io/platform/components/ui";
-import { DynamicIcon as DynamicIcon3 } from "lucide-react/dynamic";
+import { DynamicIcon as DynamicIcon3 } from "@captify-io/platform/components/ui";
 function ContractsPage() {
   var _a2, _b2, _c2, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p, _q, _r, _s, _t, _u, _v, _w;
   const { session } = useCaptify4();
@@ -1652,7 +1652,7 @@ import {
   TabsList as TabsList3,
   TabsTrigger as TabsTrigger3
 } from "@captify-io/platform/components/ui";
-import { DynamicIcon as DynamicIcon4 } from "lucide-react/dynamic";
+import { DynamicIcon as DynamicIcon4 } from "@captify-io/platform/components/ui";
 function ServicesHubPage() {
   var _a2, _b2, _c2, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p, _q;
   const { session } = useCaptify7();
@@ -1916,7 +1916,7 @@ import {
   TabsList as TabsList4,
   TabsTrigger as TabsTrigger4
 } from "@captify-io/platform/components/ui";
-import { DynamicIcon as DynamicIcon5 } from "lucide-react/dynamic";
+import { DynamicIcon as DynamicIcon5 } from "@captify-io/platform/components/ui";
 function WorkDashboardPage() {
   var _a2, _b2, _c2, _d, _e, _f, _g, _h, _i;
   const { session } = useCaptify9();

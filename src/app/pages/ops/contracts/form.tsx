@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { apiClient } from "@captify-io/platform/lib/api";
 import { cn } from "@captify-io/platform/lib/utils";
-import { DynamicIcon } from "lucide-react/dynamic";
+import { DynamicIcon } from "@captify-io/platform/components/ui";
 import {
   Tabs,
   TabsList,

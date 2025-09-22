@@ -1,6 +1,6 @@
 {
   "name": "@captify-io/pmbook",
-  "version": "1.0.22",
+  "version": "1.0.23",
   "description": "Strategic alignment and business operations platform for government contracting",
   "type": "module",
   "sideEffects": [
@@ -73,7 +73,7 @@
     }
   },
   "scripts": {
-    "dev": "next dev -p 5001 --turbo",
+    "dev": "next dev --turbo",
     "build": "next build ",
     "start": "next start",
     "dist": "tsup && tsc --project tsconfig.build.json --emitDeclarationOnly",
@@ -88,7 +88,7 @@
     "turbo:clean": "turbo clean"
   },
   "dependencies": {
-    "@captify-io/platform": "^1.0.59",
+    "@captify-io/platform": "^1.0.60",
     "@tailwindcss/postcss": "^4.1.13",
     "@types/node": "^24.3.1",
     "@types/react": "19.1.1",

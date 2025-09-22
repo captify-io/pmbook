@@ -16,7 +16,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "@captify-io/platform/components/ui";
-import { DynamicIcon } from "lucide-react/dynamic";
+import { DynamicIcon } from "@captify-io/platform/components/ui";
 
 function WorkDashboardPage() {
   const { session } = useCaptify();
