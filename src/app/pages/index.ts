@@ -12,17 +12,21 @@ function generateRegisteredApps() {
   const registeredApps: Record<string, () => Promise<{ default: any }>> = {};
 
   // Add home page
-  registeredApps.home = () => import("./ops/people/page");
+  registeredApps.home = () => import("./work/tasks");
 
   // Static import mapping to avoid critical dependency warnings
   const staticImports: Record<string, () => Promise<{ default: any }>> = {
-    "pmbook-exe-tickets": () => import("./exe/my-tickets/page"),
-    "pmbook-exe-value-streams": () => import("./exe/value-streams/page"),
-    "pmbook-ops-contracts": () => import("./ops/contracts/page"),
-    "pmbook-ops-insights": () => import("./ops/insights/page"),
-    "pmbook-ops-people": () => import("./ops/people/page"),
-    "pmbook-ops-performance": () => import("./ops/performance/page"),
-    "pmbook-service-hub": () => import("./services/page"),
+    "work-tasks": () => import("./work/tasks"),
+    "work-tickets": () => import("./work/tickets"),
+    "work-requests": () => import("./work/requests"),
+    "contracts-active": () => import("./contracts/active"),
+    "contracts-opportunities": () => import("./contracts/opportunities"),
+    "contracts-budget": () => import("./contracts/pools"),
+    "contracts-burn": () => import("./contracts/burn"),
+    "people-team": () => import("./people/team"),
+    "streams-overview": () => import("./streams/area"),
+    "streams-catalog": () => import("./streams/catalog"),
+    "people-performance": () => import("./people/performance"),
   };
 
   // Process menu items to create simple lookups

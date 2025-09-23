@@ -3,93 +3,133 @@ export const config = {
   slug: "pmbook",
   appName: "pmbook",
   version: "1.0.13",
-  identityPoolId: (typeof process !== 'undefined' && process.env?.COGNITO_IDENTITY_POOL_ID) || "",
-  agentId: (typeof process !== 'undefined' && process.env?.BEDROCK_AGENT_ID) || "",
-  agentAliasId: (typeof process !== 'undefined' && process.env?.BEDROCK_AGENT_ALIAS_ID) || "",
+  identityPoolId:
+    (typeof process !== "undefined" && process.env?.COGNITO_IDENTITY_POOL_ID) ||
+    "",
+  agentId:
+    (typeof process !== "undefined" && process.env?.BEDROCK_AGENT_ID) || "",
+  agentAliasId:
+    (typeof process !== "undefined" && process.env?.BEDROCK_AGENT_ALIAS_ID) ||
+    "",
   description:
     "Strategic alignment and business operations platform for government contracting",
 
-  // Menu structure
+  // Menu structure - funding-focused workflow
   menu: [
     {
-      id: "pmbook-ops",
-      label: "Operations",
-      icon: "layout-dashboard",
-      order: 0,
-      description: "Operations command center",
-      group: "OpsManager",
-      role: "Admin",
+      id: "work",
+      label: "Work",
+      icon: "briefcase",
+      order: 1,
+      description: "Service delivery and task management",
       children: [
         {
-          id: "pmbook-ops-insights",
-          label: "Insights",
-          href: "/ops/insights",
-          icon: "eye",
-          description: "Operational insights and analytics",
+          id: "work-tasks",
+          label: "My Tasks",
+          href: "/work/tasks",
+          icon: "check-square",
+          description: "Personal work queue and assignments",
         },
         {
-          id: "pmbook-ops-contracts",
-          label: "Contracts",
-          href: "/ops/contracts",
-          icon: "file-text",
-          description: "Contract management and tracking",
+          id: "work-tickets",
+          label: "Team Tickets",
+          href: "/work/tickets",
+          icon: "ticket",
+          description: "Cross-stream collaboration requests",
         },
         {
-          id: "pmbook-ops-people",
-          label: "People",
-          href: "/ops/people",
-          icon: "bar-chart",
-          description: "People management",
-        },
-        {
-          id: "pmbook-ops-performance",
-          label: "Performance",
-          href: "/ops/performance",
-          icon: "bar-chart",
-          description: "Performance metrics and KPIs",
+          id: "work-requests",
+          label: "Service Requests",
+          href: "/work/requests",
+          icon: "help-circle",
+          description: "New service requests from catalog",
         },
       ],
     },
     {
-      id: "pmbook-execution",
-      label: "Execution",
-      icon: "briefcase",
-      order: 2,
-      description: "Functional area management",
+      id: "contracts",
+      label: "Operations",
+      icon: "file-contract",
+      order: 3,
+      description: "Funding sources and contract management",
       children: [
         {
-          id: "pmbook-exe-value-streams",
-          label: "Value Streams",
-          href: "/exe/value-streams",
-          icon: "check-square",
-          description: "Value stream management",
+          id: "contracts-active",
+          label: "Contracts",
+          href: "/contracts/active",
+          icon: "circle-check",
+          description: "Current contracts and funding pools",
         },
         {
-          id: "pmbook-exe-tickets",
-          label: "My Tickets",
-          href: "/exe/my-tickets",
-          icon: "check-square",
-          description: "Personal work queue and tickets",
+          id: "contracts-opportunities",
+          label: "Opportunities",
+          href: "/contracts/opportunities",
+          icon: "target",
+          description: "New business and proposals",
         },
         {
-          id: "pmbook-service-hub",
-          label: "Service Hub",
-          href: "/exe/service-hub",
-          icon: "users",
-          description: "Service catalog and team management",
+          id: "contracts-budget",
+          label: "Pools",
+          href: "/contracts/pools",
+          icon: "pie-chart",
+          description: "Operations, materials, and profit allocation",
+        },
+        {
+          id: "contracts-burn",
+          label: "Burn",
+          href: "/contracts/burn",
+          icon: "pie-chart",
+          description: "Operations, materials, and profit allocation",
+        },
+        {
+          id: "people-team",
+          label: "People",
+          href: "/people/team",
+          icon: "user-check",
+          description: "Team allocation and rates",
+        },
+      ],
+    },
+    {
+      id: "streams",
+      label: "Work Streams",
+      icon: "workflow",
+      order: 4,
+      description: "Functional teams and funding allocation",
+      children: [
+        {
+          id: "streams-overview",
+          label: "Functional Areas",
+          href: "/streams/area",
+          icon: "network",
+          description: "DevOps, DataOps, Operations teams",
+        },
+        {
+          id: "streams-catalog",
+          label: "Service Catalog",
+          href: "/streams/catalog",
+          icon: "book-open",
+          description: "Services offered by each stream",
+        },
+        {
+          id: "people-performance",
+          label: "Performance",
+          href: "/people/performance",
+          icon: "trending-up",
+          description: "Team metrics and utilization",
         },
       ],
     },
   ],
-  
+
   // Additional platform configuration
   platform: {
     deployment: {
       dev: "localhost:3000",
       staging: "",
-      production: ""
-    }
-  }
+      production: "",
+    },
+  },
 };
 
 export const {

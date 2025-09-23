@@ -19,43 +19,35 @@ export type PageRegistry = Record<string, PageImport>;
 function generatePageRegistry(): PageRegistry {
   const registry: PageRegistry = {};
 
-  // Add default/home page - point to command center directly
-  registry.home = () => import("./pages/ops/people/page");
-  registry.dashboard = () => import("./pages/ops/people/page");
+  // Add default/home page - point to work tasks
+  registry.home = () => import("./pages/work/tasks");
+  registry.dashboard = () => import("./pages/work/tasks");
+
+  // Static import mapping to avoid bundler warnings
+  const staticImports: Record<string, PageImport> = {
+    "work-tasks": () => import("./pages/work/tasks"),
+    "work-tickets": () => import("./pages/work/tickets"),
+    "work-requests": () => import("./pages/work/requests"),
+    "contracts-active": () => import("./pages/contracts/active"),
+    "contracts-opportunities": () => import("./pages/contracts/opportunities"),
+    "contracts-budget": () => import("./pages/contracts/pools"),
+    "contracts-burn": () => import("./pages/contracts/burn"),
+    "people-team": () => import("./pages/people/team"),
+    "streams-overview": () => import("./pages/streams/area"),
+    "streams-catalog": () => import("./pages/streams/catalog"),
+    "people-performance": () => import("./pages/people/performance"),
+  };
 
   // Process menu items recursively to generate dynamic imports
-  function processMenuItems(items: any[], parentPath = "") {
+  function processMenuItems(items: any[]) {
     items.forEach((item) => {
       if (item.children) {
-        // Process submenu items
-        processMenuItems(item.children, parentPath);
-      } else if (item.href) {
-        // Generate dynamic import path based on href
-        const importPath = item.href.replace(/^\//, "").replace(/\//g, "/");
-
-        // Static import mapping to avoid bundler warnings
-        const staticImports: Record<string, PageImport> = {
-          'exe/my-tickets': () => import('./pages/exe/my-tickets/page'),
-          'exe/value-streams': () => import('./pages/exe/value-streams/page'),
-          'ops/contracts': () => import('./pages/ops/contracts/page'),
-          'ops/insights': () => import('./pages/ops/insights/page'),
-          'ops/people': () => import('./pages/ops/people/page'),
-          'ops/performance': () => import('./pages/ops/performance/page'),
-          'services': () => import('./pages/services/page'),
-          'strategic': () => import('./pages/strategic/page'),
-          'work': () => import('./pages/work/page'),
-        };
-
-        const dynamicImport = async () => {
-          const moduleImport = staticImports[importPath];
-          if (moduleImport) {
-            const module = await moduleImport();
-            return { default: module.default };
-          }
-          throw new Error(`Page not found: ${importPath}`);
-        };
-
-        registry[item.id] = dynamicImport;
+        processMenuItems(item.children);
+      } else if (item.href && item.id) {
+        const staticImport = staticImports[item.id];
+        if (staticImport) {
+          registry[item.id] = staticImport;
+        }
       }
     });
   }
