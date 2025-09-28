@@ -14,6 +14,9 @@ export const config = {
   description:
     "Strategic alignment and business operations platform for government contracting",
 
+  // App-level permissions
+  requiredGroups: ["captify-operations"],
+
   // Menu structure - funding-focused workflow
   menu: [
     {
@@ -27,7 +30,7 @@ export const config = {
           id: "work-tasks",
           label: "My Tasks",
           href: "/work/tasks",
-          icon: "check-square",
+          icon: "check",
           description: "Personal work queue and assignments",
         },
         {
@@ -49,7 +52,7 @@ export const config = {
     {
       id: "contracts",
       label: "Operations",
-      icon: "file-contract",
+      icon: "file-text",
       order: 3,
       description: "Funding sources and contract management",
       children: [
@@ -57,7 +60,7 @@ export const config = {
           id: "contracts-active",
           label: "Contracts",
           href: "/contracts/active",
-          icon: "circle-check",
+          icon: "check-circle",
           description: "Current contracts and funding pools",
         },
         {
@@ -80,20 +83,22 @@ export const config = {
           href: "/contracts/burn",
           icon: "pie-chart",
           description: "Operations, materials, and profit allocation",
+          requiredGroups: ["captify-admin"],
         },
         {
           id: "people-team",
           label: "People",
           href: "/people/team",
-          icon: "user-check",
+          icon: "user",
           description: "Team allocation and rates",
+          requiredGroups: ["captify-admin"],
         },
       ],
     },
     {
       id: "streams",
       label: "Work Streams",
-      icon: "workflow",
+      icon: "git-branch",
       order: 4,
       description: "Functional teams and funding allocation",
       children: [
@@ -101,7 +106,7 @@ export const config = {
           id: "streams-overview",
           label: "Functional Areas",
           href: "/streams/area",
-          icon: "network",
+          icon: "globe",
           description: "DevOps, DataOps, Operations teams",
         },
         {
@@ -117,6 +122,7 @@ export const config = {
           href: "/people/performance",
           icon: "trending-up",
           description: "Team metrics and utilization",
+          requiredGroups: ["captify-admin"],
         },
       ],
     },
@@ -130,6 +136,7 @@ export const config = {
       production: "",
     },
   },
+
 };
 
 export const {
@@ -142,5 +149,6 @@ export const {
   agentId,
   agentAliasId,
   platform,
+  requiredGroups,
 } = config;
 export default config;

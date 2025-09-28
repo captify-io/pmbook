@@ -88,7 +88,9 @@
     "turbo:clean": "turbo clean"
   },
   "dependencies": {
-    "@captify-io/platform": "^1.0.66",
+    "@captify-io/platform": "^1.0.76",
+    "next-auth": "5.0.0-beta.25",
+    "react": "^19.1.1",
     "react-dom": "19.1.1"
   },
   "peerDependencies": {
@@ -128,7 +130,6 @@
     "next-auth": "5.0.0-beta.25",
     "next-themes": "^0.4.0",
     "postcss": "^8.4.0",
-    "react": ">=19.1.1",
     "rimraf": "^6.0.1",
     "tailwind-merge": "^3.0.0",
     "tailwindcss": "^4.1.13",
