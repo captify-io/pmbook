@@ -28,6 +28,10 @@ import { PMBook } from '@captify-io/pmbook'
 - `@captify-io/pmbook/types` - TypeScript type definitions
 - `@captify-io/pmbook/config` - Configuration utilities
 
+## Dependencies
+
+This package depends on `@captify-io/platform ^1.0.78` which provides core platform functionality and shared components.
+
 ## Development
 
 ### Prerequisites
@@ -56,7 +60,7 @@ npm run lint
 
 ### Scripts
 
-- `npm run dev` - Start development server on port 5001
+- `npm run dev` - Start development server on port 3001
 - `npm run build` - Build for production
 - `npm run dist` - Build distributable package
 - `npm run type-check` - Run TypeScript type checking

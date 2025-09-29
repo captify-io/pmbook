@@ -56,3 +56,8 @@ coverage/
 .yarn/install-state.gz
 .pnp.*
 node_modules
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
