@@ -1,6 +1,6 @@
 {
   "name": "@captify-io/pmbook",
-  "version": "1.0.32",
+  "version": "1.0.33",
   "description": "Strategic alignment and business operations platform for government contracting",
   "type": "module",
   "sideEffects": [
@@ -94,16 +94,7 @@
     "next-auth": "5.0.0-beta.25",
     "react": "^19.1.1",
     "react-dom": "19.1.1",
-    "uuid": "^11.1.0"
-  },
-  "peerDependencies": {
-    "lucide-react": "^0.544.0",
-    "next": "^15.5.2",
-    "next-auth": "5.0.0-beta.25",
-    "react": ">=19.1.1",
-    "react-dom": ">=19.1.1"
-  },
-  "devDependencies": {
+    "uuid": "^11.1.0",
     "@tailwindcss/postcss": "^4.1.13",
     "@types/cookie": "^0.6.0",
     "@types/d3-color": "^3.1.3",

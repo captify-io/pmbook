@@ -21,40 +21,8 @@ import { menu } from "../config";
 
 export default function HomePage() {
   const { currentHash } = useHashContext();
-  const [sessionData, setSessionData] = useState(null);
-  const [sessionError, setSessionError] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // Check session and display the results
-    async function checkSession() {
-      try {
-        setLoading(true);
-        const response = await fetch('/api/auth/session', {
-          credentials: 'include',
-        });
-
-        console.log('Session response status:', response.status);
-
-        if (!response.ok) {
-          setSessionError(`Session request failed with status: ${response.status}`);
-          setLoading(false);
-          return;
-        }
-
-        const session = await response.json();
-        console.log('Session data:', session);
-        setSessionData(session);
-        setLoading(false);
-      } catch (error) {
-        console.error('Session check error:', error);
-        setSessionError(error.message);
-        setLoading(false);
-      }
-    }
-
-    checkSession();
-  }, []);
+  const [sessionStatus, setSessionStatus] = useState<'loading' | 'authenticated' | 'unauthenticated'>('loading');
+  const isDev = process.env.NODE_ENV === 'development';
 
   useEffect(() => {
     // Redirect to home hash if no hash is present
@@ -63,24 +31,47 @@ export default function HomePage() {
     }
   }, []);
 
-  // Debug: Log menu structure
+  // Check session status in dev mode
   useEffect(() => {
-    console.log('Menu structure:', JSON.stringify(menu, null, 2));
-  }, []);
+    if (!isDev) return;
+
+    async function checkSession() {
+      try {
+        const response = await fetch('/api/auth/session', {
+          credentials: 'include',
+        });
+
+        if (response.ok) {
+          const session = await response.json();
+          setSessionStatus(session ? 'authenticated' : 'unauthenticated');
+        } else {
+          setSessionStatus('unauthenticated');
+        }
+      } catch (error) {
+        console.error('Session check error:', error);
+        setSessionStatus('unauthenticated');
+      }
+    }
+
+    checkSession();
+  }, [isDev]);
+
+  // Auto-redirect to auth flow when unauthenticated
+  useEffect(() => {
+    if (isDev && sessionStatus === 'unauthenticated') {
+      const nextAuthUrl = process.env.NEXT_PUBLIC_NEXTAUTH_URL || 'http://localhost:3000';
+      const callbackUrl = encodeURIComponent(window.location.href);
+      window.location.href = `${nextAuthUrl}/api/auth/signin?callbackUrl=${callbackUrl}`;
+    }
+  }, [isDev, sessionStatus]);
 
   const handleMenuClick = (itemId: string) => {
     window.location.hash = itemId;
   };
 
-
-  // Show session debug info
-  if (loading) {
-    return (
-      <div className="p-8">
-        <h1 className="text-2xl font-bold mb-4">Loading Session...</h1>
-      </div>
-    );
-  }
+  const handleLogin = () => {
+    window.location.href = `http://localhost:3000?callbackUrl=${encodeURIComponent(window.location.href)}`;
+  };
 
   return (
     <SidebarProvider>
@@ -88,6 +79,16 @@ export default function HomePage() {
         {/* Sidebar */}
         <Sidebar variant="sidebar" className="shrink-0">
           <SidebarContent>
+            {isDev && sessionStatus === 'unauthenticated' && (
+              <div className="bg-blue-600 text-white p-2 m-2 rounded text-center">
+                <button
+                  onClick={handleLogin}
+                  className="text-white hover:underline text-sm"
+                >
+                  Session Expired - Login
+                </button>
+              </div>
+            )}
             <SidebarMenu>
               {menu.map((section) => (
                 <SidebarMenuItem key={section.id}>
@@ -118,18 +119,6 @@ export default function HomePage() {
 
         {/* Main Content Area */}
         <main className="flex-1 overflow-auto p-4">
-          <div className="mb-6 p-4 bg-gray-100 rounded">
-            <h2 className="text-lg font-bold mb-2">Session Debug Info:</h2>
-            {sessionError ? (
-              <div className="text-red-600">
-                <strong>Session Error:</strong> {sessionError}
-              </div>
-            ) : (
-              <pre className="text-sm bg-white p-2 rounded overflow-auto">
-                {JSON.stringify(sessionData, null, 2)}
-              </pre>
-            )}
-          </div>
           <PageRouter href={currentHash} />
         </main>
       </div>

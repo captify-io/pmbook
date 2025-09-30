@@ -284,3 +284,26 @@ export interface WorkStreamAllocation {
   deliverables: string[];
   status: "active" | "pending" | "complete";
 }
+
+export interface Customer extends Core {
+  name: string;
+  agency?: string;
+  address?: {
+    street: string;
+    city: string;
+    state: string;
+    zipCode: string;
+  };
+  pointOfContact?: {
+    name: string;
+    title: string;
+    email: string;
+    phone?: string;
+  };
+  contractingOfficer?: {
+    name: string;
+    email: string;
+    phone?: string;
+  };
+  active: boolean;
+}
