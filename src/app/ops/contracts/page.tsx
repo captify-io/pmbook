@@ -38,26 +38,48 @@ function ContractsPage() {
   const [viewMode, setViewMode] = useState<"list" | "form">("list");
 
   useEffect(() => {
-    loadContracts();
+    let mounted = true;
+
+    if (mounted) {
+      loadContracts();
+    }
+
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   useEffect(() => {
-    if (selectedContract) {
+    let mounted = true;
+
+    if (selectedContract && mounted) {
       loadContractDetails(selectedContract.id);
     }
+
+    return () => {
+      mounted = false;
+    };
   }, [selectedContract]);
 
   const loadContracts = async () => {
     try {
-      // Removed access check - all users can view contracts during development
       const response = await apiClient.run({
-        service: "contract",
-        operation: "getActiveContracts",
-        app: "pmbook",
+        service: "platform.dynamodb",
+        operation: "scan",
+        table: "pmbook-Contract",
+        data: {
+          FilterExpression: "#status <> :status",
+          ExpressionAttributeNames: {
+            "#status": "status"
+          },
+          ExpressionAttributeValues: {
+            ":status": "closed"
+          }
+        }
       });
 
-      const data = response?.data || [];
-      setContracts(data); // Use 'data' instead of 'response?.data' to ensure we always set an array
+      const data = (response as any)?.Items || [];
+      setContracts(data);
       if (data.length > 0) {
         setSelectedContract(data[0]);
       }
@@ -70,34 +92,13 @@ function ContractsPage() {
 
   const loadContractDetails = async (contractId: string) => {
     try {
-      const [burn, cdrls, milestones, profitability] = await Promise.all([
-        apiClient.run({
-          service: "contract",
-          operation: "getContractBurn",
-          data: { contractId },
-          app: "pmbook",
-        }),
-        apiClient.run({
-          service: "contract",
-          operation: "getCDRLStatus",
-          data: { contractId },
-          app: "pmbook",
-        }),
-        apiClient.run({
-          service: "contract",
-          operation: "getMilestoneProgress",
-          data: { contractId },
-          app: "pmbook",
-        }),
-        apiClient.run({
-          service: "contract",
-          operation: "calculateProfitability",
-          data: { contractId },
-          app: "pmbook",
-        }),
-      ]);
-
-      setContractDetails({ burn, cdrls, milestones, profitability });
+      // For now, set empty details - these services will be implemented later
+      setContractDetails({
+        burn: { currentMonthBurn: 0, trend: "stable", recommendations: [] },
+        cdrls: { summary: { total: 0, completed: 0, pending: 0, overdue: 0 }, upcoming: [] },
+        milestones: { milestones: [] },
+        profitability: { margin: 0, revenue: 0, profit: 0 }
+      });
     } catch (error) {
       console.error("Failed to load contract details:", error);
     }
@@ -171,14 +172,21 @@ function ContractsPage() {
   const handleArchiveContract = async (contractId: string) => {
     try {
       await apiClient.run({
-        service: "contract",
-        operation: "updateContract",
+        service: "platform.dynamodb",
+        operation: "update",
+        table: "pmbook-Contract",
         data: {
-          contractId,
-          status: "closed",
-          archivedAt: new Date().toISOString(),
-        },
-        app: "pmbook",
+          Key: { id: contractId },
+          UpdateExpression: "SET #status = :status, archivedAt = :archivedAt, updatedAt = :updatedAt",
+          ExpressionAttributeNames: {
+            "#status": "status"
+          },
+          ExpressionAttributeValues: {
+            ":status": "closed",
+            ":archivedAt": new Date().toISOString(),
+            ":updatedAt": new Date().toISOString()
+          }
+        }
       });
       await loadContracts();
     } catch (error) {
@@ -188,22 +196,33 @@ function ContractsPage() {
 
   const handleSaveContract = async (contractData: any) => {
     try {
-      if (editingContract) {
+      if (editingContract && contracts.some((c) => c.id === editingContract.id)) {
+        // Update existing contract
         await apiClient.run({
-          service: "contract",
-          operation: "updateContract",
+          service: "platform.dynamodb",
+          operation: "put",
+          table: "pmbook-Contract",
           data: {
-            ...contractData,
-            contractId: editingContract.id,
-          },
-          app: "pmbook",
+            Item: {
+              ...contractData,
+              id: editingContract.id,
+              updatedAt: new Date().toISOString()
+            }
+          }
         });
       } else {
+        // Create new contract
         await apiClient.run({
-          service: "contract",
-          operation: "createContract",
-          data: contractData,
-          app: "pmbook",
+          service: "platform.dynamodb",
+          operation: "put",
+          table: "pmbook-Contract",
+          data: {
+            Item: {
+              ...contractData,
+              createdAt: new Date().toISOString(),
+              updatedAt: new Date().toISOString()
+            }
+          }
         });
       }
       await loadContracts();

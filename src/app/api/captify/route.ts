@@ -1,18 +1,54 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { auth } from '@captify-io/platform/lib/auth';
+import { services } from '../../../services';
+import { config } from '../../../config';
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
+    const { service } = body;
 
-    // Add identity pool ID if available
+    // Check if this is a local pmbook service
+    if (service && service.startsWith('pmbook.')) {
+      const serviceName = service.replace('pmbook.', '');
+      const localService = services.use(serviceName);
+
+      if (!localService) {
+        return NextResponse.json(
+          { error: `Service not found: ${service}` },
+          { status: 404 }
+        );
+      }
+
+      // Get session for authentication using platform's auth
+      const session = await auth();
+
+      if (!session?.user) {
+        return NextResponse.json(
+          { error: 'Not authenticated' },
+          { status: 401 }
+        );
+      }
+
+      // Execute the local service
+      const result = await localService.execute(body, null, session);
+      return NextResponse.json(result);
+    }
+
+    // For all other services (platform.*), proxy to the platform server
+    const externalApp = request.headers.get('x-app');
+
+    // Only include identityPoolId if the request is from this app
     const requestBody = {
       ...body,
-      ...(process.env.COGNITO_IDENTITY_POOL_ID && {
+      ...(externalApp === config.appName && process.env.COGNITO_IDENTITY_POOL_ID && {
         identityPoolId: process.env.COGNITO_IDENTITY_POOL_ID
       })
     };
 
-    const response = await fetch('http://localhost:3000/api/captify', {
+    const captifyApiUrl = process.env.CAPTIFY_API_URL || 'https://platform.captify.io/api/captify';
+
+    const response = await fetch(captifyApiUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

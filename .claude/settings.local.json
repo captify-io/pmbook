@@ -50,7 +50,18 @@
       "Bash(dir:*)",
       "Bash(npm ci:*)",
       "Bash(findstr:*)",
-      "Bash(rimraf:*)"
+      "Bash(rimraf:*)",
+      "Bash(cmd /c:*)",
+      "Bash(del \"C:\\Users\\anaut\\OneDrive\\Documents\\GitHub\\captify-apps-pmbook\\src\\auth.ts\")",
+      "Bash(curl:*)",
+      "Bash(npx tsc:*)",
+      "Bash(aws sts:*)",
+      "Bash(aws dynamodb describe-table:*)",
+      "Bash(aws iam list-attached-user-policies:*)",
+      "Bash(aws:*)",
+      "Bash(git rm:*)",
+      "Bash(eb:*)",
+      "Bash(git pull:*)"
     ],
     "deny": [],
     "ask": []

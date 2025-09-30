@@ -29,8 +29,9 @@ export const config = {
         {
           id: "work-tasks",
           label: "My Tasks",
-          href: "/work/tasks",
+          href: "/",
           icon: "check",
+          order: 1,
           description: "Personal work queue and assignments",
         },
         {
@@ -38,6 +39,7 @@ export const config = {
           label: "Team Tickets",
           href: "/work/tickets",
           icon: "ticket",
+          order: 2,
           description: "Cross-stream collaboration requests",
         },
         {
@@ -45,6 +47,7 @@ export const config = {
           label: "Service Requests",
           href: "/work/requests",
           icon: "help-circle",
+          order: 3,
           description: "New service requests from catalog",
         },
       ],
@@ -59,8 +62,9 @@ export const config = {
         {
           id: "contracts-active",
           label: "Contracts",
-          href: "/contracts/active",
+          href: "/ops/contracts",
           icon: "check-circle",
+          order: 1,
           description: "Current contracts and funding pools",
         },
         {
@@ -68,6 +72,7 @@ export const config = {
           label: "Opportunities",
           href: "/contracts/opportunities",
           icon: "target",
+          order: 2,
           description: "New business and proposals",
         },
         {
@@ -75,6 +80,7 @@ export const config = {
           label: "Pools",
           href: "/contracts/pools",
           icon: "pie-chart",
+          order: 3,
           description: "Operations, materials, and profit allocation",
         },
         {
@@ -82,14 +88,16 @@ export const config = {
           label: "Burn",
           href: "/contracts/burn",
           icon: "pie-chart",
+          order: 4,
           description: "Operations, materials, and profit allocation",
           requiredGroups: ["captify-admin"],
         },
         {
           id: "people-team",
           label: "People",
-          href: "/people/team",
+          href: "/ops/people",
           icon: "user",
+          order: 5,
           description: "Team allocation and rates",
           requiredGroups: ["captify-admin"],
         },
@@ -107,6 +115,7 @@ export const config = {
           label: "Functional Areas",
           href: "/streams/area",
           icon: "globe",
+          order: 1,
           description: "DevOps, DataOps, Operations teams",
         },
         {
@@ -114,13 +123,15 @@ export const config = {
           label: "Service Catalog",
           href: "/streams/catalog",
           icon: "book-open",
+          order: 2,
           description: "Services offered by each stream",
         },
         {
           id: "people-performance",
           label: "Performance",
-          href: "/people/performance",
+          href: "/ops/performance",
           icon: "trending-up",
+          order: 3,
           description: "Team metrics and utilization",
           requiredGroups: ["captify-admin"],
         },

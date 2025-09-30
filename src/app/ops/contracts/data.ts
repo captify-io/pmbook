@@ -1,14 +1,23 @@
 import { apiClient } from "@captify-io/platform/lib/api";
-import type { Contract, CDRL, Invoice, Milestone } from "../../../../types";
+import type { Contract, CDRL, Invoice, Milestone } from "../../../types";
 
 export async function getActiveContracts(session: any): Promise<Contract[]> {
   const response = await apiClient.run({
-    service: "pmbook",
-    operation: "getActiveContracts",
-    app: "pmbook",
+    service: "platform.dynamodb",
+    operation: "scan",
+    table: "pmbook-Contract",
+    data: {
+      FilterExpression: "#status <> :status",
+      ExpressionAttributeNames: {
+        "#status": "status"
+      },
+      ExpressionAttributeValues: {
+        ":status": "closed"
+      }
+    }
   });
 
-  return response?.data || [];
+  return (response as any)?.Items || [];
 }
 
 export async function getContractDetails(
