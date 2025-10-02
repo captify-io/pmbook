@@ -2,7 +2,7 @@ export const config = {
   // App attributes
   slug: "pmbook",
   appName: "pmbook",
-  version: "1.0.35",
+  version: "1.0.36",
   identityPoolId:
     (typeof process !== "undefined" && process.env?.COGNITO_IDENTITY_POOL_ID) ||
     "",
