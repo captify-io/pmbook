@@ -78,10 +78,13 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
 
   // If no session, redirect to platform for sign-in
   if (status === "unauthenticated" || !session?.user) {
-    // Redirect to platform sign-in page
+    // Redirect to platform sign-in page with full callback URL preserved
     const platformUrl = process.env.NEXT_PUBLIC_PLATFORM_URL || 'http://localhost:3000';
-    const returnUrl = encodeURIComponent(window.location.href);
-    window.location.href = `${platformUrl}?callbackUrl=${returnUrl}`;
+    const callbackUrl = encodeURIComponent(window.location.href);
+
+    // Redirect to platform's NextAuth signin with callbackUrl
+    // This ensures the callback is preserved through the auth flow
+    window.location.href = `${platformUrl}/api/auth/signin?callbackUrl=${callbackUrl}`;
     return null; // Show nothing while redirecting
   }
 
