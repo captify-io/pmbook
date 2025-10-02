@@ -110,10 +110,17 @@ export default function CaptifyPageLayout({
   children,
   params,
 }: CaptifyPageLayoutProps) {
+  // Use platform's session endpoint instead of local
+  const platformUrl = typeof window !== 'undefined'
+    ? (process.env.NEXT_PUBLIC_PLATFORM_URL || 'http://localhost:3000')
+    : (process.env.NEXTAUTH_URL || 'http://localhost:3000');
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
         <SessionProvider
+          baseUrl={platformUrl}
+          basePath="/api/auth"
           refetchInterval={0}
           refetchOnWindowFocus={false}
         >
