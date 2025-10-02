@@ -79,22 +79,17 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
   // If no session, redirect to platform for sign-in
   if (status === "unauthenticated" || !session?.user) {
     // Redirect to platform sign-in page with full callback URL preserved
-    const platformUrl = process.env.NEXT_PUBLIC_PLATFORM_URL || 'http://localhost:3000';
+    const captifyUrl = process.env.NEXT_PUBLIC_CAPTIFY_URL!;
     const callbackUrl = encodeURIComponent(window.location.href);
 
     // Redirect to platform's NextAuth signin with callbackUrl
     // This ensures the callback is preserved through the auth flow
-    window.location.href = `${platformUrl}/api/auth/signin?callbackUrl=${callbackUrl}`;
+    window.location.href = `${captifyUrl}/api/auth/signin?callbackUrl=${callbackUrl}`;
     return null; // Show nothing while redirecting
   }
 
-  // Extract userState from session for theme and preferences
-  const initialUserState = useMemo(() => {
-    return session?.userState || null;
-  }, [session]);
-
   return (
-    <CaptifyProvider session={session} initialUserState={initialUserState}>
+    <CaptifyProvider session={session}>
       <CaptifyLayout
         config={memoizedConfig}
         session={session}
@@ -110,17 +105,10 @@ export default function CaptifyPageLayout({
   children,
   params,
 }: CaptifyPageLayoutProps) {
-  // Use platform's session endpoint instead of local
-  const platformUrl = typeof window !== 'undefined'
-    ? (process.env.NEXT_PUBLIC_PLATFORM_URL || 'http://localhost:3000')
-    : (process.env.NEXTAUTH_URL || 'http://localhost:3000');
-
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
         <SessionProvider
-          baseUrl={platformUrl}
-          basePath="/api/auth"
           refetchInterval={0}
           refetchOnWindowFocus={false}
         >

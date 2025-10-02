@@ -46,7 +46,8 @@ export async function POST(request: NextRequest) {
       })
     };
 
-    const captifyApiUrl = process.env.CAPTIFY_API_URL || 'https://platform.captify.io/api/captify';
+    const captifyUrl = process.env.CAPTIFY_URL!;
+    const captifyApiUrl = `${captifyUrl}/api/captify`;
 
     const response = await fetch(captifyApiUrl, {
       method: 'POST',
