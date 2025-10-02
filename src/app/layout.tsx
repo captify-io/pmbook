@@ -88,8 +88,13 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
     return null; // Show nothing while redirecting
   }
 
+  // Extract userState from session for theme and preferences
+  const initialUserState = useMemo(() => {
+    return session?.userState || null;
+  }, [session]);
+
   return (
-    <CaptifyProvider session={session}>
+    <CaptifyProvider session={session} initialUserState={initialUserState}>
       <CaptifyLayout
         config={memoizedConfig}
         session={session}
