@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { apiClient } from "@captify-io/platform/lib/api";
-import { cn } from "@captify-io/platform/lib/utils";
+import { apiClient } from "@captify-io/core";
+import { cn } from "@captify-io/core/lib/utils";
 import { DynamicIcon } from "lucide-react/dynamic";
 import {
   Tabs,
@@ -30,7 +30,7 @@ import {
   CardHeader,
   CardTitle,
   CardContent,
-} from "@captify-io/platform/components/ui";
+} from "@captify-io/core/components/ui";
 import type { Contract } from "@/types/contract";
 
 interface ContractFormProps {
@@ -253,7 +253,7 @@ export function ContractForm({
               <Input
                 id="contractNumber"
                 value={formData.contractNumber || ""}
-                onChange={(e) =>
+                onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                   handleInputChange("contractNumber", e.target.value)
                 }
                 placeholder="e.g., W15P7T-20-C-0001"
@@ -266,7 +266,7 @@ export function ContractForm({
               <Input
                 id="name"
                 value={formData.name || ""}
-                onChange={(e) => handleInputChange("name", e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => handleInputChange("name", e.target.value)}
                 placeholder="e.g., IT Support Services"
                 required
               />
@@ -276,7 +276,7 @@ export function ContractForm({
               <Label htmlFor="type">Contract Type*</Label>
               <Select
                 value={formData.type || "FFP"}
-                onValueChange={(value) => handleInputChange("type", value)}
+                onValueChange={(value: string) => handleInputChange("type", value)}
               >
                 <SelectTrigger>
                   <SelectValue placeholder="Select type" />
@@ -301,7 +301,7 @@ export function ContractForm({
               <Label htmlFor="status">Status*</Label>
               <Select
                 value={formData.status || "pre-award"}
-                onValueChange={(value) => handleInputChange("status", value)}
+                onValueChange={(value: string) => handleInputChange("status", value)}
               >
                 <SelectTrigger>
                   <SelectValue placeholder="Select status" />
@@ -462,7 +462,7 @@ export function ContractForm({
                 id="startDate"
                 type="date"
                 value={formData.startDate || ""}
-                onChange={(e) => {
+                onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
                   handleInputChange("startDate", e.target.value);
                   handleInputChange("popStart", e.target.value);
                   // Calculate end date based on POP months if set
@@ -489,7 +489,7 @@ export function ContractForm({
                 id="popMonths"
                 type="number"
                 value={formData.popMonths || 12}
-                onChange={(e) => {
+                onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
                   const months = parseInt(e.target.value) || 12;
                   handleInputChange("popMonths", months);
                   // Calculate end date based on start date
@@ -518,7 +518,7 @@ export function ContractForm({
                 id="awardAmount"
                 type="number"
                 value={formData.awardAmount || ""}
-                onChange={(e) => {
+                onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
                   const amount = parseFloat(e.target.value) || 0;
                   handleInputChange("awardAmount", amount);
                   // Also set totalValue and fundedValue if not already set
@@ -544,7 +544,7 @@ export function ContractForm({
                 id="totalValue"
                 type="number"
                 value={formData.totalValue || ""}
-                onChange={(e) =>
+                onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                   handleInputChange("totalValue", parseFloat(e.target.value))
                 }
                 placeholder="0.00"
@@ -557,7 +557,7 @@ export function ContractForm({
                 id="fundedValue"
                 type="number"
                 value={formData.fundedValue || ""}
-                onChange={(e) =>
+                onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                   handleInputChange("fundedValue", parseFloat(e.target.value))
                 }
                 placeholder="0.00"
@@ -570,7 +570,7 @@ export function ContractForm({
                 id="avgMonthlyBurn"
                 type="number"
                 value={formData.avgMonthlyBurn || ""}
-                onChange={(e) =>
+                onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                   handleInputChange(
                     "avgMonthlyBurn",
                     parseFloat(e.target.value)
@@ -586,7 +586,7 @@ export function ContractForm({
                 id="indirectRate"
                 type="number"
                 value={formData.indirectRate || ""}
-                onChange={(e) =>
+                onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                   handleInputChange("indirectRate", parseFloat(e.target.value))
                 }
                 placeholder="0"
@@ -607,7 +607,7 @@ export function ContractForm({
                   <Input
                     type="number"
                     value={formData.budgetedCosts?.direct || 0}
-                    onChange={(e) =>
+                    onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                       handleCostChange(
                         "budgetedCosts",
                         "direct",
@@ -621,7 +621,7 @@ export function ContractForm({
                   <Input
                     type="number"
                     value={formData.budgetedCosts?.indirect || 0}
-                    onChange={(e) =>
+                    onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                       handleCostChange(
                         "budgetedCosts",
                         "indirect",
@@ -635,7 +635,7 @@ export function ContractForm({
                   <Input
                     type="number"
                     value={formData.budgetedCosts?.materials || 0}
-                    onChange={(e) =>
+                    onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                       handleCostChange(
                         "budgetedCosts",
                         "materials",
@@ -649,7 +649,7 @@ export function ContractForm({
                   <Input
                     type="number"
                     value={formData.budgetedCosts?.subcontracts || 0}
-                    onChange={(e) =>
+                    onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                       handleCostChange(
                         "budgetedCosts",
                         "subcontracts",
@@ -663,7 +663,7 @@ export function ContractForm({
                   <Input
                     type="number"
                     value={formData.budgetedCosts?.profit || 0}
-                    onChange={(e) =>
+                    onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                       handleCostChange(
                         "budgetedCosts",
                         "profit",
@@ -696,7 +696,7 @@ export function ContractForm({
                   <Input
                     type="number"
                     value={formData.expendedCosts?.direct || 0}
-                    onChange={(e) =>
+                    onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                       handleCostChange(
                         "expendedCosts",
                         "direct",
@@ -710,7 +710,7 @@ export function ContractForm({
                   <Input
                     type="number"
                     value={formData.expendedCosts?.indirect || 0}
-                    onChange={(e) =>
+                    onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                       handleCostChange(
                         "expendedCosts",
                         "indirect",
@@ -724,7 +724,7 @@ export function ContractForm({
                   <Input
                     type="number"
                     value={formData.expendedCosts?.materials || 0}
-                    onChange={(e) =>
+                    onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                       handleCostChange(
                         "expendedCosts",
                         "materials",
@@ -738,7 +738,7 @@ export function ContractForm({
                   <Input
                     type="number"
                     value={formData.expendedCosts?.subcontracts || 0}
-                    onChange={(e) =>
+                    onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                       handleCostChange(
                         "expendedCosts",
                         "subcontracts",
@@ -752,7 +752,7 @@ export function ContractForm({
                   <Input
                     type="number"
                     value={formData.expendedCosts?.profit || 0}
-                    onChange={(e) =>
+                    onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                       handleCostChange(
                         "expendedCosts",
                         "profit",
@@ -781,7 +781,7 @@ export function ContractForm({
               <Label htmlFor="programManager">Program Manager*</Label>
               <Select
                 value={formData.programManager || ""}
-                onValueChange={(value) =>
+                onValueChange={(value: string) =>
                   handleInputChange("programManager", value)
                 }
               >
@@ -811,7 +811,7 @@ export function ContractForm({
               <Label htmlFor="technicalLead">Technical Lead</Label>
               <Select
                 value={formData.technicalLead || ""}
-                onValueChange={(value) =>
+                onValueChange={(value: string) =>
                   handleInputChange("technicalLead", value)
                 }
               >
@@ -841,7 +841,7 @@ export function ContractForm({
               <Label htmlFor="contractingOfficer">Contracting Officer</Label>
               <Select
                 value={formData.contractingOfficer || ""}
-                onValueChange={(value) =>
+                onValueChange={(value: string) =>
                   handleInputChange("contractingOfficer", value)
                 }
               >
@@ -871,7 +871,7 @@ export function ContractForm({
               </Label>
               <Select
                 value={formData.contractingOfficerRep || ""}
-                onValueChange={(value) =>
+                onValueChange={(value: string) =>
                   handleInputChange("contractingOfficerRep", value)
                 }
               >

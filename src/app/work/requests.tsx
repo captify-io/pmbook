@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@captify-io/platform/components/ui";
+import { Card, CardContent, CardHeader, CardTitle } from "@captify-io/core/components/ui";
 import { DynamicIcon } from "lucide-react/dynamic";
 
 function ServiceRequestsPage() {

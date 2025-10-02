@@ -1,14 +1,14 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useCaptify } from "@captify-io/platform/hooks";
-import { apiClient } from "@captify-io/platform/lib/api";
+import { useCaptify } from "@captify-io/core/components";
+import { apiClient } from "@captify-io/core";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from "@captify-io/platform/components/ui";
+} from "@captify-io/core/components/ui";
 
 function PerformancePage() {
   const { session } = useCaptify();

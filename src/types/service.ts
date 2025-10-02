@@ -1,4 +1,4 @@
-import { Core } from "@captify-io/platform/types";
+import { Core } from "@captify-io/core/types";
 
 /**
  * Internal service marketplace and ticketing system

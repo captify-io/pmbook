@@ -16,7 +16,7 @@ import {
   SelectTrigger,
   SelectValue,
   Progress,
-} from "@captify-io/platform/components/ui";
+} from "@captify-io/core/components/ui";
 import { DynamicIcon } from "lucide-react/dynamic";
 import type { CLIN, Objective } from "../../types";
 
@@ -133,7 +133,7 @@ export function ObjectiveWizard({
                 <Input
                   id="title"
                   value={formData.title}
-                  onChange={(e) =>
+                  onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                     setFormData({ ...formData, title: e.target.value })
                   }
                   placeholder="e.g., Modernize Data Platform"
@@ -149,7 +149,7 @@ export function ObjectiveWizard({
                 <Textarea
                   id="description"
                   value={formData.description}
-                  onChange={(e) =>
+                  onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                     setFormData({ ...formData, description: e.target.value })
                   }
                   placeholder="What are we trying to achieve and why?"
@@ -164,7 +164,7 @@ export function ObjectiveWizard({
                   <Input
                     id="owner"
                     value={formData.owner}
-                    onChange={(e) =>
+                    onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                       setFormData({ ...formData, owner: e.target.value })
                     }
                     placeholder="PM or Tech Lead"
@@ -176,7 +176,7 @@ export function ObjectiveWizard({
                   <Label htmlFor="functionalArea">Functional Area</Label>
                   <Select
                     value={formData.functionalArea}
-                    onValueChange={(value) =>
+                    onValueChange={(value: string) =>
                       setFormData({ ...formData, functionalArea: value })
                     }
                   >
@@ -260,7 +260,7 @@ export function ObjectiveWizard({
                         <Input
                           type="number"
                           value={formData.allocations[clin.id] || 0}
-                          onChange={(e) =>
+                          onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                             updateAllocation(
                               clin.id,
                               parseFloat(e.target.value) || 0

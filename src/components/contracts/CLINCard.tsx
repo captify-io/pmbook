@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Card, CardContent, Progress, Badge } from "@captify-io/platform/components/ui";
+import { Card, CardContent, Progress, Badge } from "@captify-io/core/components/ui";
 import { DynamicIcon } from "lucide-react/dynamic";
 import type { CLIN } from "../../types";
 
@@ -125,7 +125,6 @@ export function CLINCard({ clin, onClick, showAllocation = false }: CLINCardProp
           <Progress
             value={burnRate}
             className="h-2"
-            indicatorClassName={getProgressColor()}
           />
         </div>
 

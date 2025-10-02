@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useCaptify } from "@captify-io/platform/hooks";
-import { apiClient } from "@captify-io/platform/lib/api";
+import { useCaptify } from "@captify-io/core/components";
+import { apiClient } from "@captify-io/core";
 import {
   Card,
   CardContent,
@@ -21,7 +21,7 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@captify-io/platform/components/ui";
+} from "@captify-io/core/components/ui";
 import { DynamicIcon } from "lucide-react/dynamic";
 
 function ServicesHubPage() {
@@ -337,7 +337,7 @@ function ServicesHubPage() {
                 <label className="text-sm font-medium">Title</label>
                 <Input
                   value={newTicket.title}
-                  onChange={(e) =>
+                  onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                     setNewTicket({ ...newTicket, title: e.target.value })
                   }
                   placeholder="Brief description of what you need"
@@ -348,7 +348,7 @@ function ServicesHubPage() {
                 <label className="text-sm font-medium">Description</label>
                 <Textarea
                   value={newTicket.description}
-                  onChange={(e) =>
+                  onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                     setNewTicket({ ...newTicket, description: e.target.value })
                   }
                   placeholder="Detailed description and acceptance criteria"
@@ -361,7 +361,7 @@ function ServicesHubPage() {
                   <label className="text-sm font-medium">Service Area</label>
                   <Select
                     value={newTicket.serviceArea}
-                    onValueChange={(value) =>
+                    onValueChange={(value: string) =>
                       setNewTicket({ ...newTicket, serviceArea: value })
                     }
                   >
@@ -382,7 +382,7 @@ function ServicesHubPage() {
                   <label className="text-sm font-medium">Priority</label>
                   <Select
                     value={newTicket.priority}
-                    onValueChange={(value) =>
+                    onValueChange={(value: string) =>
                       setNewTicket({ ...newTicket, priority: value })
                     }
                   >
@@ -404,7 +404,7 @@ function ServicesHubPage() {
                 <Input
                   type="number"
                   value={newTicket.bounty}
-                  onChange={(e) =>
+                  onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                     setNewTicket({
                       ...newTicket,
                       bounty: parseInt(e.target.value) || 0,

@@ -1,4 +1,4 @@
-import { apiClient } from "@captify-io/platform/lib/api";
+import { apiClient } from "@captify-io/core";
 
 export async function getIntelligenceInsights(session: any): Promise<any[]> {
   const response = await apiClient.run({

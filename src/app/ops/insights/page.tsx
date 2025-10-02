@@ -1,14 +1,14 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useCaptify } from "@captify-io/platform/hooks";
-import { apiClient } from "@captify-io/platform/lib/api";
+import { useCaptify } from "@captify-io/core/components";
+import { apiClient } from "@captify-io/core";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from "@captify-io/platform/components/ui";
+} from "@captify-io/core/components/ui";
 
 function InsightsPage() {
   const { session } = useCaptify();
@@ -110,10 +110,10 @@ function InsightsPage() {
             <input
               type="text"
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => setQuery(e.target.value)}
               placeholder="Ask about your business performance, risks, or opportunities..."
               className="flex-1 px-3 py-2 border rounded-md"
-              onKeyPress={(e) => e.key === "Enter" && handleQuery()}
+              onKeyPress={(e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => e.key === "Enter" && handleQuery()}
             />
             <button
               onClick={handleQuery}

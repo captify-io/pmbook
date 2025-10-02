@@ -25,7 +25,7 @@ export interface CLIN {
   createdBy: string;
 }
 
-export interface Objective {
+export interface CLINObjective {
   id: string;
   contractId: string;
   clinIds: string[]; // Can pull from multiple CLINs
@@ -83,7 +83,7 @@ export interface Outcome {
   updatedAt: string;
 }
 
-export interface Task {
+export interface CLINTask {
   id: string;
   outcomeId: string;
 
@@ -115,7 +115,7 @@ export interface Task {
 }
 
 // For inter-team work requests
-export interface TeamTicket extends Task {
+export interface TeamTicket extends CLINTask {
   type: 'support-request' | 'feature-request' | 'infrastructure';
   requestingTeam: string;
   fulfillmentTeam: string;

@@ -61,7 +61,8 @@
       "Bash(aws:*)",
       "Bash(git rm:*)",
       "Bash(eb:*)",
-      "Bash(git pull:*)"
+      "Bash(git pull:*)",
+      "Bash(tee:*)"
     ],
     "deny": [],
     "ask": []

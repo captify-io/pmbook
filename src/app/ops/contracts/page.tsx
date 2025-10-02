@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { apiClient } from "@captify-io/platform/lib/api";
-import { useCaptify } from "@captify-io/platform/hooks";
+import { apiClient } from "@captify-io/core";
+import { useCaptify } from "@captify-io/core/components";
 import {
   Card,
   CardContent,
@@ -21,7 +21,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@captify-io/platform/components/ui";
+} from "@captify-io/core/components/ui";
 import { DynamicIcon } from "lucide-react/dynamic";
 import { v4 as uuidv4 } from "uuid";
 import { ContractForm } from "./form";

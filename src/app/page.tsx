@@ -6,7 +6,7 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
-} from "@captify-io/platform/components/ui";
+} from "@captify-io/core/components/ui";
 
 function WorkDashboardPage() {
   return (

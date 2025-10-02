@@ -1,13 +1,13 @@
 "use client";
 
 import React from "react";
-import { Card, CardContent, Badge } from "@captify-io/platform/components/ui";
+import { Card, CardContent, Badge } from "@captify-io/core/components/ui";
 import { DynamicIcon } from "lucide-react/dynamic";
-import type { CLIN, Objective, Outcome } from "../../types";
+import type { CLIN, CLINObjective, Outcome } from "../../types";
 
 interface BudgetFlowDiagramProps {
   clins: CLIN[];
-  objectives: Objective[];
+  objectives: CLINObjective[];
   outcomes?: Outcome[];
 }
 

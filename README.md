@@ -30,7 +30,17 @@ import { PMBook } from '@captify-io/pmbook'
 
 ## Dependencies
 
-This package depends on `@captify-io/platform ^1.0.78` which provides core platform functionality and shared components.
+This package depends on `@captify-io/core ^2.0.2` which provides core platform functionality and shared components.
+
+### Migration from @captify-io/platform
+
+Version 1.0.35+ migrates from `@captify-io/platform` to `@captify-io/core`. Key changes:
+
+- Updated dependency to `@captify-io/core@latest`
+- All imports now use `@captify-io/core` instead of `@captify-io/platform`
+- `apiClient` is imported from `@captify-io/core`
+- `useCaptify` is imported from `@captify-io/core/components`
+- `auth` is imported from `@captify-io/core/lib`
 
 ## Development
 

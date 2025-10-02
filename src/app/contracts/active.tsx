@@ -28,10 +28,10 @@ import {
   Textarea,
   Badge,
   Separator,
-} from "@captify-io/platform/components/ui";
+} from "@captify-io/core/components/ui";
 import { DynamicIcon } from "lucide-react/dynamic";
 import { Contract, Customer } from "../../types/contract";
-import { apiClient } from "@captify-io/platform/lib";
+import { apiClient } from "@captify-io/core/lib";
 
 function ActiveContractsPage() {
   const [contracts, setContracts] = useState<Contract[]>([]);
@@ -509,7 +509,7 @@ function ActiveContractsPage() {
                     id="name"
                     placeholder="Enter contract name"
                     value={formData.name}
-                    onChange={(e) => handleInputChange("name", e.target.value)}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange("name", e.target.value)}
                     required
                   />
                 </div>
@@ -520,7 +520,7 @@ function ActiveContractsPage() {
                     id="contractNumber"
                     placeholder="FA8750-22-C-0001"
                     value={formData.contractNumber}
-                    onChange={(e) =>
+                    onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                       handleInputChange("contractNumber", e.target.value)
                     }
                     required
@@ -532,7 +532,7 @@ function ActiveContractsPage() {
                   <div className="flex space-x-2">
                     <Select
                       value={formData.customer}
-                      onValueChange={(value) =>
+                      onValueChange={(value: string) =>
                         handleInputChange("customer", value)
                       }
                     >
@@ -568,7 +568,7 @@ function ActiveContractsPage() {
                               id="customerName"
                               placeholder="Customer name"
                               value={newCustomer.name}
-                              onChange={(e) =>
+                              onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                                 setNewCustomer((prev) => ({
                                   ...prev,
                                   name: e.target.value,
@@ -582,7 +582,7 @@ function ActiveContractsPage() {
                               id="agency"
                               placeholder="USAF, US Army, etc."
                               value={newCustomer.agency}
-                              onChange={(e) =>
+                              onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                                 setNewCustomer((prev) => ({
                                   ...prev,
                                   agency: e.target.value,
@@ -612,7 +612,7 @@ function ActiveContractsPage() {
                   <Label htmlFor="status">Status</Label>
                   <Select
                     value={formData.status}
-                    onValueChange={(value) =>
+                    onValueChange={(value: string) =>
                       handleInputChange("status", value)
                     }
                   >
@@ -635,7 +635,7 @@ function ActiveContractsPage() {
                   <Label htmlFor="type">Contract Type</Label>
                   <Select
                     value={formData.type}
-                    onValueChange={(value) => handleInputChange("type", value)}
+                    onValueChange={(value: string) => handleInputChange("type", value)}
                   >
                     <SelectTrigger>
                       <SelectValue placeholder="Select type" />
@@ -676,7 +676,7 @@ function ActiveContractsPage() {
                     min="0"
                     step="0.01"
                     value={formData.awardAmount}
-                    onChange={(e) =>
+                    onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                       handleInputChange("awardAmount", e.target.value)
                     }
                     required
@@ -727,7 +727,7 @@ function ActiveContractsPage() {
                     id="popStart"
                     type="date"
                     value={formData.popStart}
-                    onChange={(e) =>
+                    onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                       handleInputChange("popStart", e.target.value)
                     }
                     required
@@ -743,7 +743,7 @@ function ActiveContractsPage() {
                     min="1"
                     max="120"
                     value={formData.popMonths}
-                    onChange={(e) =>
+                    onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                       handleInputChange("popMonths", e.target.value)
                     }
                     required
@@ -847,7 +847,7 @@ function ActiveContractsPage() {
                     <Input
                       id="edit-name"
                       value={formData.name}
-                      onChange={(e) =>
+                      onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                         handleInputChange("name", e.target.value)
                       }
                       required
@@ -859,7 +859,7 @@ function ActiveContractsPage() {
                     <Input
                       id="edit-contractNumber"
                       value={formData.contractNumber}
-                      onChange={(e) =>
+                      onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                         handleInputChange("contractNumber", e.target.value)
                       }
                       required
@@ -870,7 +870,7 @@ function ActiveContractsPage() {
                     <Label htmlFor="edit-customer">Customer</Label>
                     <Select
                       value={formData.customer}
-                      onValueChange={(value) =>
+                      onValueChange={(value: string) =>
                         handleInputChange("customer", value)
                       }
                     >
@@ -892,7 +892,7 @@ function ActiveContractsPage() {
                     <Label htmlFor="edit-status">Status</Label>
                     <Select
                       value={formData.status}
-                      onValueChange={(value) =>
+                      onValueChange={(value: string) =>
                         handleInputChange("status", value)
                       }
                     >
@@ -915,7 +915,7 @@ function ActiveContractsPage() {
                     <Label htmlFor="edit-type">Contract Type</Label>
                     <Select
                       value={formData.type}
-                      onValueChange={(value) =>
+                      onValueChange={(value: string) =>
                         handleInputChange("type", value)
                       }
                     >
@@ -957,7 +957,7 @@ function ActiveContractsPage() {
                       min="0"
                       step="0.01"
                       value={formData.awardAmount}
-                      onChange={(e) =>
+                      onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                         handleInputChange("awardAmount", e.target.value)
                       }
                       required
@@ -1012,7 +1012,7 @@ function ActiveContractsPage() {
                       id="edit-popStart"
                       type="date"
                       value={formData.popStart}
-                      onChange={(e) =>
+                      onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                         handleInputChange("popStart", e.target.value)
                       }
                       required
@@ -1027,7 +1027,7 @@ function ActiveContractsPage() {
                       min="1"
                       max="120"
                       value={formData.popMonths}
-                      onChange={(e) =>
+                      onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                         handleInputChange("popMonths", e.target.value)
                       }
                       required
@@ -1188,7 +1188,7 @@ function ActiveContractsPage() {
                     Created
                   </Label>
                   <p className="text-sm">
-                    {formatDate(selectedContract.createdAt)}
+                    {selectedContract.createdAt ? formatDate(selectedContract.createdAt) : 'N/A'}
                   </p>
                 </div>
               </CardContent>

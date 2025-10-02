@@ -17,16 +17,16 @@ import {
   SelectValue,
   Progress,
   Badge,
-} from "@captify-io/platform/components/ui";
+} from "@captify-io/core/components/ui";
 import { DynamicIcon } from "lucide-react/dynamic";
-import { apiClient } from "@captify-io/platform/lib/api";
+import { apiClient } from "@captify-io/core";
 import { config } from "../../config";
-import type { Objective, Outcome } from "../../types";
+import type { CLINObjective, Outcome } from "../../types";
 
 interface OutcomeWizardProps {
   open: boolean;
   onClose: () => void;
-  objective: Objective;
+  objective: CLINObjective;
   userRole: "pm" | "tech-lead" | "team-member";
   currentUser: string;
   onSuccess: () => void;
@@ -185,7 +185,7 @@ export function OutcomeWizard({
                 <Input
                   id="title"
                   value={formData.title}
-                  onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => setFormData({ ...formData, title: e.target.value })}
                   placeholder="e.g., Deploy API Gateway to Production"
                   className="mt-1"
                 />
@@ -199,7 +199,7 @@ export function OutcomeWizard({
                 <Textarea
                   id="description"
                   value={formData.description}
-                  onChange={(e) =>
+                  onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                     setFormData({ ...formData, description: e.target.value })
                   }
                   placeholder="What will be delivered and why it matters"
@@ -213,7 +213,7 @@ export function OutcomeWizard({
                 <Textarea
                   id="successCriteria"
                   value={formData.successCriteria}
-                  onChange={(e) =>
+                  onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                     setFormData({ ...formData, successCriteria: e.target.value })
                   }
                   placeholder="How do we know this is done? e.g., 'API responds to all endpoints with <100ms latency, 99.9% uptime'"
@@ -230,11 +230,11 @@ export function OutcomeWizard({
                 <div className="flex gap-2 mt-1">
                   <Input
                     value={formData.newDeliverable}
-                    onChange={(e) =>
+                    onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                       setFormData({ ...formData, newDeliverable: e.target.value })
                     }
                     placeholder="Add a deliverable..."
-                    onKeyPress={(e) => e.key === "Enter" && addDeliverable()}
+                    onKeyPress={(e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => e.key === "Enter" && addDeliverable()}
                   />
                   <Button onClick={addDeliverable} size="sm" variant="outline">
                     <DynamicIcon name="plus" className="h-4 w-4" />
@@ -273,7 +273,7 @@ export function OutcomeWizard({
                   <Label htmlFor="ownerTeam">Owner Team *</Label>
                   <Select
                     value={formData.ownerTeam}
-                    onValueChange={(value) =>
+                    onValueChange={(value: string) =>
                       setFormData({ ...formData, ownerTeam: value })
                     }
                   >
@@ -296,7 +296,7 @@ export function OutcomeWizard({
                     id="targetDate"
                     type="date"
                     value={formData.targetDate}
-                    onChange={(e) =>
+                    onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                       setFormData({ ...formData, targetDate: e.target.value })
                     }
                     className="mt-1"
@@ -312,7 +312,7 @@ export function OutcomeWizard({
                     id="budget"
                     type="number"
                     value={formData.allocatedBudget || ""}
-                    onChange={(e) =>
+                    onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                       setFormData({
                         ...formData,
                         allocatedBudget: parseFloat(e.target.value) || 0,
@@ -357,7 +357,7 @@ export function OutcomeWizard({
                 <Input
                   id="teamLead"
                   value={formData.teamLead}
-                  onChange={(e) =>
+                  onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                     setFormData({ ...formData, teamLead: e.target.value })
                   }
                   className="mt-1"

@@ -1,6 +1,6 @@
 {
   "name": "@captify-io/pmbook",
-  "version": "1.0.34",
+  "version": "1.0.35",
   "description": "Strategic alignment and business operations platform for government contracting",
   "type": "module",
   "sideEffects": [
@@ -88,7 +88,7 @@
     "turbo:clean": "turbo clean"
   },
   "dependencies": {
-    "@captify-io/platform": "^1.0.86",
+    "@captify-io/core": "github:captify-io/core",
     "@tailwindcss/postcss": "^4.1.13",
     "@types/cookie": "^0.6.0",
     "@types/d3-color": "^3.1.3",

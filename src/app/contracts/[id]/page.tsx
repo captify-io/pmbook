@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
-import { apiClient } from "@captify-io/platform/lib/api";
+import { apiClient } from "@captify-io/core";
 import {
   Card,
   CardContent,
@@ -14,9 +14,9 @@ import {
   TabsTrigger,
   Button,
   Progress,
-} from "@captify-io/platform/components/ui";
+} from "@captify-io/core/components/ui";
 import { DynamicIcon } from "lucide-react/dynamic";
-import type { Contract, CLIN, Objective } from "../../../types";
+import type { Contract, CLIN, CLINObjective } from "../../../types";
 
 /**
  * CONTRACT DETAIL PAGE
@@ -34,7 +34,7 @@ export default function ContractDetailPage() {
 
   const [contract, setContract] = useState<Contract | null>(null);
   const [clins, setCLINs] = useState<CLIN[]>([]);
-  const [objectives, setObjectives] = useState<Objective[]>([]);
+  const [objectives, setObjectives] = useState<CLINObjective[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -103,7 +103,7 @@ export default function ContractDetailPage() {
       <div className="flex justify-between items-start">
         <div>
           <h1 className="text-3xl font-bold">{contract.contractNumber}</h1>
-          <p className="text-muted-foreground mt-1">{contract.title}</p>
+          <p className="text-muted-foreground mt-1">{contract.name}</p>
         </div>
         <div className="flex gap-2">
           <Button variant="outline">
@@ -259,7 +259,7 @@ function ObjectivesView({ objectives, clins, contractId, onRefresh }: any) {
         </Button>
       </div>
 
-      {objectives.map((obj: Objective) => (
+      {objectives.map((obj: CLINObjective) => (
         <Card key={obj.id} className="hover:border-primary transition-colors cursor-pointer">
           <CardContent className="pt-6">
             <div className="flex justify-between items-start">

@@ -6,8 +6,8 @@ import { useRouter } from "next/navigation";
 import {
   CaptifyProvider,
   CaptifyLayout,
-} from "@captify-io/platform/components";
-import { SignOnPage } from "@captify-io/platform";
+} from "@captify-io/core/components";
+import { SignOnPage } from "@captify-io/core";
 import { config } from "../config";
 import "./globals.css";
 

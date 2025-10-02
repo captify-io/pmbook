@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle, Button, Input, Label, Progress } from "@captify-io/platform/components/ui";
+import { Card, CardContent, CardHeader, CardTitle, Button, Input, Label, Progress } from "@captify-io/core/components/ui";
 import { DynamicIcon } from "lucide-react/dynamic";
-import { apiClient } from "@captify-io/platform/lib/api";
+import { apiClient } from "@captify-io/core";
 import type { CLIN, Objective } from "../../types";
 
 interface BudgetAllocationFlowProps {
@@ -187,7 +187,6 @@ export function BudgetAllocationFlow({
                         <Progress
                           value={percentage}
                           className="h-1"
-                          indicatorClassName={isOverAllocated ? "bg-red-500" : "bg-blue-500"}
                         />
                       </div>
                     </div>
@@ -200,7 +199,7 @@ export function BudgetAllocationFlow({
                         <Input
                           type="number"
                           value={allocated || ""}
-                          onChange={(e) =>
+                          onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
                             setAllocations({
                               ...allocations,
                               [clin.id]: parseFloat(e.target.value) || 0,

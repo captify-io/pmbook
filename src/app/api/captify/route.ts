@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { auth } from '@captify-io/platform/lib/auth';
+import { auth } from '@captify-io/core/lib';
 import { services } from '../../../services';
 import { config } from '../../../config';
 

@@ -1,14 +1,14 @@
 "use client";
 
 import React, { useState } from "react";
-import { Card, CardContent, Badge, Button, Input } from "@captify-io/platform/components/ui";
+import { Card, CardContent, Badge, Button, Input } from "@captify-io/core/components/ui";
 import { DynamicIcon } from "lucide-react/dynamic";
-import { apiClient } from "@captify-io/platform/lib/api";
-import type { Task, Outcome } from "../../types";
+import { apiClient } from "@captify-io/core";
+import type { CLINTask, Outcome } from "../../types";
 
 interface TaskBoardProps {
   outcome: Outcome;
-  tasks: Task[];
+  tasks: CLINTask[];
   onRefresh: () => void;
 }
 
@@ -37,7 +37,7 @@ export function TaskBoard({ outcome, tasks, onRefresh }: TaskBoardProps) {
   const tasksByStatus = COLUMNS.reduce((acc, col) => {
     acc[col.id] = tasks.filter((t) => t.status === col.id);
     return acc;
-  }, {} as Record<string, Task[]>);
+  }, {} as Record<string, CLINTask[]>);
 
   const handleAddTask = async () => {
     if (!newTaskTitle.trim()) return;
@@ -117,8 +117,8 @@ export function TaskBoard({ outcome, tasks, onRefresh }: TaskBoardProps) {
               <Input
                 placeholder="Task title..."
                 value={newTaskTitle}
-                onChange={(e) => setNewTaskTitle(e.target.value)}
-                onKeyPress={(e) => e.key === "Enter" && handleAddTask()}
+                onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => setNewTaskTitle(e.target.value)}
+                onKeyPress={(e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => e.key === "Enter" && handleAddTask()}
                 autoFocus
               />
               <Button onClick={handleAddTask} size="sm">
@@ -180,7 +180,7 @@ function TaskCard({
   task,
   onStatusChange,
 }: {
-  task: Task;
+  task: CLINTask;
   onStatusChange: (status: string) => void;
 }) {
   const [showActions, setShowActions] = useState(false);
