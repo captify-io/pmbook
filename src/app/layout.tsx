@@ -7,7 +7,6 @@ import {
   CaptifyProvider,
   CaptifyLayout,
 } from "@captify-io/core/components";
-import { SignOnPage } from "@captify-io/core";
 import { config } from "../config";
 import "./globals.css";
 
@@ -77,9 +76,13 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
     return null;
   }
 
-  // If no session, show the sign-in page
+  // If no session, redirect to platform for sign-in
   if (status === "unauthenticated" || !session?.user) {
-    return <SignOnPage appName={config.appName} />;
+    // Redirect to platform sign-in page
+    const platformUrl = process.env.NEXT_PUBLIC_PLATFORM_URL || 'http://localhost:3000';
+    const returnUrl = encodeURIComponent(window.location.href);
+    window.location.href = `${platformUrl}?callbackUrl=${returnUrl}`;
+    return null; // Show nothing while redirecting
   }
 
   return (
