@@ -5,14 +5,28 @@ const nextConfig: NextConfig = {
   // Disable React Strict Mode to prevent double-rendering in development
   reactStrictMode: false,
 
-  // Don't generate source maps in production or development to avoid 404s from AWS SDK source files
+  // Don't generate source maps in production
   productionBrowserSourceMaps: false,
 
   // Keep webpack config minimal – package.json "exports" handles subpaths
-  webpack(config, { dev }) {
-    // Disable source maps in development to prevent 404s from node_modules
+  webpack(config, { dev, isServer }) {
     if (dev) {
-      config.devtool = false;
+      // Ignore missing source maps from node_modules (AWS SDK, etc.)
+      config.ignoreWarnings = [
+        ...(config.ignoreWarnings || []),
+        /Failed to parse source map/,
+        /source-map-loader/,
+      ];
+
+      // Configure source-map-loader to skip node_modules
+      config.module = config.module || {};
+      config.module.rules = config.module.rules || [];
+      config.module.rules.push({
+        test: /\.js$/,
+        enforce: 'pre',
+        use: ['source-map-loader'],
+        exclude: /node_modules/,
+      });
     }
     return config;
   },

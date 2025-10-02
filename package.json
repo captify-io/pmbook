@@ -144,5 +144,8 @@
   "homepage": "https://github.com/captify-io/pmbook#readme",
   "bugs": {
     "url": "https://github.com/captify-io/pmbook/issues"
+  },
+  "devDependencies": {
+    "source-map-loader": "^5.0.0"
   }
 }
