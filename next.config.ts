@@ -8,6 +8,9 @@ const nextConfig: NextConfig = {
   // Don't generate source maps in production
   productionBrowserSourceMaps: false,
 
+  // Transpile lucide-react for dynamic imports
+  transpilePackages: ["lucide-react"],
+
   // Keep webpack config minimal – package.json "exports" handles subpaths
   webpack(config, { dev, isServer }) {
     if (dev) {

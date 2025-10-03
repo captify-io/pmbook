@@ -62,7 +62,8 @@
       "Bash(git rm:*)",
       "Bash(eb:*)",
       "Bash(git pull:*)",
-      "Bash(tee:*)"
+      "Bash(tee:*)",
+      "Bash(git log:*)"
     ],
     "deny": [],
     "ask": []

@@ -3,7 +3,7 @@ node_modules/
 .pnpm-store/
 
 # Build outputs
-# Note: dist/ is NOT ignored as it needs to be published to npm
+dist/
 build/
 *.tsbuildinfo
 .next/
