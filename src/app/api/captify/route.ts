@@ -5,7 +5,21 @@ import { config } from '../../../config';
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    // Check if request has a body
+    const text = await request.text();
+    if (!text || text.trim() === '') {
+      console.warn('Empty POST request to /api/captify from:', {
+        referer: request.headers.get('referer'),
+        userAgent: request.headers.get('user-agent'),
+        origin: request.headers.get('origin'),
+      });
+      return NextResponse.json(
+        { error: 'Empty request body' },
+        { status: 400 }
+      );
+    }
+
+    const body = JSON.parse(text);
     const { service } = body;
 
     // Check if this is a local pmbook service

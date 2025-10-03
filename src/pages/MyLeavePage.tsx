@@ -2,12 +2,12 @@
 
 import React from "react";
 
-export default function InsightsPage() {
+export default function MyLeavePage(props: Record<string, string>) {
   return (
     <div className="h-full w-full">
-      <h1 className="text-3xl font-bold mb-4">Insights</h1>
+      <h1 className="text-3xl font-bold mb-4">My Leave</h1>
       <p className="text-muted-foreground mb-6">
-        Organization-wide overview of projects, outcomes, and announcements
+        PTO/leave requests
       </p>
       {/* Content will be built here */}
     </div>

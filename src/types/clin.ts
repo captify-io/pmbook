@@ -1,6 +1,7 @@
 export interface CLIN {
   id: string;
   contractId: string;
+  taskOrderId?: string; // Optional: for IDIQ contracts with task orders
   clinNumber: string; // e.g., "0001", "0002AA"
   title: string;
   description?: string;

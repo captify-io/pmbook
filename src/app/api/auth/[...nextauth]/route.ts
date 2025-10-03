@@ -11,6 +11,16 @@ export async function GET(
   const { nextauth } = await params;
   const captifyUrl = process.env.CAPTIFY_URL!;
   const path = nextauth.join("/");
+
+  // For signin/signout routes, redirect directly to platform
+  if (path === "signin" || path === "signout" || path === "error") {
+    const searchParams = request.nextUrl.searchParams.toString();
+    const redirectUrl = `${captifyUrl}/api/auth/${path}${
+      searchParams ? `?${searchParams}` : ""
+    }`;
+    return NextResponse.redirect(redirectUrl);
+  }
+
   const searchParams = request.nextUrl.searchParams.toString();
   const url = `${captifyUrl}/api/auth/${path}${
     searchParams ? `?${searchParams}` : ""
@@ -45,10 +55,10 @@ export async function GET(
     });
   } catch (error) {
     console.error("Auth proxy error:", error);
-    return NextResponse.json(
-      { error: "Failed to proxy auth request" },
-      { status: 500 }
-    );
+    // On proxy failure, redirect to platform login with original callback
+    const existingCallback = request.nextUrl.searchParams.get('callbackUrl');
+    const callbackUrl = existingCallback || request.headers.get('referer') || request.nextUrl.origin;
+    return NextResponse.redirect(`${captifyUrl}/api/auth/signin?callbackUrl=${encodeURIComponent(callbackUrl)}`);
   }
 }
 
@@ -94,9 +104,9 @@ export async function POST(
     });
   } catch (error) {
     console.error("Auth proxy error:", error);
-    return NextResponse.json(
-      { error: "Failed to proxy auth request" },
-      { status: 500 }
-    );
+    // On proxy failure, redirect to platform login with original callback
+    const existingCallback = request.nextUrl.searchParams.get('callbackUrl');
+    const callbackUrl = existingCallback || request.headers.get('referer') || request.nextUrl.origin;
+    return NextResponse.redirect(`${captifyUrl}/api/auth/signin?callbackUrl=${encodeURIComponent(callbackUrl)}`);
   }
 }

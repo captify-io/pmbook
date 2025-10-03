@@ -2,7 +2,7 @@ export const config = {
   // App attributes
   slug: "pmbook",
   appName: "pmbook",
-  version: "1.0.36",
+  version: "1.0.37",
   identityPoolId:
     (typeof process !== "undefined" && process.env?.COGNITO_IDENTITY_POOL_ID) ||
     "",
@@ -15,57 +15,54 @@ export const config = {
     "Strategic alignment and business operations platform for government contracting",
 
   // App-level permissions
-  requiredGroups: ["captify-operations"],
+  requiredGroups: [], // All employees can access base functionality
 
-  // Menu structure - funding-focused workflow
+  // Permission groups for restricted sections
+  permissionGroups: {
+    operations: ["captify-operations"],
+    financials: ["captify-financials"],
+  },
+
+  // Menu structure - comprehensive company operations
   menu: [
     {
-      id: "work",
-      label: "Work",
-      icon: "briefcase",
+      id: "insights",
+      label: "Insights",
+      icon: "bar-chart-3",
       order: 1,
-      description: "Service delivery and task management",
-      children: [
-        {
-          id: "work-overview",
-          label: "Overview",
-          href: "/work",
-          icon: "layout-dashboard",
-          order: 1,
-          description: "Work overview and management",
-        },
-        {
-          id: "work-services",
-          label: "Services",
-          href: "/services",
-          icon: "package",
-          order: 2,
-          description: "Service catalog and offerings",
-        },
-      ],
+      description:
+        "Default start page: org-wide overview of projects, outcomes, announcements",
+      isDefault: true,
     },
     {
-      id: "execution",
-      label: "Execution",
-      icon: "zap",
-      order: 2,
-      description: "Team execution and delivery",
+      id: "tickets",
+      label: "Tickets",
+      icon: "ticket",
+      order: 3,
+      description:
+        "Central help/support area - filter by team, contract, or status",
+    },
+    {
+      id: "my-work",
+      label: "My Work",
+      icon: "briefcase",
+      order: 5,
+      description: "Personal work management",
       children: [
         {
-          id: "exe-tickets",
-          label: "My Tickets",
-          href: "/exe/my-tickets",
-          icon: "ticket",
+          id: "my-tasks",
+          label: "Tasks",
+          icon: "list-checks",
           order: 1,
-          description: "Personal ticket queue",
+          description:
+            "Daily work, issues, tickets assigned - task updates = time reporting",
         },
         {
-          id: "exe-streams",
-          label: "Value Streams",
-          href: "/exe/value-streams",
-          icon: "git-branch",
+          id: "my-leave",
+          label: "Leave",
+          icon: "calendar-days",
           order: 2,
-          description: "Value stream management",
+          description: "PTO/leave requests",
         },
       ],
     },
@@ -73,69 +70,118 @@ export const config = {
       id: "operations",
       label: "Operations",
       icon: "settings",
-      order: 3,
+      order: 6,
       description: "Operational management and oversight",
+      requiredGroups: ["captify-operations"],
       children: [
         {
           id: "ops-contracts",
           label: "Contracts",
-          href: "/ops/contracts",
           icon: "file-text",
           order: 1,
-          description: "Contract management",
+          description: "Repository of awarded contracts and milestones",
+        },
+        {
+          id: "ops-streams",
+          label: "Streams",
+          icon: "git-branch",
+          order: 2,
+          description:
+            "Execution map: Contract → CLIN → Outcomes → Tasks → Teams → Individuals",
+          usesReactFlow: true,
         },
         {
           id: "ops-people",
           label: "People",
-          href: "/ops/people",
           icon: "users",
-          order: 2,
-          description: "Team allocation and rates",
-        },
-        {
-          id: "ops-performance",
-          label: "Performance",
-          href: "/ops/performance",
-          icon: "trending-up",
           order: 3,
-          description: "Team metrics and utilization",
-        },
-        {
-          id: "ops-insights",
-          label: "Insights",
-          href: "/ops/insights",
-          icon: "bar-chart",
-          order: 4,
-          description: "Analytics and insights",
+          description: "Team and people management",
+          children: [
+            {
+              id: "ops-people-teams",
+              label: "Teams",
+              icon: "users-round",
+              order: 1,
+              description: "Build/manage teams - assign teams to Outcomes",
+            },
+            {
+              id: "ops-people-performance",
+              label: "Performance",
+              icon: "trending-up",
+              order: 2,
+              description:
+                "Delivery analytics, outcome tracking, workload balance",
+            },
+          ],
         },
       ],
     },
     {
-      id: "strategic",
-      label: "Strategic",
-      icon: "target",
-      order: 4,
-      description: "Strategic planning and roadmaps",
+      id: "financials",
+      label: "Financials",
+      icon: "dollar-sign",
+      order: 7,
+      description: "Financial management and insights",
+      requiredGroups: ["captify-financials"],
       children: [
         {
-          id: "strategic-overview",
-          label: "Overview",
-          href: "/strategic",
-          icon: "compass",
+          id: "fin-insights",
+          label: "Insights",
+          icon: "chart-line",
           order: 1,
-          description: "Strategic overview and planning",
+          description:
+            "Burn rates, funding pool usage (overhead, G&A, M&H, profit)",
+        },
+        {
+          id: "fin-clins",
+          label: "CLINs",
+          icon: "list-ordered",
+          order: 2,
+          description:
+            "CLIN allocations: Contract → CLIN → Outcome → Task → Team → Ticket → Individual",
         },
       ],
     },
   ],
 
-  // Functional areas / teams
+  // Functional areas / teams - ticket queues and team assignments
   functionalAreas: [
-    { id: "dataops", name: "DataOps", description: "Data engineering and analytics" },
-    { id: "devops", name: "DevOps", description: "CI/CD, infrastructure automation" },
-    { id: "platform", name: "Platform", description: "Core platform services and APIs" },
-    { id: "cloudops", name: "CloudOps", description: "Cloud infrastructure and operations" },
-    { id: "security", name: "Security", description: "Security and compliance" },
+    { id: "it", name: "IT", description: "IT support and infrastructure" },
+    {
+      id: "hr",
+      name: "HR",
+      description: "Human resources and people operations",
+    },
+    {
+      id: "dataops",
+      name: "DataOps",
+      description: "Data engineering and analytics",
+    },
+    {
+      id: "devops",
+      name: "DevOps",
+      description: "CI/CD, infrastructure automation",
+    },
+    {
+      id: "platform",
+      name: "Platform",
+      description: "Core platform services and APIs",
+    },
+    {
+      id: "helpdesk",
+      name: "Help Desk",
+      description: "General support and assistance",
+    },
+    {
+      id: "cloudops",
+      name: "CloudOps",
+      description: "Cloud infrastructure and operations",
+    },
+    {
+      id: "security",
+      name: "Security",
+      description: "Security and compliance",
+    },
   ],
 
   // CLIN types supported
@@ -161,7 +207,6 @@ export const config = {
       production: "",
     },
   },
-
 };
 
 export const {

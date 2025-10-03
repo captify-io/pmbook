@@ -2,6 +2,7 @@
 export * from "./strategic";
 export * from "./work";
 export * from "./contract";
+export * from "./task-order";
 export * from "./clin";
 export * from "./intelligence";
 export * from "./service";
